@@ -1,6 +1,6 @@
 # KBO 분석
 
-<img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/2d2778fa-d66b-4f69-a978-83845f629d10" width="600" height="300">
+![image](https://github.com/user-attachments/assets/364819bf-297b-4f31-907c-35ac275e911b)
 
 ### 01. 💡프로젝트 소개
 * 수도권 교통 상황 분석  
