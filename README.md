@@ -1,6 +1,6 @@
 # KBO 분석
 
-![image](https://github.com/user-attachments/assets/364819bf-297b-4f31-907c-35ac275e911b)
+![image](https://github.com/user-attachments/assets/588bb013-2d98-46c6-b545-7a14aca70eca)
 
 ### 01. 💡프로젝트 소개
 * 수도권 교통 상황 분석  
