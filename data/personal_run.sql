@@ -1,277 +1,67 @@
-mysql  Ver 8.0.39-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+-- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+--
+-- Host: database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com    Database: KBO
+-- ------------------------------------------------------
+-- Server version	8.0.35
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
-Usage: mysql [OPTIONS] [database]
-  -?, --help          Display this help and exit.
-  -I, --help          Synonym for -?
-  --auto-rehash       Enable automatic rehashing. One doesn't need to use
-                      'rehash' to get table and field completion, but startup
-                      and reconnecting may take a longer time. Disable with
-                      --disable-auto-rehash.
-                      (Defaults to on; use --skip-auto-rehash to disable.)
-  -A, --no-auto-rehash 
-                      No automatic rehashing. One has to use 'rehash' to get
-                      table and field completion. This gives a quicker start of
-                      mysql and disables rehashing on reconnect.
-  --auto-vertical-output 
-                      Automatically switch to vertical output mode if the
-                      result is wider than the terminal width.
-  -B, --batch         Don't use history file. Disable interactive behavior.
-                      (Enables --silent.)
-  --bind-address=name IP address to bind to.
-  --binary-as-hex     Print binary data as hex. Enabled by default for
-                      interactive terminals.
-  --character-sets-dir=name 
-                      Directory for character set files.
-  --column-type-info  Display column type information.
-  -c, --comments      Preserve comments. Send comments to the server. The
-                      default is --skip-comments (discard comments), enable
-                      with --comments.
-  -C, --compress      Use compression in server/client protocol.
-  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
-  --debug-check       This is a non-debug version. Catch this and exit.
-  -T, --debug-info    This is a non-debug version. Catch this and exit.
-  -D, --database=name Database to use.
-  --default-character-set=name 
-                      Set the default character set.
-  --delimiter=name    Delimiter to be used.
-  --enable-cleartext-plugin 
-                      Enable/disable the clear text authentication plugin.
-  -e, --execute=name  Execute command and quit. (Disables --force and history
-                      file.)
-  -E, --vertical      Print the output of a query (rows) vertically.
-  -f, --force         Continue even if we get an SQL error.
-  --histignore=name   A colon-separated list of patterns to keep statements
-                      from getting logged into syslog and mysql history.
-  -G, --named-commands 
-                      Enable named commands. Named commands mean this program's
-                      internal commands; see mysql> help . When enabled, the
-                      named commands can be used from any line of the query,
-                      otherwise only from the first line, before an enter.
-                      Disable with --disable-named-commands. This option is
-                      disabled by default.
-  -i, --ignore-spaces Ignore space after function names.
-  --init-command=name SQL Command to execute when connecting to MySQL server.
-                      Will automatically be re-executed when reconnecting.
-  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
-  -b, --no-beep       Turn off beep on error.
-  -h, --host=name     Connect to host.
-  --dns-srv-name=name Connect to a DNS SRV resource
-  -H, --html          Produce HTML output.
-  -X, --xml           Produce XML output.
-  --line-numbers      Write line numbers for errors.
-                      (Defaults to on; use --skip-line-numbers to disable.)
-  -L, --skip-line-numbers 
-                      Don't write line number for errors.
-  -n, --unbuffered    Flush buffer after each query.
-  --column-names      Write column names in results.
-                      (Defaults to on; use --skip-column-names to disable.)
-  -N, --skip-column-names 
-                      Don't write column names in results.
-  --sigint-ignore     Ignore SIGINT (CTRL-C).
-  -o, --one-database  Ignore statements except those that occur while the
-                      default database is the one named at the command line.
-  --pager[=name]      Pager to use to display results. If you don't supply an
-                      option, the default pager is taken from your ENV variable
-                      PAGER. Valid pagers are less, more, cat [> filename],
-                      etc. See interactive help (\h) also. This option does not
-                      work in batch mode. Disable with --disable-pager. This
-                      option is disabled by default.
-  -p, --password[=name] 
-                      Password to use when connecting to server. If password is
-                      not given it's asked from the tty.
-  -,, --password1[=name] 
-                      Password for first factor authentication plugin.
-  -,, --password2[=name] 
-                      Password for second factor authentication plugin.
-  -,, --password3[=name] 
-                      Password for third factor authentication plugin.
-  -P, --port=#        Port number to use for connection or 0 for default to, in
-                      order of preference, my.cnf, $MYSQL_TCP_PORT,
-                      /etc/services, built-in default (3306).
-  --prompt=name       Set the mysql prompt to this value.
-  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
-                      memory).
-  -q, --quick         Don't cache result, print it row by row. This may slow
-                      down the server if the output is suspended. Doesn't use
-                      history file.
-  -r, --raw           Write fields without conversion. Used with --batch.
-  --reconnect         Reconnect if the connection is lost. Disable with
-                      --disable-reconnect. This option is enabled by default.
-                      (Defaults to on; use --skip-reconnect to disable.)
-  -s, --silent        Be more silent. Print results with a tab as separator,
-                      each row on new line.
-  -S, --socket=name   The socket file to use for connection.
-  --server-public-key-path=name 
-                      File path to the server public RSA key in PEM format.
-  --get-server-public-key 
-                      Get server public key
-  --ssl-mode=name     SSL connection mode.
-  --ssl-ca=name       CA file in PEM format.
-  --ssl-capath=name   CA directory.
-  --ssl-cert=name     X509 cert in PEM format.
-  --ssl-cipher=name   SSL cipher to use.
-  --ssl-key=name      X509 key in PEM format.
-  --ssl-crl=name      Certificate revocation list.
-  --ssl-crlpath=name  Certificate revocation list path.
-  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
-                      TLSv1.3
-  --ssl-fips-mode=name 
-                      SSL FIPS mode (applies only for OpenSSL); permitted
-                      values are: OFF, ON, STRICT
-  --tls-ciphersuites=name 
-                      TLS v1.3 cipher to use.
-  --ssl-session-data=name 
-                      Session data file to use to enable ssl session reuse
-  --ssl-session-data-continue-on-failed-reuse 
-                      If set to ON, this option will allow connection to
-                      succeed even if session data cannot be reused.
-  -t, --table         Output in table format.
-  --tee=name          Append everything into outfile. See interactive help (\h)
-                      also. Does not work in batch mode. Disable with
-                      --disable-tee. This option is disabled by default.
-  -u, --user=name     User for login if not current user.
-  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
-  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
-  -v, --verbose       Write more. (-v -v -v gives the table output format).
-  -V, --version       Output version information and exit.
-  -w, --wait          Wait and retry if connection is down.
-  --connect-timeout=# Number of seconds before connection timeout.
-  --max-allowed-packet=# 
-                      The maximum packet length to send to or receive from
-                      server.
-  --net-buffer-length=# 
-                      The buffer size for TCP/IP and socket communication.
-  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
-  --max-join-size=#   Automatic limit for rows in a join when using
-                      --safe-updates.
-  --show-warnings     Show warnings after every statement.
-  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
-                      commands depends on the patterns supplied via histignore
-                      option besides the default patterns.
-  --plugin-dir=name   Directory for client-side plugins.
-  --default-auth=name Default authentication client-side plugin to use.
-  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
-                      translated to '\n'. This switch turns off both features,
-                      and also turns off parsing of all clientcommands except
-                      \C and DELIMITER, in non-interactive mode (for input
-                      piped to mysql or loaded using the 'source' command).
-                      This is necessary when processing output from mysqlbinlog
-                      that may contain blobs.
-  --connect-expired-password 
-                      Notify the server that this client is prepared to handle
-                      expired password sandbox mode.
-  --network-namespace=name 
-                      Network namespace to use for connection via tcp with a
-                      server.
-  --compression-algorithms=name 
-                      Use compression algorithm in server/client protocol.
-                      Valid values are any combination of
-                      'zstd','zlib','uncompressed'.
-  --zstd-compression-level=# 
-                      Use this compression level in the client/server protocol,
-                      in case --compression-algorithms=zstd. Valid range is
-                      between 1 and 22, inclusive. Default is 3.
-  --load-data-local-dir=name 
-                      Directory path safe for LOAD DATA LOCAL INFILE to read
-                      from.
-  --fido-register-factor=name 
-                      Specifies authentication factor, for which registration
-                      needs to be done.
-  --authentication-oci-client-config-profile=name 
-                      Specifies the configuration profile whose configuration
-                      options are to be read from the OCI configuration file.
-                      Default is DEFAULT.
-  --oci-config-file=name 
-                      Specifies the location of the OCI configuration file.
-                      Default for Linux is ~/.oci/config and %HOME/.oci/config
-                      on Windows.
+--
+-- GTID state at the beginning of the backup 
+--
 
-Default options are read from the following files in the given order:
-/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf 
-The following groups are read: mysql client
-The following options may be given as the first argument:
---print-defaults        Print the program argument list and exit.
---no-defaults           Don't read default options from any option file,
-                        except for login file.
---defaults-file=#       Only read default options from the given file #.
---defaults-extra-file=# Read this file after the global files are read.
---defaults-group-suffix=#
-                        Also read groups with concat(group, suffix)
---login-path=#          Read this path from the login file.
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
-Variables (--variable-name=value)
-and boolean options {FALSE|TRUE}          Value (after reading options)
------------------------------------------ --------------------------------
-auto-rehash                               TRUE
-auto-vertical-output                      FALSE
-bind-address                              (No default value)
-binary-as-hex                             FALSE
-character-sets-dir                        (No default value)
-column-type-info                          FALSE
-comments                                  FALSE
-compress                                  FALSE
-database                                  (No default value)
-default-character-set                     auto
-delimiter                                 ;
-enable-cleartext-plugin                   FALSE
-vertical                                  FALSE
-force                                     FALSE
-histignore                                (No default value)
-named-commands                            FALSE
-ignore-spaces                             FALSE
-init-command                              (No default value)
-local-infile                              FALSE
-no-beep                                   FALSE
-host                                      database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com
-dns-srv-name                              (No default value)
-html                                      FALSE
-xml                                       FALSE
-line-numbers                              TRUE
-unbuffered                                FALSE
-column-names                              TRUE
-sigint-ignore                             FALSE
-port                                      3306
-prompt                                    mysql> 
-quick                                     FALSE
-raw                                       FALSE
-reconnect                                 FALSE
-socket                                    (No default value)
-server-public-key-path                    (No default value)
-get-server-public-key                     FALSE
-ssl-ca                                    (No default value)
-ssl-capath                                (No default value)
-ssl-cert                                  (No default value)
-ssl-cipher                                (No default value)
-ssl-key                                   (No default value)
-ssl-crl                                   (No default value)
-ssl-crlpath                               (No default value)
-tls-version                               (No default value)
-tls-ciphersuites                          (No default value)
-ssl-session-data                          (No default value)
-ssl-session-data-continue-on-failed-reuse FALSE
-table                                     FALSE
-user                                      EDA_project
-safe-updates                              FALSE
-i-am-a-dummy                              FALSE
-connect-timeout                           0
-max-allowed-packet                        16777216
-net-buffer-length                         16384
-select-limit                              1000
-max-join-size                             1000000
-show-warnings                             FALSE
-plugin-dir                                (No default value)
-default-auth                              (No default value)
-binary-mode                               FALSE
-connect-expired-password                  FALSE
-network-namespace                         (No default value)
-compression-algorithms                    (No default value)
-zstd-compression-level                    3
-load-data-local-dir                       (No default value)
-fido-register-factor                      (No default value)
-authentication-oci-client-config-profile  (No default value)
-oci-config-file                           (No default value)
+--
+-- Table structure for table `기록실_도루`
+--
+
+DROP TABLE IF EXISTS `기록실_도루`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `기록실_도루` (
+  `year` int DEFAULT NULL,
+  `name` varchar(8) DEFAULT NULL,
+  `team` varchar(8) DEFAULT NULL,
+  `G` int DEFAULT NULL,
+  `SBA` int DEFAULT NULL,
+  `SB` int DEFAULT NULL,
+  `CS` int DEFAULT NULL,
+  `SBper` float DEFAULT NULL,
+  `OOB` int DEFAULT NULL,
+  `PKO` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `기록실_도루`
+--
+
+LOCK TABLES `기록실_도루` WRITE;
+/*!40000 ALTER TABLE `기록실_도루` DISABLE KEYS */;
+INSERT INTO `기록실_도루` VALUES (2022,'박찬호','KIA',130,50,42,8,84,7,0),(2022,'김혜성','키움',129,41,34,7,82.9,4,1),(2022,'최지훈','SSG',144,38,31,7,81.6,5,3),(2022,'김지찬','삼성',113,29,25,4,86.2,3,0),(2022,'박해민','LG',144,30,24,6,80,8,1),(2022,'심우준','KT',132,25,23,2,92,3,0),(2022,'조수행','두산',117,29,22,7,75.9,2,0),(2022,'박민우','NC',104,25,21,4,84,9,1),(2022,'오지환','LG',142,27,20,7,74.1,5,2),(2022,'하주석','한화',125,26,20,6,76.9,7,0),(2022,'배정대','KT',144,23,19,4,82.6,9,2),(2022,'터크먼','한화',144,30,19,11,63.3,2,1),(2022,'노수광','한화',117,23,17,6,73.9,8,3),(2022,'정수빈','두산',127,23,15,8,65.2,4,1),(2022,'피렐라','삼성',141,20,15,5,75,5,2),(2022,'추신수','SSG',112,20,15,5,75,5,1),(2022,'김기환','NC',73,16,14,2,87.5,1,3),(2022,'강승호','두산',134,18,13,5,72.2,2,1),(2022,'홍창기','LG',118,17,13,4,76.5,1,0),(2022,'김도영','KIA',103,16,13,3,81.3,7,0),(2022,'김선빈','KIA',140,15,13,2,86.7,10,0),(2022,'이용규','키움',86,14,12,2,85.7,7,0),(2022,'박성한','SSG',140,20,12,8,60,2,0),(2022,'최정','SSG',121,17,12,5,70.6,4,0),(2022,'마티니','NC',139,16,12,4,75,5,0),(2022,'소크라테스','KIA',127,19,12,7,63.2,5,1),(2022,'구자욱','삼성',99,12,11,1,91.7,4,1),(2022,'오태곤','SSG',130,15,11,4,73.3,1,0),(2022,'허경민','두산',121,13,10,3,76.9,6,1),(2022,'김성윤','삼성',48,12,10,2,83.3,1,1),(2022,'김주원','NC',96,13,10,3,76.9,2,1),(2022,'황성빈','롯데',102,22,10,12,45.5,0,3),(2022,'정은원','한화',140,16,10,6,62.5,4,0),(2022,'문성주','LG',106,15,9,6,60,6,1),(2022,'서건창','LG',77,11,8,3,72.7,2,0),(2022,'박승욱','롯데',100,10,8,2,80,5,0),(2022,'류지혁','KIA',127,12,8,4,66.7,4,0),(2022,'문보경','LG',126,7,7,0,100,5,2),(2022,'박준영','NC',75,9,7,2,77.8,2,0),(2022,'손아섭','NC',138,10,7,3,70,6,0),(2022,'안치홍','롯데',132,9,7,2,77.8,4,0),(2022,'피터스','롯데',85,11,7,4,63.6,4,1),(2022,'김민혁','KT',132,15,6,9,40,3,1),(2022,'황재균','KT',141,9,6,3,66.7,3,1),(2022,'김현준','삼성',118,9,6,3,66.7,6,0),(2022,'채은성','LG',126,13,6,7,46.2,3,0),(2022,'푸이그','키움',126,9,6,3,66.7,12,1),(2022,'최승민','NC',44,9,6,3,66.7,1,0),(2022,'전준우','롯데',120,9,6,3,66.7,2,0),(2022,'나성범','KIA',144,7,6,1,85.7,5,0),(2022,'노시환','한화',115,8,6,2,75,2,1),(2022,'박정현','한화',81,7,6,1,85.7,3,0),(2022,'박병호','KT',124,8,5,3,62.5,3,0),(2022,'알포드','KT',80,6,5,1,83.3,6,1),(2022,'조용호','KT',131,9,5,4,55.6,4,0),(2022,'박계범','두산',77,8,5,3,62.5,3,0),(2022,'이정후','키움',142,5,5,0,100,1,1),(2022,'이명기','NC',94,9,5,4,55.6,5,0),(2022,'권동진','KT',48,4,4,0,100,1,0),(2022,'홍현빈','KT',61,4,4,0,100,0,0),(2022,'강진성','두산',40,4,4,0,100,1,0),(2022,'안재석','두산',99,4,4,0,100,4,0),(2022,'강한울','삼성',94,6,4,2,66.7,0,0),(2022,'김재혁','삼성',15,4,4,0,100,0,1),(2022,'가르시아','LG',39,5,4,1,80,2,2),(2022,'장두성','롯데',53,5,4,1,80,3,1),(2022,'정훈','롯데',91,5,4,1,80,2,0),(2022,'안권수','두산',76,7,3,4,42.9,3,0),(2022,'전민재','두산',35,3,3,0,100,1,0),(2022,'김헌곤','삼성',80,4,3,1,75,3,0),(2022,'이재원','LG',85,4,3,1,75,4,1),(2022,'김성현','SSG',130,6,3,3,50,5,0),(2022,'라가레스','SSG',49,4,3,1,75,3,0),(2022,'최상민','SSG',27,4,3,1,75,0,0),(2022,'박건우','NC',111,6,3,3,50,4,0),(2022,'서호철','NC',89,4,3,1,75,1,0),(2022,'양의지','NC',130,4,3,1,75,7,0),(2022,'렉스','롯데',56,3,3,0,100,5,0),(2022,'신윤후','롯데',49,4,3,1,75,0,0),(2022,'이호연','롯데',88,4,3,1,75,4,0),(2022,'이창진','KIA',111,8,3,5,37.5,4,0),(2022,'김태연','한화',119,5,3,2,60,6,0),(2022,'이도윤','한화',80,5,3,2,60,2,0),(2022,'김준태','KT',98,2,2,0,100,2,0),(2022,'라모스','KT',18,2,2,0,100,1,0),(2022,'오윤석','KT',112,3,2,1,66.7,1,0),(2022,'이시원','KT',31,2,2,0,100,0,0),(2022,'김대한','두산',51,3,2,1,66.7,2,0),(2022,'김재환','두산',128,3,2,1,66.7,5,0),(2022,'박세혁','두산',128,4,2,2,50,4,0),(2022,'김상수','삼성',72,3,2,1,66.7,3,0),(2022,'김성표','삼성',17,2,2,0,100,1,0),(2022,'박승규','삼성',62,2,2,0,100,0,1),(2022,'오선진','삼성',100,4,2,2,50,1,0),(2022,'오재일','삼성',135,3,2,1,66.7,4,0),(2022,'최영진','삼성',43,4,2,2,50,0,0),(2022,'김현수','LG',141,3,2,1,66.7,2,0),(2022,'송찬의','LG',33,3,2,1,66.7,2,0),(2022,'신민재','LG',14,4,2,2,50,0,0),(2022,'안상현','SSG',46,2,2,0,100,0,0),(2022,'최경모','SSG',98,2,2,0,100,3,0),(2022,'권희동','NC',82,3,2,1,66.7,1,0),(2022,'노진혁','NC',115,2,2,0,100,5,0),(2022,'오태양','NC',15,4,2,2,50,0,0),(2022,'이학주','롯데',91,6,2,4,33.3,2,1),(2022,'김호령','KIA',54,3,2,1,66.7,1,0),(2022,'김인환','한화',113,2,2,0,100,6,0),(2022,'이진영','한화',70,4,2,2,50,2,0),(2022,'장진혁','한화',41,3,2,1,66.7,1,0),(2022,'문상철','KT',28,1,1,0,100,0,0),(2022,'양승혁','KT',11,2,1,1,50,0,1),(2022,'장성우','KT',117,1,1,0,100,0,0),(2022,'장준원','KT',35,1,1,0,100,0,0),(2022,'김인태','두산',83,1,1,0,100,3,0),(2022,'신성현','두산',17,1,1,0,100,0,0),(2022,'양석환','두산',107,1,1,0,100,4,0),(2022,'오재원','두산',18,3,1,2,33.3,0,0),(2022,'이유찬','두산',13,2,1,1,50,0,0),(2022,'조민성','삼성',12,1,1,0,100,1,0),(2022,'루이즈','LG',27,1,1,0,100,0,0),(2022,'이상호','LG',60,3,1,2,33.3,0,0),(2022,'김주형','키움',55,1,1,0,100,1,0),(2022,'김준완','키움',111,2,1,1,50,3,0),(2022,'김태진','키움',77,3,1,2,33.3,1,0),(2022,'이병규','키움',24,1,1,0,100,2,0),(2022,'이지영','키움',137,2,1,1,50,3,1),(2022,'임지열','키움',40,1,1,0,100,1,0),(2022,'김강민','SSG',84,4,1,3,25,4,0),(2022,'이재원','SSG',105,1,1,0,100,1,0),(2022,'하재훈','SSG',60,1,1,0,100,1,0),(2022,'한유섬','SSG',135,2,1,1,50,1,0),(2022,'윤형준','NC',35,1,1,0,100,1,0),(2022,'정진기','NC',39,1,1,0,100,0,1),(2022,'천재환','NC',29,1,1,0,100,0,0),(2022,'고승민','롯데',92,5,1,4,20,0,0),(2022,'정보근','롯데',95,1,1,0,100,4,0),(2022,'추재현','롯데',33,1,1,0,100,3,0),(2022,'한태양','롯데',38,1,1,0,100,2,0),(2022,'고종욱','KIA',62,1,1,0,100,1,0),(2022,'박동원','KIA',123,1,1,0,100,5,1),(2022,'이우성','KIA',80,4,1,3,25,1,1),(2022,'최형우','KIA',132,1,1,0,100,3,1),(2022,'이성곤','한화',41,2,1,1,50,1,0),(2022,'최재훈','한화',114,2,1,1,50,1,0),(2022,'허관회','한화',15,1,1,0,100,0,0),(2022,'강백호','KT',62,0,0,0,0,1,0),(2022,'고명성','KT',1,0,0,0,0,0,0),(2022,'김병희','KT',41,3,0,3,0,1,0),(2022,'김재윤','KT',1,0,0,0,0,0,0),(2022,'김태훈','KT',7,0,0,0,0,0,0),(2022,'문상인','KT',12,0,0,0,0,0,0),(2022,'문상준','KT',2,0,0,0,0,0,0),(2022,'박경수','KT',100,0,0,0,0,0,0),(2022,'박영현','KT',4,0,0,0,0,0,0),(2022,'배제성','KT',1,0,0,0,0,0,0),(2022,'송민섭','KT',119,2,0,2,0,0,0),(2022,'신본기','KT',74,1,0,1,0,0,0),(2022,'심재민','KT',2,0,0,0,0,0,0),(2022,'유준규','KT',7,0,0,0,0,0,0),(2022,'이상우','KT',1,0,0,0,0,0,0),(2022,'이정현','KT',1,0,0,0,0,0,0),(2022,'전진영','KT',4,0,0,0,0,0,0),(2022,'조대현','KT',6,0,0,0,0,0,0),(2022,'주권','KT',1,0,0,0,0,0,0),(2022,'지명성','KT',1,0,0,0,0,0,0),(2022,'강현구','두산',3,0,0,0,0,0,0),(2022,'권민석','두산',16,0,0,0,0,0,0),(2022,'김강률','두산',5,0,0,0,0,0,0),(2022,'김동주','두산',1,0,0,0,0,0,0),(2022,'김명신','두산',3,0,0,0,0,0,0),(2022,'김민혁','두산',38,0,0,0,0,0,0),(2022,'김재호','두산',102,2,0,2,0,3,0),(2022,'김지용','두산',3,0,0,0,0,0,0),(2022,'김태근','두산',2,1,0,1,0,0,0),(2022,'박신지','두산',1,0,0,0,0,0,0),(2022,'박유연','두산',13,0,0,0,0,0,0),(2022,'박정수','두산',1,0,0,0,0,0,0),(2022,'서예일','두산',35,0,0,0,0,1,0),(2022,'송승환','두산',11,0,0,0,0,0,1),(2022,'안승한','두산',30,0,0,0,0,1,0),(2022,'양찬열','두산',41,0,0,0,0,1,0),(2022,'윤명준','두산',1,0,0,0,0,0,0),(2022,'이승진','두산',1,0,0,0,0,0,0),(2022,'임창민','두산',3,0,0,0,0,0,0),(2022,'장승현','두산',60,0,0,0,0,0,0),(2022,'장원준','두산',1,0,0,0,0,0,0),(2022,'정철원','두산',2,0,0,0,0,0,0),(2022,'최용제','두산',1,0,0,0,0,0,0),(2022,'페르난데스','두산',139,0,0,0,0,5,0),(2022,'홍건희','두산',7,0,0,0,0,0,0),(2022,'홍성호','두산',12,0,0,0,0,0,0),(2022,'강민호','삼성',130,0,0,0,0,4,0),(2022,'공민규','삼성',15,0,0,0,0,0,0),(2022,'김동엽','삼성',30,3,0,3,0,0,0),(2022,'김동진','삼성',5,0,0,0,0,1,0),(2022,'김서준','삼성',1,0,0,0,0,0,0),(2022,'김영웅','삼성',13,0,0,0,0,0,0),(2022,'김재성','삼성',63,0,0,0,0,4,0),(2022,'김태군','삼성',102,0,0,0,0,2,0),(2022,'김호재','삼성',21,0,0,0,0,0,0),(2022,'박주혁','삼성',2,0,0,0,0,0,0),(2022,'송준석','삼성',17,0,0,0,0,0,0),(2022,'안주형','삼성',18,0,0,0,0,0,0),(2022,'오승환','삼성',3,0,0,0,0,0,0),(2022,'우규민','삼성',1,0,0,0,0,0,0),(2022,'윤정빈','삼성',13,0,0,0,0,0,0),(2022,'이병헌','삼성',3,0,0,0,0,0,0),(2022,'이상민','삼성',1,0,0,0,0,0,0),(2022,'이성규','삼성',13,0,0,0,0,0,0),(2022,'이원석','삼성',88,0,0,0,0,5,0),(2022,'이재현','삼성',75,0,0,0,0,2,0),(2022,'이태훈','삼성',10,0,0,0,0,0,0),(2022,'이해승','삼성',46,0,0,0,0,0,0),(2022,'홍정우','삼성',2,0,0,0,0,0,0),(2022,'고우석','LG',4,0,0,0,0,0,0),(2022,'김기연','LG',12,0,0,0,0,0,0),(2022,'김민성','LG',92,1,0,1,0,0,0),(2022,'김진성','LG',2,0,0,0,0,0,0),(2022,'김호은','LG',2,0,0,0,0,0,0),(2022,'박용택','LG',1,0,0,0,0,0,0),(2022,'박재욱','LG',1,0,0,0,0,0,0),(2022,'배재준','LG',1,0,0,0,0,0,0),(2022,'백승현','LG',1,0,0,0,0,0,0),(2022,'손호영','LG',36,3,0,3,0,1,0),(2022,'송승기','LG',1,0,0,0,0,0,0),(2022,'송은범','LG',2,0,0,0,0,0,0),(2022,'안익훈','LG',14,0,0,0,0,0,0),(2022,'유강남','LG',139,0,0,0,0,5,1),(2022,'이영빈','LG',60,0,0,0,0,0,0),(2022,'이천웅','LG',19,0,0,0,0,0,0),(2022,'이형종','LG',26,0,0,0,0,0,0),(2022,'정우영','LG',1,0,0,0,0,0,0),(2022,'진해수','LG',1,0,0,0,0,0,0),(2022,'채원후','LG',1,0,0,0,0,0,0),(2022,'최동환','LG',4,0,0,0,0,0,0),(2022,'최민창','LG',4,0,0,0,0,0,0),(2022,'최성훈','LG',2,0,0,0,0,0,0),(2022,'한석현','LG',6,1,0,1,0,0,0),(2022,'함덕주','LG',1,0,0,0,0,0,0),(2022,'허도환','LG',64,0,0,0,0,0,0),(2022,'허준혁','LG',1,0,0,0,0,0,0),(2022,'강민국','키움',3,0,0,0,0,0,0),(2022,'김성진','키움',2,0,0,0,0,0,0),(2022,'김수환','키움',57,0,0,0,0,0,1),(2022,'김시앙','키움',13,0,0,0,0,0,0),(2022,'김웅빈','키움',45,2,0,2,0,0,0),(2022,'김재현','키움',56,0,0,0,0,1,0),(2022,'김태훈','키움',1,0,0,0,0,0,0),(2022,'김휘집','키움',112,0,0,0,0,2,1),(2022,'노운현','키움',1,0,0,0,0,0,0),(2022,'박승주','키움',1,0,0,0,0,0,0),(2022,'박주성','키움',2,0,0,0,0,0,0),(2022,'박주홍','키움',21,0,0,0,0,0,0),(2022,'박준태','키움',52,0,0,0,0,2,0),(2022,'박찬혁','키움',52,1,0,1,0,0,1),(2022,'송성문','키움',142,1,0,1,0,1,0),(2022,'신준우','키움',76,0,0,0,0,0,0),(2022,'애플러','키움',1,0,0,0,0,0,0),(2022,'예진원','키움',20,0,0,0,0,0,0),(2022,'이명기','키움',2,0,0,0,0,0,0),(2022,'이재홍','키움',4,0,0,0,0,0,1),(2022,'이주형','키움',32,0,0,0,0,0,0),(2022,'전병우','키움',115,0,0,0,0,0,0),(2022,'하영민','키움',3,0,0,0,0,0,0),(2022,'고효준','SSG',2,0,0,0,0,0,0),(2022,'김규남','SSG',2,0,0,0,0,0,0),(2022,'김민식','SSG',104,0,0,0,0,1,0),(2022,'김재현','SSG',18,0,0,0,0,0,0),(2022,'김택형','SSG',1,0,0,0,0,0,0),(2022,'박민호','SSG',1,0,0,0,0,0,0),(2022,'서동민','SSG',1,0,0,0,0,0,0),(2022,'석정우','SSG',9,1,0,1,0,0,0),(2022,'오준혁','SSG',47,0,0,0,0,0,0),(2022,'이정범','SSG',7,0,0,0,0,0,0),(2022,'이현석','SSG',9,0,0,0,0,0,0),(2022,'이흥련','SSG',22,0,0,0,0,0,0),(2022,'전경원','SSG',1,0,0,0,0,0,0),(2022,'전의산','SSG',77,0,0,0,0,2,0),(2022,'조요한','SSG',1,0,0,0,0,0,0),(2022,'조형우','SSG',9,0,0,0,0,0,0),(2022,'최민준','SSG',1,0,0,0,0,0,0),(2022,'최주환','SSG',97,0,0,0,0,1,0),(2022,'최준우','SSG',10,0,0,0,0,0,0),(2022,'최항','SSG',15,0,0,0,0,1,0),(2022,'크론','SSG',67,0,0,0,0,2,0),(2022,'김수윤','NC',10,0,0,0,0,0,0),(2022,'김응민','NC',34,0,0,0,0,0,0),(2022,'김진호','NC',1,0,0,0,0,0,0),(2022,'김태경','NC',2,0,0,0,0,0,0),(2022,'김한별','NC',24,1,0,1,0,0,0),(2022,'도태훈','NC',91,0,0,0,0,2,1),(2022,'류진욱','NC',1,0,0,0,0,0,0),(2022,'박대온','NC',59,0,0,0,0,2,0),(2022,'박석민','NC',16,0,0,0,0,0,0),(2022,'오영수','NC',83,5,0,5,0,1,0),(2022,'원종현','NC',1,0,0,0,0,0,0),(2022,'이용준','NC',1,0,0,0,0,0,0),(2022,'이용찬','NC',4,0,0,0,0,0,0),(2022,'이재용','NC',8,0,0,0,0,0,0),(2022,'전민수','NC',20,0,0,0,0,1,0),(2022,'정범모','NC',5,0,0,0,0,0,0),(2022,'하준영','NC',1,0,0,0,0,0,0),(2022,'한재승','NC',1,0,0,0,0,0,0),(2022,'강로한','롯데',1,1,0,1,0,0,0),(2022,'강윤구','롯데',1,0,0,0,0,0,0),(2022,'강태율','롯데',19,0,0,0,0,2,0),(2022,'구승민','롯데',1,0,0,0,0,0,0),(2022,'김민수','롯데',57,1,0,1,0,1,0),(2022,'김민수','롯데',5,0,0,0,0,0,0),(2022,'김세민','롯데',4,0,0,0,0,0,0),(2022,'김원중','롯데',1,0,0,0,0,0,0),(2022,'김재유','롯데',1,0,0,0,0,1,0),(2022,'문경찬','롯데',1,0,0,0,0,0,0),(2022,'배성근','롯데',22,0,0,0,0,0,0),(2022,'안중열','롯데',33,1,0,1,0,0,0),(2022,'윤동희','롯데',4,0,0,0,0,0,0),(2022,'이대호','롯데',142,0,0,0,0,6,0),(2022,'조세진','롯데',39,1,0,1,0,0,0),(2022,'지시완','롯데',75,0,0,0,0,0,0),(2022,'한동희','롯데',129,0,0,0,0,4,0),(2022,'권혁경','KIA',2,0,0,0,0,0,0),(2022,'김규성','KIA',70,0,0,0,0,1,0),(2022,'김석환','KIA',51,0,0,0,0,0,0),(2022,'김선우','KIA',3,0,0,0,0,0,0),(2022,'김재열','KIA',1,0,0,0,0,0,0),(2022,'나지완','KIA',2,0,0,0,0,0,0),(2022,'류승현','KIA',3,0,0,0,0,0,0),(2022,'박민','KIA',6,0,0,0,0,0,0),(2022,'박정우','KIA',16,0,0,0,0,1,1),(2022,'신범수','KIA',2,0,0,0,0,0,0),(2022,'이정훈','KIA',6,0,0,0,0,0,0),(2022,'임석진','KIA',10,0,0,0,0,0,0),(2022,'최정용','KIA',30,0,0,0,0,0,0),(2022,'한승택','KIA',66,0,0,0,0,0,0),(2022,'황대인','KIA',129,0,0,0,0,3,0),(2022,'강상원','한화',1,0,0,0,0,0,0),(2022,'권광민','한화',32,1,0,1,0,0,0),(2022,'김민우','한화',1,0,0,0,0,0,0),(2022,'김범수','한화',1,0,0,0,0,0,0),(2022,'류희운','한화',2,0,0,0,0,0,0),(2022,'박상언','한화',56,3,0,3,0,0,0),(2022,'백용환','한화',4,0,0,0,0,0,0),(2022,'변우혁','한화',21,0,0,0,0,0,0),(2022,'신정락','한화',1,0,0,0,0,0,0),(2022,'원혁재','한화',11,0,0,0,0,0,0),(2022,'유로결','한화',30,0,0,0,0,2,0),(2022,'유상빈','한화',17,1,0,1,0,0,1),(2022,'윤호솔','한화',1,0,0,0,0,0,0),(2022,'이원석','한화',20,0,0,0,0,0,0),(2022,'이해창','한화',4,0,0,0,0,0,0),(2022,'임종찬','한화',20,1,0,1,0,0,0),(2022,'장시환','한화',3,0,0,0,0,0,0),(2022,'장운호','한화',57,2,0,2,0,1,0),(2022,'정민규','한화',9,0,0,0,0,1,0),(2022,'주현상','한화',2,0,0,0,0,0,0),(2022,'허인서','한화',8,0,0,0,0,0,0),(2023,'정수빈','두산',137,47,39,8,83,5,3),(2023,'신민재','LG',122,54,37,17,68.5,6,1),(2023,'박찬호','KIA',130,38,30,8,78.9,5,1),(2023,'박해민','LG',144,38,26,12,68.4,11,2),(2023,'박민우','NC',124,33,26,7,78.8,4,1),(2023,'류지혁','삼성',132,28,26,2,92.9,7,2),(2023,'조수행','두산',126,32,26,6,81.3,4,0),(2023,'김혜성','키움',137,28,25,3,89.3,6,2),(2023,'김도영','KIA',84,29,25,4,86.2,2,2),(2023,'문성주','LG',136,38,24,14,63.2,6,2),(2023,'홍창기','LG',141,46,23,23,50,10,3),(2023,'최지훈','SSG',117,23,21,2,91.3,4,3),(2023,'오태곤','SSG',123,21,20,1,95.2,2,0),(2023,'김성윤','삼성',101,24,20,4,83.3,1,0),(2023,'알포드','KT',133,21,17,4,81,12,1),(2023,'오지환','LG',126,23,16,7,69.6,7,2),(2023,'김민석','롯데',129,19,16,3,84.2,3,2),(2023,'안권수','롯데',95,23,16,7,69.6,2,2),(2023,'소크라테스','KIA',142,21,15,6,71.4,3,1),(2023,'김주원','NC',127,18,15,3,83.3,6,1),(2023,'마틴','NC',118,18,15,3,83.3,9,1),(2023,'박승욱','롯데',123,19,15,4,78.9,1,0),(2023,'손아섭','NC',140,17,14,3,82.4,4,1),(2023,'배정대','KT',97,16,13,3,81.3,3,0),(2023,'최원준','KIA',67,18,13,5,72.2,1,1),(2023,'김지찬','삼성',99,14,13,1,92.9,4,1),(2023,'강승호','두산',127,19,13,6,68.4,4,1),(2023,'이원석','한화',81,16,13,3,81.3,3,0),(2023,'에레디아','SSG',122,20,12,8,60,5,1),(2023,'구자욱','삼성',119,16,12,4,75,4,2),(2023,'이유찬','두산',104,17,12,5,70.6,3,1),(2023,'하재훈','SSG',77,11,11,0,100,0,1),(2023,'김민혁','KT',113,15,11,4,73.3,5,0),(2023,'이도윤','한화',106,14,11,3,78.6,0,0),(2023,'도슨','키움',57,11,9,2,81.8,2,0),(2023,'문보경','LG',131,17,9,8,52.9,8,2),(2023,'이창진','KIA',104,11,9,2,81.8,1,0),(2023,'전준우','롯데',138,11,9,2,81.8,7,0),(2023,'황성빈','롯데',74,14,9,5,64.3,0,1),(2023,'허경민','두산',130,12,9,3,75,3,1),(2023,'최승민','LG',38,11,8,3,72.7,1,1),(2023,'이우성','KIA',126,9,8,1,88.9,7,0),(2023,'고승민','롯데',94,11,8,3,72.7,2,0),(2023,'양의지','두산',129,8,8,0,100,7,1),(2023,'최정','SSG',128,10,7,3,70,6,0),(2023,'오스틴','LG',139,10,7,3,70,5,2),(2023,'안치영','KT',76,8,7,1,87.5,0,0),(2023,'박건우','NC',130,12,7,5,58.3,5,0),(2023,'노진혁','롯데',113,9,7,2,77.8,2,0),(2023,'추신수','SSG',112,10,6,4,60,4,0),(2023,'이정후','키움',86,9,6,3,66.7,1,1),(2023,'김규성','KIA',99,8,6,2,75,0,1),(2023,'김성욱','NC',93,7,6,1,85.7,0,1),(2023,'강민호','삼성',125,7,6,1,85.7,5,0),(2023,'피렐라','삼성',139,10,6,4,60,7,1),(2023,'정은원','한화',122,9,6,3,66.7,1,1),(2023,'김상수','KT',129,11,5,6,45.5,4,2),(2023,'김현준','삼성',109,10,5,5,50,4,1),(2023,'이재현','삼성',143,9,5,4,55.6,8,0),(2023,'김태연','한화',91,6,5,1,83.3,3,0),(2023,'문현빈','한화',137,6,5,1,83.3,6,3),(2023,'이진영','한화',121,5,5,0,100,4,1),(2023,'장진혁','한화',68,9,5,4,55.6,0,0),(2023,'김성현','SSG',112,5,4,1,80,2,0),(2023,'박성한','SSG',128,5,4,1,80,4,3),(2023,'임병욱','키움',80,4,4,0,100,4,0),(2023,'이재원','LG',57,6,4,2,66.7,0,0),(2023,'이호연','KT',85,6,4,2,66.7,3,0),(2023,'조용호','KT',63,4,4,0,100,3,0),(2023,'최정용','KIA',56,4,4,0,100,1,0),(2023,'박영빈','NC',41,6,4,2,66.7,2,0),(2023,'서호철','NC',114,9,4,5,44.4,3,1),(2023,'최정원','NC',39,5,4,1,80,1,0),(2023,'이성규','삼성',109,7,4,3,57.1,1,0),(2023,'이학주','롯데',104,5,4,1,80,1,0),(2023,'김재호','두산',91,4,4,0,100,2,0),(2023,'양석환','두산',140,4,4,0,100,9,0),(2023,'안상현','SSG',58,4,3,1,75,0,0),(2023,'이주형','키움',69,4,3,1,75,0,1),(2023,'서건창','LG',44,6,3,3,50,3,0),(2023,'강백호','KT',71,3,3,0,100,4,0),(2023,'문상철','KT',112,4,3,1,75,3,0),(2023,'송민섭','KT',69,4,3,1,75,1,0),(2023,'오윤석','KT',82,4,3,1,75,0,1),(2023,'장준원','KT',69,3,3,0,100,0,0),(2023,'황재균','KT',109,6,3,3,50,2,1),(2023,'김선빈','KIA',119,4,3,1,75,4,0),(2023,'오영수','NC',70,6,3,3,50,3,1),(2023,'오태양','NC',21,6,3,3,50,1,0),(2023,'김동진','삼성',44,3,3,0,100,2,1),(2023,'안치홍','롯데',121,6,3,3,50,3,1),(2023,'윤동희','롯데',107,9,3,6,33.3,2,3),(2023,'김재환','두산',132,4,3,1,75,4,0),(2023,'양찬열','두산',44,5,3,2,60,0,0),(2023,'김강민','SSG',70,3,2,1,66.7,2,0),(2023,'최경모','SSG',28,2,2,0,100,0,0),(2023,'최상민','SSG',51,4,2,2,50,1,0),(2023,'한유섬','SSG',109,3,2,1,66.7,1,1),(2023,'이용규','키움',50,3,2,1,66.7,2,0),(2023,'김민성','LG',112,3,2,1,66.7,2,0),(2023,'김현수','LG',133,3,2,1,66.7,5,0),(2023,'손호영','LG',27,3,2,1,66.7,0,0),(2023,'박병호','KT',132,2,2,0,100,4,0),(2023,'이상호','KT',63,2,2,0,100,1,0),(2023,'홍현빈','KT',44,2,2,0,100,0,0),(2023,'고종욱','KIA',114,4,2,2,50,0,0),(2023,'김태군','KIA',114,3,2,1,66.7,5,0),(2023,'권희동','NC',96,2,2,0,100,5,0),(2023,'도태훈','NC',117,3,2,1,66.7,2,0),(2023,'천재환','NC',78,5,2,3,40,1,0),(2023,'한석현','NC',27,3,2,1,66.7,1,1),(2023,'김호재','삼성',75,2,2,0,100,0,1),(2023,'장두성','롯데',25,2,2,0,100,1,1),(2023,'정훈','롯데',80,2,2,0,100,2,0),(2023,'김인태','두산',47,3,2,1,66.7,2,0),(2023,'박계범','두산',78,4,2,2,50,1,2),(2023,'박준영','두산',51,3,2,1,66.7,0,0),(2023,'안재석','두산',27,2,2,0,100,1,2),(2023,'권광민','한화',66,2,2,0,100,0,0),(2023,'노수광','한화',30,3,2,1,66.7,1,1),(2023,'노시환','한화',131,3,2,1,66.7,4,0),(2023,'오선진','한화',90,2,2,0,100,2,0),(2023,'러셀','키움',59,1,1,0,100,1,0),(2023,'박주홍','키움',27,1,1,0,100,1,0),(2023,'송성문','키움',104,1,1,0,100,1,0),(2023,'이지영','키움',81,2,1,1,50,0,0),(2023,'임지열','키움',72,1,1,0,100,2,0),(2023,'김기연','LG',28,1,1,0,100,1,0),(2023,'송찬의','LG',19,1,1,0,100,1,0),(2023,'정주현','LG',89,6,1,5,16.7,1,0),(2023,'김준태','KT',69,1,1,0,100,1,0),(2023,'장성우','KT',131,2,1,1,50,2,0),(2023,'김호령','KIA',76,1,1,0,100,0,0),(2023,'박세혁','NC',88,2,1,1,50,1,0),(2023,'윤형준','NC',82,2,1,1,50,1,0),(2023,'강한울','삼성',72,4,1,3,25,1,0),(2023,'김동엽','삼성',69,2,1,1,50,2,0),(2023,'김영웅','삼성',55,1,1,0,100,0,0),(2023,'오재일','삼성',106,1,1,0,100,3,1),(2023,'윤정빈','삼성',28,1,1,0,100,1,0),(2023,'김동혁','롯데',15,1,1,0,100,0,0),(2023,'배영빈','롯데',18,1,1,0,100,0,0),(2023,'신윤후','롯데',28,1,1,0,100,0,0),(2023,'유강남','롯데',121,2,1,1,50,6,0),(2023,'이정훈','롯데',59,2,1,1,50,1,1),(2023,'정보근','롯데',55,1,1,0,100,0,1),(2023,'한동희','롯데',108,4,1,3,25,3,0),(2023,'김대한','두산',33,4,1,3,25,0,0),(2023,'박지훈','두산',22,1,1,0,100,1,0),(2023,'안승한','두산',22,1,1,0,100,0,0),(2023,'장승현','두산',76,1,1,0,100,0,0),(2023,'김인환','한화',112,1,1,0,100,5,0),(2023,'박상언','한화',86,3,1,2,33.3,2,0),(2023,'오그레디','한화',22,1,1,0,100,0,0),(2023,'윌리엄스','한화',68,2,1,1,50,1,0),(2023,'유로결','한화',27,1,1,0,100,0,0),(2023,'이명기','한화',14,1,1,0,100,0,0),(2023,'이상혁','한화',7,2,1,1,50,0,0),(2023,'최인호','한화',41,1,1,0,100,1,1),(2023,'최재훈','한화',125,2,1,1,50,0,0),(2023,'강진성','SSG',58,0,0,0,0,0,0),(2023,'고명준','SSG',2,0,0,0,0,0,0),(2023,'고효준','SSG',2,0,0,0,0,0,0),(2023,'김건웅','SSG',1,0,0,0,0,0,0),(2023,'김민식','SSG',122,0,0,0,0,5,1),(2023,'김정민','SSG',8,0,0,0,0,0,0),(2023,'김찬형','SSG',36,0,0,0,0,0,0),(2023,'노경은','SSG',1,0,0,0,0,0,0),(2023,'류효승','SSG',3,0,0,0,0,0,0),(2023,'문승원','SSG',1,0,0,0,0,0,0),(2023,'백승건','SSG',1,0,0,0,0,0,0),(2023,'서진용','SSG',3,0,0,0,0,0,0),(2023,'이건욱','SSG',1,0,0,0,0,0,0),(2023,'이재원','SSG',27,0,0,0,0,0,0),(2023,'이정범','SSG',15,0,0,0,0,0,0),(2023,'이흥련','SSG',16,0,0,0,0,0,0),(2023,'임준섭','SSG',1,0,0,0,0,0,0),(2023,'전의산','SSG',56,2,0,2,0,0,0),(2023,'조형우','SSG',62,0,0,0,0,1,0),(2023,'채현우','SSG',1,0,0,0,0,0,0),(2023,'최민준','SSG',1,0,0,0,0,0,0),(2023,'최주환','SSG',134,0,0,0,0,5,0),(2023,'최준우','SSG',38,1,0,1,0,0,0),(2023,'최항','SSG',21,0,0,0,0,1,0),(2023,'김건희','키움',9,0,0,0,0,0,0),(2023,'김동규','키움',1,0,0,0,0,0,0),(2023,'김동헌','키움',102,0,0,0,0,1,0),(2023,'김동혁','키움',2,0,0,0,0,0,0),(2023,'김병휘','키움',10,0,0,0,0,0,0),(2023,'김선기','키움',2,0,0,0,0,0,0),(2023,'김성진','키움',2,0,0,0,0,0,0),(2023,'김수환','키움',50,0,0,0,0,0,0),(2023,'김시앙','키움',33,0,0,0,0,1,1),(2023,'김웅빈','키움',29,0,0,0,0,2,0),(2023,'김재웅','키움',1,0,0,0,0,0,0),(2023,'김재현','키움',8,0,0,0,0,1,0),(2023,'김주형','키움',46,0,0,0,0,0,0),(2023,'김준완','키움',76,0,0,0,0,2,0),(2023,'김준형','키움',1,0,0,0,0,0,0),(2023,'김태진','키움',74,0,0,0,0,2,0),(2023,'김휘집','키움',110,0,0,0,0,2,0),(2023,'문성현','키움',2,0,0,0,0,0,0),(2023,'박수종','키움',23,0,0,0,0,0,0),(2023,'박준태','키움',14,0,0,0,0,0,0),(2023,'박찬혁','키움',48,0,0,0,0,0,1),(2023,'송재선','키움',5,0,0,0,0,0,0),(2023,'신준우','키움',24,0,0,0,0,0,0),(2023,'양현','키움',2,0,0,0,0,0,0),(2023,'예진원','키움',16,0,0,0,0,0,0),(2023,'원종현','키움',2,0,0,0,0,0,0),(2023,'윤정현','키움',3,0,0,0,0,0,0),(2023,'이명종','키움',3,0,0,0,0,0,0),(2023,'이병규','키움',7,0,0,0,0,0,0),(2023,'이승원','키움',4,0,0,0,0,0,0),(2023,'이원석','키움',89,1,0,1,0,2,0),(2023,'이형종','키움',99,0,0,0,0,4,0),(2023,'임창민','키움',2,0,0,0,0,0,0),(2023,'전병우','키움',41,0,0,0,0,0,0),(2023,'주성원','키움',25,0,0,0,0,1,1),(2023,'하영민','키움',3,0,0,0,0,0,0),(2023,'후라도','키움',1,0,0,0,0,0,0),(2023,'고우석','LG',1,0,0,0,0,0,0),(2023,'김대현','LG',2,0,0,0,0,0,0),(2023,'김범석','LG',10,0,0,0,0,0,0),(2023,'김주성','LG',11,0,0,0,0,1,0),(2023,'박동원','LG',130,1,0,1,0,7,0),(2023,'박명근','LG',2,0,0,0,0,0,0),(2023,'송대현','LG',4,0,0,0,0,0,0),(2023,'안익훈','LG',11,0,0,0,0,3,0),(2023,'오석주','LG',1,0,0,0,0,0,0),(2023,'이정용','LG',1,0,0,0,0,0,0),(2023,'이천웅','LG',4,0,0,0,0,0,0),(2023,'전준호','LG',2,0,0,0,0,0,0),(2023,'최동환','LG',3,0,0,0,0,0,0),(2023,'허도환','LG',47,0,0,0,0,0,0),(2023,'강민성','KT',12,0,0,0,0,0,0),(2023,'강현우','KT',53,1,0,1,0,0,0),(2023,'김민','KT',1,0,0,0,0,0,0),(2023,'김병준','KT',3,0,0,0,0,0,0),(2023,'김병희','KT',5,0,0,0,0,0,0),(2023,'김영현','KT',1,0,0,0,0,0,0),(2023,'김재윤','KT',5,0,0,0,0,0,0),(2023,'류현인','KT',17,0,0,0,0,0,0),(2023,'문상인','KT',1,0,0,0,0,0,0),(2023,'문상준','KT',2,0,0,0,0,0,0),(2023,'박경수','KT',107,0,0,0,0,4,0),(2023,'박민석','KT',4,0,0,0,0,0,0),(2023,'박영현','KT',3,0,0,0,0,0,0),(2023,'손민석','KT',9,0,0,0,0,0,0),(2023,'신본기','KT',40,1,0,1,0,1,0),(2023,'이상동','KT',1,0,0,0,0,0,0),(2023,'이선우','KT',1,0,0,0,0,0,0),(2023,'이시원','KT',29,1,0,1,0,1,0),(2023,'이채호','KT',1,0,0,0,0,0,0),(2023,'정준영','KT',34,0,0,0,0,0,0),(2023,'하준호','KT',1,0,0,0,0,0,0),(2023,'김기훈','KIA',1,0,0,0,0,0,0),(2023,'김석환','KIA',12,0,0,0,0,0,0),(2023,'김선우','KIA',5,0,0,0,0,0,0),(2023,'나성범','KIA',58,0,0,0,0,5,0),(2023,'박정우','KIA',21,0,0,0,0,0,0),(2023,'박준표','KIA',1,0,0,0,0,0,0),(2023,'변우혁','KIA',83,0,0,0,0,0,0),(2023,'신범수','KIA',36,0,0,0,0,1,0),(2023,'오선우','KIA',33,0,0,0,0,0,0),(2023,'윤도현','KIA',1,0,0,0,0,0,0),(2023,'윤중현','KIA',1,0,0,0,0,0,0),(2023,'정해영','KIA',2,0,0,0,0,0,0),(2023,'주효상','KIA',19,0,0,0,0,0,0),(2023,'최형우','KIA',121,0,0,0,0,4,0),(2023,'한승택','KIA',49,0,0,0,0,0,0),(2023,'한준수','KIA',48,0,0,0,0,0,0),(2023,'홍종표','KIA',40,0,0,0,0,0,0),(2023,'황대인','KIA',60,0,0,0,0,1,0),(2023,'황동하','KIA',1,0,0,0,0,0,0),(2023,'김수윤','NC',16,0,0,0,0,0,0),(2023,'김시훈','NC',1,0,0,0,0,0,0),(2023,'김한별','NC',79,3,0,3,0,1,0),(2023,'김형준','NC',26,0,0,0,0,0,0),(2023,'류진욱','NC',2,0,0,0,0,0,0),(2023,'박대온','NC',25,0,0,0,0,0,0),(2023,'박석민','NC',30,0,0,0,0,1,0),(2023,'박주찬','NC',5,0,0,0,0,0,0),(2023,'박한결','NC',12,0,0,0,0,0,0),(2023,'안중열','NC',77,0,0,0,0,2,0),(2023,'오장한','NC',3,0,0,0,0,0,0),(2023,'이용찬','NC',2,0,0,0,0,0,0),(2023,'전사민','NC',1,0,0,0,0,0,0),(2023,'조현진','NC',10,0,0,0,0,0,0),(2023,'채원후','NC',1,0,0,0,0,0,0),(2023,'최보성','NC',12,0,0,0,0,0,0),(2023,'한재승','NC',1,0,0,0,0,0,0),(2023,'강준서','삼성',10,1,0,1,0,0,0),(2023,'공민규','삼성',22,0,0,0,0,1,0),(2023,'김대우','삼성',1,0,0,0,0,0,0),(2023,'김도환','삼성',9,0,0,0,0,0,0),(2023,'김민수','삼성',2,0,0,0,0,0,0),(2023,'김상민','삼성',8,0,0,0,0,0,0),(2023,'김서준','삼성',1,0,0,0,0,0,0),(2023,'김재상','삼성',17,0,0,0,0,0,0),(2023,'김재성','삼성',57,1,0,1,0,0,0),(2023,'김태훈','삼성',11,1,0,1,0,0,0),(2023,'김태훈','삼성',2,0,0,0,0,0,0),(2023,'김헌곤','삼성',6,0,0,0,0,0,0),(2023,'류승민','삼성',24,0,0,0,0,1,0),(2023,'송준석','삼성',7,0,0,0,0,0,0),(2023,'안주형','삼성',53,0,0,0,0,2,0),(2023,'오승환','삼성',3,0,0,0,0,0,0),(2023,'이병헌','삼성',23,0,0,0,0,0,0),(2023,'이상민','삼성',1,0,0,0,0,0,0),(2023,'이승현','삼성',2,0,0,0,0,0,0),(2023,'이승현','삼성',2,0,0,0,0,0,0),(2023,'이재익','삼성',1,0,0,0,0,0,0),(2023,'이태훈','삼성',12,0,0,0,0,0,0),(2023,'이해승','삼성',9,0,0,0,0,0,0),(2023,'조민성','삼성',15,1,0,1,0,2,0),(2023,'구드럼','롯데',50,0,0,0,0,1,0),(2023,'국해성','롯데',6,0,0,0,0,1,0),(2023,'김민수','롯데',25,0,0,0,0,0,0),(2023,'김상수','롯데',1,0,0,0,0,0,0),(2023,'김원중','롯데',3,0,0,0,0,0,0),(2023,'렉스','롯데',55,1,0,1,0,3,0),(2023,'박형준','롯데',1,0,0,0,0,0,0),(2023,'서동욱','롯데',13,0,0,0,0,0,0),(2023,'손성빈','롯데',45,0,0,0,0,1,0),(2023,'윤수녕','롯데',3,0,0,0,0,0,0),(2023,'정대선','롯데',19,0,0,0,0,0,0),(2023,'지시완','롯데',6,0,0,0,0,0,0),(2023,'최설우','롯데',1,0,0,0,0,0,0),(2023,'권민석','두산',1,0,0,0,0,0,0),(2023,'김민규','두산',1,0,0,0,0,0,0),(2023,'김민혁','두산',21,0,0,0,0,0,0),(2023,'김정우','두산',1,0,0,0,0,0,0),(2023,'김태근','두산',41,3,0,3,0,0,0),(2023,'로하스','두산',122,1,0,1,0,5,0),(2023,'박신지','두산',1,0,0,0,0,0,0),(2023,'박유연','두산',10,0,0,0,0,0,0),(2023,'박정수','두산',2,0,0,0,0,0,0),(2023,'박치국','두산',1,0,0,0,0,0,0),(2023,'서예일','두산',5,0,0,0,0,0,0),(2023,'송승환','두산',30,1,0,1,0,1,0),(2023,'신성현','두산',12,1,0,1,0,0,0),(2023,'이형범','두산',2,0,0,0,0,0,0),(2023,'전민재','두산',19,3,0,3,0,0,0),(2023,'정철원','두산',3,0,0,0,0,0,0),(2023,'최승용','두산',2,0,0,0,0,0,0),(2023,'홍건희','두산',4,0,0,0,0,0,0),(2023,'홍성호','두산',21,1,0,1,0,0,0),(2023,'강재민','한화',1,0,0,0,0,0,0),(2023,'김건','한화',7,0,0,0,0,0,0),(2023,'김서현','한화',1,0,0,0,0,0,0),(2023,'박상원','한화',3,0,0,0,0,0,0),(2023,'박정현','한화',53,0,0,0,0,0,0),(2023,'박준영','한화',1,0,0,0,0,0,0),(2023,'유상빈','한화',3,0,0,0,0,0,0),(2023,'윤대경','한화',1,0,0,0,0,0,0),(2023,'이민준','한화',4,0,0,0,0,0,0),(2023,'이성곤','한화',8,0,0,0,0,0,0),(2023,'이재용','한화',2,0,0,0,0,0,0),(2023,'이태양','한화',1,0,0,0,0,0,0),(2023,'장운호','한화',4,0,0,0,0,0,0),(2023,'장지승','한화',3,0,0,0,0,0,0),(2023,'정우람','한화',1,0,0,0,0,0,0),(2023,'채은성','한화',137,0,0,0,0,2,0),(2023,'하주석','한화',25,0,0,0,0,0,0),(2023,'허관회','한화',10,0,0,0,0,0,0),(2024,'조수행','두산',78,44,39,5,88.6,2,0),(2024,'황성빈','롯데',63,36,32,4,88.9,1,2),(2024,'정수빈','두산',79,35,31,4,88.6,3,1),(2024,'박해민','LG',83,33,26,7,78.8,2,3),(2024,'신민재','LG',81,30,25,5,83.3,2,0),(2024,'최지훈','SSG',82,30,25,5,83.3,2,0),(2024,'김도영','KIA',78,27,24,3,88.9,4,0),(2024,'김지찬','삼성',80,24,23,1,95.8,1,0),(2024,'박민우','NC',64,27,22,5,81.5,4,3),(2024,'김혜성','키움',70,23,19,4,82.6,4,1),(2024,'오태곤','SSG',71,17,16,1,94.1,0,1),(2024,'최원준','KIA',76,20,14,6,70,1,1),(2024,'문성주','LG',75,20,13,7,65,5,0),(2024,'박찬호','KIA',72,21,13,8,61.9,2,1),(2024,'강승호','두산',85,15,12,3,80,2,0),(2024,'오스틴','LG',82,16,11,5,68.8,6,1),(2024,'오지환','LG',54,14,11,3,78.6,1,0),(2024,'최승민','LG',29,14,8,6,57.1,1,1),(2024,'홍창기','LG',79,17,8,9,47.1,5,1),(2024,'박성한','SSG',80,10,8,2,80,1,1),(2024,'김성욱','NC',78,10,8,2,80,0,0),(2024,'김주원','NC',75,10,8,2,80,3,0),(2024,'이유찬','두산',57,12,8,4,66.7,2,1),(2024,'김영웅','삼성',79,9,8,1,88.9,1,0),(2024,'이성규','삼성',77,9,8,1,88.9,1,0),(2024,'배정대','KT',51,12,7,5,58.3,2,0),(2024,'천성호','KT',60,7,7,0,100,2,1),(2024,'장두성','롯데',24,9,7,2,77.8,0,0),(2024,'장진혁','한화',37,10,7,3,70,0,1),(2024,'페라자','한화',62,11,7,4,63.6,3,0),(2024,'최경모','SSG',50,9,6,3,66.7,0,0),(2024,'하재훈','SSG',62,6,6,0,100,1,0),(2024,'손아섭','NC',77,8,6,2,75,4,0),(2024,'이우성','KIA',75,7,6,1,85.7,5,0),(2024,'손호영','롯데',48,10,6,4,60,1,1),(2024,'최원영','LG',23,8,5,3,62.5,1,1),(2024,'강백호','KT',82,7,5,2,71.4,2,0),(2024,'조용호','KT',54,6,5,1,83.3,1,1),(2024,'박지환','SSG',30,7,5,2,71.4,3,0),(2024,'이지영','SSG',65,6,5,1,83.3,0,0),(2024,'최정','SSG',71,5,5,0,100,1,0),(2024,'최정원','NC',40,8,5,3,62.5,2,0),(2024,'윤동희','롯데',75,7,5,2,71.4,2,0),(2024,'구자욱','삼성',79,9,5,4,55.6,7,1),(2024,'류지혁','삼성',47,8,5,3,62.5,2,0),(2024,'이도윤','한화',73,8,5,3,62.5,1,0),(2024,'문보경','LG',83,9,4,5,44.4,1,2),(2024,'장성우','KT',76,4,4,0,100,2,0),(2024,'황재균','KT',80,7,4,3,57.1,1,0),(2024,'추신수','SSG',41,5,4,1,80,2,0),(2024,'양석환','두산',84,7,4,3,57.1,1,0),(2024,'소크라테스','KIA',80,5,4,1,80,5,1),(2024,'고승민','롯데',56,6,4,2,66.7,3,0),(2024,'레이예스','롯데',78,4,4,0,100,2,1),(2024,'김재상','삼성',35,4,4,0,100,1,0),(2024,'안주형','삼성',34,5,4,1,80,2,0),(2024,'노시환','한화',79,4,4,0,100,1,0),(2024,'송성문','키움',76,4,4,0,100,2,1),(2024,'구본혁','LG',75,7,3,4,42.9,0,0),(2024,'문상철','KT',72,4,3,1,75,0,1),(2024,'에레디아','SSG',77,6,3,3,50,3,0),(2024,'정준재','SSG',32,6,3,3,50,1,0),(2024,'박건우','NC',75,3,3,0,100,0,0),(2024,'천재환','NC',33,3,3,0,100,2,0),(2024,'라모스','두산',69,6,3,3,50,3,0),(2024,'전민재','두산',59,5,3,2,60,1,0),(2024,'김선빈','KIA',60,3,3,0,100,1,0),(2024,'서건창','KIA',58,4,3,1,75,0,0),(2024,'김동혁','롯데',26,4,3,1,75,0,1),(2024,'전준우','롯데',43,4,3,1,75,1,1),(2024,'김성윤','삼성',28,4,3,1,75,0,0),(2024,'김헌곤','삼성',64,4,3,1,75,0,0),(2024,'김태연','한화',66,5,3,2,60,2,0),(2024,'안치홍','한화',79,4,3,1,75,1,0),(2024,'이원석','한화',38,3,3,0,100,2,0),(2024,'황영묵','한화',61,8,3,5,37.5,1,0),(2024,'김대원','LG',10,2,2,0,100,0,0),(2024,'김현수','LG',79,3,2,1,66.7,2,1),(2024,'안익훈','LG',19,2,2,0,100,0,0),(2024,'김민혁','KT',58,2,2,0,100,1,0),(2024,'김상수','KT',64,3,2,1,66.7,1,0),(2024,'신본기','KT',56,2,2,0,100,0,0),(2024,'김성현','SSG',27,2,2,0,100,0,0),(2024,'권희동','NC',77,2,2,0,100,2,0),(2024,'김휘집','NC',78,3,2,1,66.7,2,0),(2024,'박세혁','NC',47,2,2,0,100,1,0),(2024,'박영빈','NC',6,2,2,0,100,0,0),(2024,'한석현','NC',22,3,2,1,66.7,1,0),(2024,'양의지','두산',73,2,2,0,100,5,0),(2024,'허경민','두산',69,2,2,0,100,2,0),(2024,'김호령','KIA',43,3,2,1,66.7,1,0),(2024,'이창진','KIA',64,3,2,1,66.7,0,0),(2024,'김민석','롯데',32,3,2,1,66.7,0,0),(2024,'김재혁','삼성',25,4,2,2,50,1,0),(2024,'박병호','삼성',73,2,2,0,100,1,0),(2024,'문현빈','한화',60,6,2,4,33.3,2,0),(2024,'이상혁','한화',6,2,2,0,100,0,1),(2024,'정은원','한화',27,2,2,0,100,1,0),(2024,'최인호','한화',70,2,2,0,100,3,0),(2024,'도슨','키움',74,4,2,2,50,3,0),(2024,'이용규','키움',44,3,2,1,66.7,3,0),(2024,'박동원','LG',73,1,1,0,100,2,0),(2024,'고명준','SSG',76,5,1,4,20,0,0),(2024,'김창평','SSG',6,1,1,0,100,0,0),(2024,'안상현','SSG',29,2,1,1,50,0,0),(2024,'서호철','NC',79,4,1,3,25,4,0),(2024,'김대한','두산',54,2,1,1,50,3,0),(2024,'박계범','두산',24,1,1,0,100,1,0),(2024,'박준영','두산',48,1,1,0,100,1,0),(2024,'홍성호','두산',13,1,1,0,100,0,0),(2024,'홍종표','KIA',48,3,1,2,33.3,0,0),(2024,'박승욱','롯데',76,5,1,4,20,4,0),(2024,'정훈','롯데',54,2,1,1,50,1,0),(2024,'강민호','삼성',79,1,1,0,100,0,0),(2024,'맥키넌','삼성',69,1,1,0,100,2,0),(2024,'이재현','삼성',51,1,1,0,100,1,0),(2024,'박상언','한화',27,1,1,0,100,0,0),(2024,'채은성','한화',61,2,1,1,50,4,0),(2024,'하주석','한화',27,3,1,2,33.3,1,0),(2024,'원성준','키움',13,1,1,0,100,0,0),(2024,'이형종','키움',21,1,1,0,100,0,0),(2024,'임병욱','키움',19,1,1,0,100,0,0),(2024,'김대현','LG',2,0,0,0,0,0,0),(2024,'김민수','LG',6,0,0,0,0,0,0),(2024,'김범석','LG',42,0,0,0,0,1,0),(2024,'김성진','LG',1,0,0,0,0,0,0),(2024,'김주성','LG',10,0,0,0,0,0,0),(2024,'김진성','LG',1,0,0,0,0,0,0),(2024,'김태우','LG',4,0,0,0,0,0,0),(2024,'김현종','LG',15,0,0,0,0,0,0),(2024,'송찬의','LG',3,0,0,0,0,0,0),(2024,'유영찬','LG',2,0,0,0,0,0,0),(2024,'이지강','LG',1,0,0,0,0,0,0),(2024,'전준호','LG',3,0,0,0,0,0,0),(2024,'최동환','LG',1,0,0,0,0,0,0),(2024,'최명경','LG',1,0,0,0,0,0,0),(2024,'함창건','LG',6,0,0,0,0,0,0),(2024,'허도환','LG',40,0,0,0,0,2,0),(2024,'강건','KT',1,0,0,0,0,0,0),(2024,'강현우','KT',9,0,0,0,0,0,0),(2024,'김건형','KT',12,0,0,0,0,0,0),(2024,'김민','KT',1,0,0,0,0,0,0),(2024,'김병준','KT',25,0,0,0,0,1,0),(2024,'김준태','KT',23,0,0,0,0,0,0),(2024,'로하스','KT',82,1,0,1,0,2,0),(2024,'박경수','KT',5,0,0,0,0,0,0),(2024,'박민석','KT',2,0,0,0,0,0,0),(2024,'박시영','KT',1,0,0,0,0,0,0),(2024,'박영현','KT',4,0,0,0,0,0,0),(2024,'성재헌','KT',1,0,0,0,0,0,0),(2024,'손동현','KT',2,0,0,0,0,0,0),(2024,'송민섭','KT',5,1,0,1,0,0,0),(2024,'안치영','KT',31,1,0,1,0,0,0),(2024,'안현민','KT',9,0,0,0,0,0,0),(2024,'오윤석','KT',43,0,0,0,0,0,0),(2024,'오재일','KT',51,0,0,0,0,1,0),(2024,'우규민','KT',2,0,0,0,0,0,0),(2024,'윤준혁','KT',2,0,0,0,0,0,0),(2024,'이선우','KT',3,0,0,0,0,0,0),(2024,'이호연','KT',23,0,0,0,0,0,0),(2024,'장준원','KT',17,0,0,0,0,0,0),(2024,'정준영','KT',20,0,0,0,0,0,0),(2024,'조대현','KT',8,0,0,0,0,0,0),(2024,'주권','KT',2,0,0,0,0,0,0),(2024,'홍현빈','KT',19,0,0,0,0,0,0),(2024,'강진성','SSG',16,0,0,0,0,0,0),(2024,'김민식','SSG',25,0,0,0,0,1,0),(2024,'김찬형','SSG',5,0,0,0,0,0,0),(2024,'류효승','SSG',1,0,0,0,0,0,0),(2024,'문승원','SSG',4,0,0,0,0,0,0),(2024,'박민호','SSG',1,0,0,0,0,0,0),(2024,'이로운','SSG',2,0,0,0,0,0,0),(2024,'전의산','SSG',18,1,0,1,0,0,0),(2024,'정현승','SSG',8,0,0,0,0,1,0),(2024,'조병현','SSG',1,0,0,0,0,0,0),(2024,'조형우','SSG',14,0,0,0,0,0,0),(2024,'최민창','SSG',7,0,0,0,0,0,0),(2024,'최준우','SSG',15,0,0,0,0,0,0),(2024,'한두솔','SSG',1,0,0,0,0,0,0),(2024,'한유섬','SSG',73,1,0,1,0,0,0),(2024,'김세훈','NC',6,0,0,0,0,0,0),(2024,'김수윤','NC',5,0,0,0,0,0,0),(2024,'김영규','NC',1,0,0,0,0,0,0),(2024,'김재열','NC',1,0,0,0,0,0,0),(2024,'김한별','NC',18,0,0,0,0,0,0),(2024,'김형준','NC',68,0,0,0,0,2,0),(2024,'데이비슨','NC',72,1,0,1,0,3,0),(2024,'도태훈','NC',52,0,0,0,0,1,0),(2024,'류진욱','NC',1,0,0,0,0,0,0),(2024,'박시원','NC',12,0,0,0,0,1,0),(2024,'박한결','NC',16,0,0,0,0,0,0),(2024,'송명기','NC',1,0,0,0,0,0,0),(2024,'오영수','NC',20,0,0,0,0,0,0),(2024,'한재승','NC',1,0,0,0,0,0,0),(2024,'김기연','두산',49,2,0,2,0,1,0),(2024,'김동주','두산',1,0,0,0,0,0,0),(2024,'김명신','두산',3,0,0,0,0,0,0),(2024,'김민규','두산',1,0,0,0,0,0,0),(2024,'김민혁','두산',5,0,0,0,0,0,0),(2024,'김인태','두산',10,0,0,0,0,0,0),(2024,'김재호','두산',29,0,0,0,0,1,0),(2024,'김재환','두산',80,1,0,1,0,1,0),(2024,'김태근','두산',25,1,0,1,0,2,0),(2024,'김호준','두산',2,0,0,0,0,0,0),(2024,'박민준','두산',1,0,0,0,0,0,0),(2024,'박정수','두산',1,0,0,0,0,0,0),(2024,'박치국','두산',2,0,0,0,0,0,0),(2024,'서예일','두산',15,0,0,0,0,0,0),(2024,'안승한','두산',4,0,0,0,0,0,0),(2024,'양찬열','두산',3,0,0,0,0,0,0),(2024,'오명진','두산',1,0,0,0,0,0,0),(2024,'윤준호','두산',3,0,0,0,0,0,0),(2024,'이교훈','두산',2,0,0,0,0,0,0),(2024,'이영하','두산',1,0,0,0,0,0,0),(2024,'장승현','두산',9,1,0,1,0,0,0),(2024,'전다민','두산',5,0,0,0,0,0,0),(2024,'정철원','두산',2,0,0,0,0,0,0),(2024,'최지강','두산',1,0,0,0,0,0,0),(2024,'홍건희','두산',3,0,0,0,0,0,0),(2024,'고종욱','KIA',22,0,0,0,0,0,0),(2024,'곽도규','KIA',1,0,0,0,0,0,0),(2024,'김규성','KIA',6,0,0,0,0,0,0),(2024,'김태군','KIA',59,0,0,0,0,1,0),(2024,'나성범','KIA',49,0,0,0,0,0,0),(2024,'박민','KIA',16,1,0,1,0,0,0),(2024,'박정우','KIA',14,0,0,0,0,1,0),(2024,'변우혁','KIA',16,0,0,0,0,0,0),(2024,'전상현','KIA',1,0,0,0,0,0,0),(2024,'정해영','KIA',1,0,0,0,0,0,0),(2024,'최지민','KIA',1,0,0,0,0,0,0),(2024,'최형우','KIA',74,1,0,1,0,1,0),(2024,'한승택','KIA',4,0,0,0,0,0,0),(2024,'한준수','KIA',63,0,0,0,0,1,0),(2024,'황대인','KIA',3,0,0,0,0,0,0),(2024,'강성우','롯데',2,1,0,1,0,0,0),(2024,'김민성','롯데',35,1,0,1,0,0,0),(2024,'나승엽','롯데',55,0,0,0,0,3,0),(2024,'노진혁','롯데',29,0,0,0,0,0,0),(2024,'백두산','롯데',1,0,0,0,0,0,0),(2024,'서동욱','롯데',12,0,0,0,0,0,0),(2024,'손성빈','롯데',33,0,0,0,0,0,0),(2024,'신윤후','롯데',16,0,0,0,0,1,1),(2024,'오선진','롯데',16,0,0,0,0,0,0),(2024,'유강남','롯데',52,0,0,0,0,2,0),(2024,'이선우','롯데',5,0,0,0,0,0,0),(2024,'이정훈','롯데',29,0,0,0,0,0,0),(2024,'이주찬','롯데',14,0,0,0,0,0,0),(2024,'이학주','롯데',37,1,0,1,0,1,0),(2024,'정대선','롯데',3,0,0,0,0,0,0),(2024,'정보근','롯데',35,0,0,0,0,0,0),(2024,'최항','롯데',49,1,0,1,0,1,1),(2024,'한동희','롯데',14,0,0,0,0,1,0),(2024,'강한울','삼성',18,0,0,0,0,0,0),(2024,'공민규','삼성',11,0,0,0,0,0,0),(2024,'김대우','삼성',1,0,0,0,0,0,0),(2024,'김동엽','삼성',6,0,0,0,0,0,0),(2024,'김동진','삼성',26,0,0,0,0,0,0),(2024,'김재성','삼성',10,0,0,0,0,0,0),(2024,'김재윤','삼성',1,0,0,0,0,0,0),(2024,'김태훈','삼성',9,0,0,0,0,0,0),(2024,'김태훈','삼성',1,0,0,0,0,0,0),(2024,'김현준','삼성',32,0,0,0,0,1,0),(2024,'김호진','삼성',19,0,0,0,0,1,0),(2024,'류승민','삼성',5,0,0,0,0,0,0),(2024,'양우현','삼성',3,0,0,0,0,0,0),(2024,'오승환','삼성',1,0,0,0,0,0,0),(2024,'육선엽','삼성',1,0,0,0,0,0,0),(2024,'윤정빈','삼성',18,0,0,0,0,0,0),(2024,'이병헌','삼성',58,0,0,0,0,1,0),(2024,'이상민','삼성',1,0,0,0,0,0,0),(2024,'이창용','삼성',4,0,0,0,0,0,0),(2024,'전병우','삼성',23,0,0,0,0,0,0),(2024,'최지광','삼성',1,0,0,0,0,0,0),(2024,'김강민','한화',36,0,0,0,0,0,0),(2024,'김인환','한화',3,0,0,0,0,0,0),(2024,'박상원','한화',1,0,0,0,0,0,0),(2024,'유로결','한화',8,1,0,1,0,0,1),(2024,'이명기','한화',4,0,0,0,0,0,0),(2024,'이재원','한화',28,0,0,0,0,1,0),(2024,'이진영','한화',23,0,0,0,0,0,0),(2024,'임종찬','한화',24,1,0,1,0,0,1),(2024,'주현상','한화',1,0,0,0,0,0,0),(2024,'최재훈','한화',62,0,0,0,0,1,0),(2024,'고영우','키움',53,0,0,0,0,1,0),(2024,'김건희','키움',26,0,0,0,0,0,0),(2024,'김동헌','키움',2,0,0,0,0,0,0),(2024,'김병휘','키움',2,0,0,0,0,0,0),(2024,'김선기','키움',1,0,0,0,0,0,0),(2024,'김시앙','키움',6,0,0,0,0,0,0),(2024,'김연주','키움',4,0,0,0,0,0,0),(2024,'김웅빈','키움',6,0,0,0,0,0,0),(2024,'김윤하','키움',1,0,0,0,0,0,0),(2024,'김재웅','키움',2,0,0,0,0,0,0),(2024,'김재현','키움',65,0,0,0,0,0,0),(2024,'김주형','키움',12,0,0,0,0,0,0),(2024,'김태진','키움',27,0,0,0,0,0,0),(2024,'문성현','키움',1,0,0,0,0,0,0),(2024,'박성빈','키움',6,0,0,0,0,0,0),(2024,'박수종','키움',36,0,0,0,0,1,0),(2024,'박주홍','키움',3,0,0,0,0,0,0),(2024,'박준형','키움',4,0,0,0,0,0,0),(2024,'변상권','키움',38,0,0,0,0,0,0),(2024,'송지후','키움',2,0,0,0,0,0,0),(2024,'신준우','키움',1,0,0,0,0,0,0),(2024,'예진원','키움',22,0,0,0,0,0,0),(2024,'이승원','키움',3,0,0,0,0,0,0),(2024,'이원석','키움',39,0,0,0,0,0,0),(2024,'이재상','키움',29,0,0,0,0,1,0),(2024,'이주형','키움',49,0,0,0,0,1,0),(2024,'임지열','키움',22,0,0,0,0,0,1),(2024,'장재영','키움',7,0,0,0,0,1,0),(2024,'주성원','키움',20,0,0,0,0,0,0),(2024,'주승우','키움',3,0,0,0,0,0,0),(2024,'최주환','키움',68,1,0,1,0,0,0);
+/*!40000 ALTER TABLE `기록실_도루` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-07 15:57:59

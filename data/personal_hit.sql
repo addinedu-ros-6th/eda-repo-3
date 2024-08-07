@@ -1,277 +1,85 @@
-mysql  Ver 8.0.39-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+-- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+--
+-- Host: database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com    Database: KBO
+-- ------------------------------------------------------
+-- Server version	8.0.35
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
-Usage: mysql [OPTIONS] [database]
-  -?, --help          Display this help and exit.
-  -I, --help          Synonym for -?
-  --auto-rehash       Enable automatic rehashing. One doesn't need to use
-                      'rehash' to get table and field completion, but startup
-                      and reconnecting may take a longer time. Disable with
-                      --disable-auto-rehash.
-                      (Defaults to on; use --skip-auto-rehash to disable.)
-  -A, --no-auto-rehash 
-                      No automatic rehashing. One has to use 'rehash' to get
-                      table and field completion. This gives a quicker start of
-                      mysql and disables rehashing on reconnect.
-  --auto-vertical-output 
-                      Automatically switch to vertical output mode if the
-                      result is wider than the terminal width.
-  -B, --batch         Don't use history file. Disable interactive behavior.
-                      (Enables --silent.)
-  --bind-address=name IP address to bind to.
-  --binary-as-hex     Print binary data as hex. Enabled by default for
-                      interactive terminals.
-  --character-sets-dir=name 
-                      Directory for character set files.
-  --column-type-info  Display column type information.
-  -c, --comments      Preserve comments. Send comments to the server. The
-                      default is --skip-comments (discard comments), enable
-                      with --comments.
-  -C, --compress      Use compression in server/client protocol.
-  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
-  --debug-check       This is a non-debug version. Catch this and exit.
-  -T, --debug-info    This is a non-debug version. Catch this and exit.
-  -D, --database=name Database to use.
-  --default-character-set=name 
-                      Set the default character set.
-  --delimiter=name    Delimiter to be used.
-  --enable-cleartext-plugin 
-                      Enable/disable the clear text authentication plugin.
-  -e, --execute=name  Execute command and quit. (Disables --force and history
-                      file.)
-  -E, --vertical      Print the output of a query (rows) vertically.
-  -f, --force         Continue even if we get an SQL error.
-  --histignore=name   A colon-separated list of patterns to keep statements
-                      from getting logged into syslog and mysql history.
-  -G, --named-commands 
-                      Enable named commands. Named commands mean this program's
-                      internal commands; see mysql> help . When enabled, the
-                      named commands can be used from any line of the query,
-                      otherwise only from the first line, before an enter.
-                      Disable with --disable-named-commands. This option is
-                      disabled by default.
-  -i, --ignore-spaces Ignore space after function names.
-  --init-command=name SQL Command to execute when connecting to MySQL server.
-                      Will automatically be re-executed when reconnecting.
-  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
-  -b, --no-beep       Turn off beep on error.
-  -h, --host=name     Connect to host.
-  --dns-srv-name=name Connect to a DNS SRV resource
-  -H, --html          Produce HTML output.
-  -X, --xml           Produce XML output.
-  --line-numbers      Write line numbers for errors.
-                      (Defaults to on; use --skip-line-numbers to disable.)
-  -L, --skip-line-numbers 
-                      Don't write line number for errors.
-  -n, --unbuffered    Flush buffer after each query.
-  --column-names      Write column names in results.
-                      (Defaults to on; use --skip-column-names to disable.)
-  -N, --skip-column-names 
-                      Don't write column names in results.
-  --sigint-ignore     Ignore SIGINT (CTRL-C).
-  -o, --one-database  Ignore statements except those that occur while the
-                      default database is the one named at the command line.
-  --pager[=name]      Pager to use to display results. If you don't supply an
-                      option, the default pager is taken from your ENV variable
-                      PAGER. Valid pagers are less, more, cat [> filename],
-                      etc. See interactive help (\h) also. This option does not
-                      work in batch mode. Disable with --disable-pager. This
-                      option is disabled by default.
-  -p, --password[=name] 
-                      Password to use when connecting to server. If password is
-                      not given it's asked from the tty.
-  -,, --password1[=name] 
-                      Password for first factor authentication plugin.
-  -,, --password2[=name] 
-                      Password for second factor authentication plugin.
-  -,, --password3[=name] 
-                      Password for third factor authentication plugin.
-  -P, --port=#        Port number to use for connection or 0 for default to, in
-                      order of preference, my.cnf, $MYSQL_TCP_PORT,
-                      /etc/services, built-in default (3306).
-  --prompt=name       Set the mysql prompt to this value.
-  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
-                      memory).
-  -q, --quick         Don't cache result, print it row by row. This may slow
-                      down the server if the output is suspended. Doesn't use
-                      history file.
-  -r, --raw           Write fields without conversion. Used with --batch.
-  --reconnect         Reconnect if the connection is lost. Disable with
-                      --disable-reconnect. This option is enabled by default.
-                      (Defaults to on; use --skip-reconnect to disable.)
-  -s, --silent        Be more silent. Print results with a tab as separator,
-                      each row on new line.
-  -S, --socket=name   The socket file to use for connection.
-  --server-public-key-path=name 
-                      File path to the server public RSA key in PEM format.
-  --get-server-public-key 
-                      Get server public key
-  --ssl-mode=name     SSL connection mode.
-  --ssl-ca=name       CA file in PEM format.
-  --ssl-capath=name   CA directory.
-  --ssl-cert=name     X509 cert in PEM format.
-  --ssl-cipher=name   SSL cipher to use.
-  --ssl-key=name      X509 key in PEM format.
-  --ssl-crl=name      Certificate revocation list.
-  --ssl-crlpath=name  Certificate revocation list path.
-  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
-                      TLSv1.3
-  --ssl-fips-mode=name 
-                      SSL FIPS mode (applies only for OpenSSL); permitted
-                      values are: OFF, ON, STRICT
-  --tls-ciphersuites=name 
-                      TLS v1.3 cipher to use.
-  --ssl-session-data=name 
-                      Session data file to use to enable ssl session reuse
-  --ssl-session-data-continue-on-failed-reuse 
-                      If set to ON, this option will allow connection to
-                      succeed even if session data cannot be reused.
-  -t, --table         Output in table format.
-  --tee=name          Append everything into outfile. See interactive help (\h)
-                      also. Does not work in batch mode. Disable with
-                      --disable-tee. This option is disabled by default.
-  -u, --user=name     User for login if not current user.
-  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
-  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
-  -v, --verbose       Write more. (-v -v -v gives the table output format).
-  -V, --version       Output version information and exit.
-  -w, --wait          Wait and retry if connection is down.
-  --connect-timeout=# Number of seconds before connection timeout.
-  --max-allowed-packet=# 
-                      The maximum packet length to send to or receive from
-                      server.
-  --net-buffer-length=# 
-                      The buffer size for TCP/IP and socket communication.
-  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
-  --max-join-size=#   Automatic limit for rows in a join when using
-                      --safe-updates.
-  --show-warnings     Show warnings after every statement.
-  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
-                      commands depends on the patterns supplied via histignore
-                      option besides the default patterns.
-  --plugin-dir=name   Directory for client-side plugins.
-  --default-auth=name Default authentication client-side plugin to use.
-  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
-                      translated to '\n'. This switch turns off both features,
-                      and also turns off parsing of all clientcommands except
-                      \C and DELIMITER, in non-interactive mode (for input
-                      piped to mysql or loaded using the 'source' command).
-                      This is necessary when processing output from mysqlbinlog
-                      that may contain blobs.
-  --connect-expired-password 
-                      Notify the server that this client is prepared to handle
-                      expired password sandbox mode.
-  --network-namespace=name 
-                      Network namespace to use for connection via tcp with a
-                      server.
-  --compression-algorithms=name 
-                      Use compression algorithm in server/client protocol.
-                      Valid values are any combination of
-                      'zstd','zlib','uncompressed'.
-  --zstd-compression-level=# 
-                      Use this compression level in the client/server protocol,
-                      in case --compression-algorithms=zstd. Valid range is
-                      between 1 and 22, inclusive. Default is 3.
-  --load-data-local-dir=name 
-                      Directory path safe for LOAD DATA LOCAL INFILE to read
-                      from.
-  --fido-register-factor=name 
-                      Specifies authentication factor, for which registration
-                      needs to be done.
-  --authentication-oci-client-config-profile=name 
-                      Specifies the configuration profile whose configuration
-                      options are to be read from the OCI configuration file.
-                      Default is DEFAULT.
-  --oci-config-file=name 
-                      Specifies the location of the OCI configuration file.
-                      Default for Linux is ~/.oci/config and %HOME/.oci/config
-                      on Windows.
+--
+-- GTID state at the beginning of the backup 
+--
 
-Default options are read from the following files in the given order:
-/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf 
-The following groups are read: mysql client
-The following options may be given as the first argument:
---print-defaults        Print the program argument list and exit.
---no-defaults           Don't read default options from any option file,
-                        except for login file.
---defaults-file=#       Only read default options from the given file #.
---defaults-extra-file=# Read this file after the global files are read.
---defaults-group-suffix=#
-                        Also read groups with concat(group, suffix)
---login-path=#          Read this path from the login file.
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
-Variables (--variable-name=value)
-and boolean options {FALSE|TRUE}          Value (after reading options)
------------------------------------------ --------------------------------
-auto-rehash                               TRUE
-auto-vertical-output                      FALSE
-bind-address                              (No default value)
-binary-as-hex                             FALSE
-character-sets-dir                        (No default value)
-column-type-info                          FALSE
-comments                                  FALSE
-compress                                  FALSE
-database                                  (No default value)
-default-character-set                     auto
-delimiter                                 ;
-enable-cleartext-plugin                   FALSE
-vertical                                  FALSE
-force                                     FALSE
-histignore                                (No default value)
-named-commands                            FALSE
-ignore-spaces                             FALSE
-init-command                              (No default value)
-local-infile                              FALSE
-no-beep                                   FALSE
-host                                      database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com
-dns-srv-name                              (No default value)
-html                                      FALSE
-xml                                       FALSE
-line-numbers                              TRUE
-unbuffered                                FALSE
-column-names                              TRUE
-sigint-ignore                             FALSE
-port                                      3306
-prompt                                    mysql> 
-quick                                     FALSE
-raw                                       FALSE
-reconnect                                 FALSE
-socket                                    (No default value)
-server-public-key-path                    (No default value)
-get-server-public-key                     FALSE
-ssl-ca                                    (No default value)
-ssl-capath                                (No default value)
-ssl-cert                                  (No default value)
-ssl-cipher                                (No default value)
-ssl-key                                   (No default value)
-ssl-crl                                   (No default value)
-ssl-crlpath                               (No default value)
-tls-version                               (No default value)
-tls-ciphersuites                          (No default value)
-ssl-session-data                          (No default value)
-ssl-session-data-continue-on-failed-reuse FALSE
-table                                     FALSE
-user                                      EDA_project
-safe-updates                              FALSE
-i-am-a-dummy                              FALSE
-connect-timeout                           0
-max-allowed-packet                        16777216
-net-buffer-length                         16384
-select-limit                              1000
-max-join-size                             1000000
-show-warnings                             FALSE
-plugin-dir                                (No default value)
-default-auth                              (No default value)
-binary-mode                               FALSE
-connect-expired-password                  FALSE
-network-namespace                         (No default value)
-compression-algorithms                    (No default value)
-zstd-compression-level                    3
-load-data-local-dir                       (No default value)
-fido-register-factor                      (No default value)
-authentication-oci-client-config-profile  (No default value)
-oci-config-file                           (No default value)
+--
+-- Table structure for table `기록실_선수기록_타자`
+--
+
+DROP TABLE IF EXISTS `기록실_선수기록_타자`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `기록실_선수기록_타자` (
+  `id` int DEFAULT NULL,
+  `선수명` varchar(16) DEFAULT NULL,
+  `팀명` varchar(16) DEFAULT NULL,
+  `avg` float DEFAULT NULL,
+  `G` int DEFAULT NULL,
+  `PA` int DEFAULT NULL,
+  `AB` int DEFAULT NULL,
+  `R` int DEFAULT NULL,
+  `H` int DEFAULT NULL,
+  `2B` int DEFAULT NULL,
+  `3B` int DEFAULT NULL,
+  `HR` int DEFAULT NULL,
+  `TB` int DEFAULT NULL,
+  `RBI` int DEFAULT NULL,
+  `SAC` int DEFAULT NULL,
+  `SF` int DEFAULT NULL,
+  `BB` int DEFAULT NULL,
+  `IBB` int DEFAULT NULL,
+  `HBP` int DEFAULT NULL,
+  `SO` int DEFAULT NULL,
+  `GDP` int DEFAULT NULL,
+  `SLG` float DEFAULT NULL,
+  `OBP` float DEFAULT NULL,
+  `OPS` float DEFAULT NULL,
+  `MH` float DEFAULT NULL,
+  `RISP` float DEFAULT NULL,
+  `PHBA` float DEFAULT NULL,
+  `year` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `기록실_선수기록_타자`
+--
+
+LOCK TABLES `기록실_선수기록_타자` WRITE;
+/*!40000 ALTER TABLE `기록실_선수기록_타자` DISABLE KEYS */;
+INSERT INTO `기록실_선수기록_타자` VALUES (31,'문보경','LG',0.286,83,329,280,38,80,16,1,10,128,45,1,10,30,0,4,42,7,0.573,0.43,1.003,35,0.328,0.5,24),(2,'에레디아','SSG',0.361,77,334,305,43,110,15,1,9,154,62,0,6,15,3,8,41,6,0.505,0.398,0.903,33,0.43,0,24),(3,'박건우','NC',0.354,75,308,274,48,97,21,1,8,144,40,0,2,30,3,2,47,6,0.526,0.419,0.945,30,0.355,1,24),(4,'김혜성','키움',0.349,70,318,281,54,98,17,3,10,151,46,0,3,30,1,4,28,4,0.537,0.415,0.952,28,0.391,0,24),(5,'레이예스','롯데',0.349,78,337,307,42,107,22,2,7,154,67,0,7,22,0,1,45,9,0.502,0.386,0.888,32,0.413,0,24),(6,'허경민','두산',0.348,69,281,247,44,86,17,0,5,118,38,0,5,18,0,11,17,6,0.478,0.409,0.887,26,0.322,0.667,24),(7,'송성문','키움',0.346,76,304,263,39,91,12,2,9,134,54,0,7,33,0,1,32,2,0.51,0.411,0.921,25,0.346,0.333,24),(8,'양의지','두산',0.341,73,305,276,33,94,12,0,9,133,62,0,6,18,2,5,27,8,0.482,0.384,0.866,26,0.449,0.5,24),(9,'김도영','KIA',0.339,78,352,310,75,105,12,4,21,188,58,1,4,34,2,3,61,2,0.606,0.405,1.011,33,0.333,0,24),(10,'박민우','NC',0.335,64,295,248,40,83,15,2,4,114,20,3,1,35,4,8,43,3,0.46,0.432,0.892,22,0.25,0,24),(11,'문성주','LG',0.331,75,298,248,41,82,16,2,0,102,43,1,3,44,0,2,31,2,0.411,0.431,0.842,22,0.418,0,24),(12,'로하스','KT',0.319,82,381,320,62,102,21,0,21,186,68,0,1,55,3,5,72,5,0.581,0.425,1.006,28,0.304,0,24),(13,'홍창기','LG',0.317,79,360,290,55,92,4,3,4,114,41,1,2,60,2,7,51,7,0.393,0.443,0.836,27,0.377,1,24),(14,'이우성','KIA',0.317,75,314,278,47,88,11,1,8,125,46,0,1,33,0,2,59,11,0.45,0.392,0.842,23,0.321,1,24),(15,'페라자','한화',0.316,62,274,237,46,75,17,0,16,140,46,0,2,34,3,1,63,4,0.591,0.401,0.992,23,0.351,0.5,24),(16,'고승민','롯데',0.316,56,244,215,40,68,13,2,6,103,43,0,4,24,0,1,41,3,0.479,0.381,0.86,19,0.367,1,24),(17,'구자욱','삼성',0.311,79,348,312,49,97,24,1,16,171,60,0,2,26,1,8,48,3,0.548,0.376,0.924,28,0.306,0,24),(18,'라모스','두산',0.309,69,299,265,34,82,16,3,8,128,45,1,6,25,0,2,46,3,0.483,0.366,0.849,24,0.297,0,24),(19,'강백호','KT',0.309,82,364,327,61,101,17,0,22,184,66,0,2,34,3,1,70,3,0.563,0.374,0.937,31,0.261,0.5,24),(20,'윤동희','롯데',0.301,75,324,282,61,85,19,3,5,125,39,2,3,36,0,1,50,3,0.443,0.379,0.822,24,0.329,0,24),(21,'박찬호','KIA',0.301,72,319,292,44,88,13,0,2,107,29,4,3,19,1,1,27,5,0.366,0.343,0.709,29,0.329,0.5,24),(22,'오스틴','LG',0.301,82,357,306,51,92,19,2,17,166,69,0,10,38,5,3,58,3,0.542,0.373,0.915,27,0.302,0,24),(23,'박성한','SSG',0.297,80,344,300,49,89,15,0,5,119,38,3,2,38,3,1,42,6,0.397,0.375,0.772,23,0.276,0.5,24),(24,'김태연','한화',0.297,66,245,209,32,62,13,0,8,99,39,2,2,29,0,3,42,3,0.474,0.387,0.861,16,0.327,0,24),(25,'김지찬','삼성',0.297,80,308,263,50,78,9,0,3,96,21,7,1,29,0,8,21,3,0.365,0.382,0.747,17,0.259,0.273,24),(26,'서호철','NC',0.296,79,320,280,37,83,10,1,3,104,37,1,2,26,0,11,60,10,0.371,0.376,0.747,20,0.273,0,24),(27,'손아섭','NC',0.295,77,344,322,45,95,16,0,7,132,50,2,4,16,0,0,59,1,0.41,0.325,0.735,22,0.277,0.333,24),(31,'문보경','LG',0.286,83,329,280,38,80,16,1,10,128,45,1,10,38,3,0,59,8,0.457,0.36,0.817,22,0.234,0,24),(31,'최형우','KIA',0.286,74,325,287,47,82,18,1,15,147,71,0,2,33,3,3,54,1,0.512,0.363,0.875,24,0.359,1,24),(33,'강승호','두산',0.285,85,343,319,46,91,21,6,13,163,51,1,3,18,3,2,99,3,0.511,0.325,0.836,25,0.275,0.333,24),(34,'최정','SSG',0.285,71,298,249,45,71,15,1,21,151,66,0,5,33,1,11,56,8,0.606,0.386,0.992,21,0.279,0,24),(35,'정수빈','두산',0.283,79,339,286,57,81,9,3,3,105,23,6,6,36,1,5,35,5,0.367,0.366,0.733,24,0.262,0,24),(36,'박동원','LG',0.279,73,274,229,35,64,12,0,13,115,47,1,5,39,2,0,60,7,0.502,0.377,0.879,14,0.3,0.5,24),(37,'데이비슨','NC',0.279,72,317,276,49,77,10,0,25,162,62,0,5,24,2,12,83,5,0.587,0.356,0.943,23,0.218,0,24),(38,'최원준','KIA',0.279,76,278,251,40,70,13,3,4,101,30,2,0,23,0,2,41,6,0.402,0.344,0.746,20,0.317,0.143,24),(39,'권희동','NC',0.275,77,318,258,36,71,12,1,3,94,39,0,3,50,1,7,45,6,0.364,0.403,0.767,17,0.385,0,24),(40,'김재환','두산',0.272,80,327,279,41,76,17,0,16,141,57,0,8,36,3,4,101,6,0.505,0.355,0.86,15,0.218,0.667,24),(41,'안치홍','한화',0.27,79,338,296,42,80,12,0,8,116,35,0,3,34,0,5,52,4,0.392,0.352,0.744,23,0.257,0,24),(42,'박해민','LG',0.27,83,327,285,43,77,7,5,1,97,34,4,7,24,0,7,60,2,0.34,0.334,0.674,22,0.257,0.25,24),(43,'노시환','한화',0.27,79,354,319,52,86,10,1,18,152,60,0,0,32,7,3,75,5,0.476,0.342,0.818,22,0.305,0,24),(44,'신민재','LG',0.269,81,281,234,43,63,7,1,0,72,27,6,3,37,0,1,31,5,0.308,0.367,0.675,19,0.323,0.5,24),(45,'김영웅','삼성',0.265,79,332,294,43,78,11,3,17,146,46,1,2,33,0,2,95,2,0.497,0.341,0.838,20,0.301,0,24),(46,'최지훈','SSG',0.265,82,369,321,58,85,15,4,6,126,32,4,1,42,0,1,53,5,0.393,0.351,0.744,25,0.237,0,24),(47,'고명준','SSG',0.263,76,268,251,24,66,10,0,9,103,35,0,0,16,0,1,68,3,0.41,0.31,0.72,11,0.315,0,24),(48,'장성우','KT',0.262,76,269,229,26,60,10,0,9,97,44,0,2,38,0,0,48,4,0.424,0.364,0.788,17,0.309,0.2,24),(49,'황재균','KT',0.26,80,306,277,35,72,13,0,4,97,27,4,1,23,0,1,53,5,0.35,0.318,0.668,19,0.247,0.25,24),(50,'양석환','두산',0.243,84,343,309,46,75,16,0,18,145,58,0,2,29,0,3,72,13,0.469,0.312,0.781,25,0.284,0.667,24),(51,'채은성','한화',0.242,61,251,227,25,55,11,0,6,84,38,0,2,20,1,2,47,4,0.37,0.307,0.677,16,0.238,0,24),(52,'한유섬','SSG',0.233,73,283,245,36,57,14,0,14,113,50,0,3,28,3,7,85,1,0.461,0.325,0.786,14,0.281,0,24),(53,'김휘집','NC',0.224,78,301,263,38,59,13,1,9,101,39,3,5,26,1,4,76,10,0.384,0.299,0.683,16,0.25,0,24),(54,'최주환','키움',0.221,68,281,253,24,56,11,0,6,85,40,0,6,19,1,3,51,8,0.336,0.278,0.614,15,0.247,0,24),(55,'김형준','NC',0.212,68,263,217,26,46,8,0,12,90,34,5,3,36,0,2,90,4,0.415,0.326,0.741,9,0.196,0,24),(56,'김주원','NC',0.198,75,251,207,29,41,6,1,5,64,28,7,1,25,1,11,62,1,0.309,0.316,0.625,7,0.197,0,24),(57,'김성욱','NC',0.196,78,255,219,36,43,6,2,9,80,35,1,1,22,0,12,48,5,0.365,0.303,0.668,9,0.236,0,24),(1,'손아섭','NC',0.339,140,609,551,97,187,36,3,5,244,65,1,5,50,2,2,67,10,0.443,0.393,0.836,54,0.339,0.333,23),(2,'구자욱','삼성',0.336,119,515,453,65,152,37,1,11,224,71,2,3,53,2,4,81,5,0.494,0.407,0.901,50,0.395,0,23),(3,'김혜성','키움',0.335,137,621,556,104,186,29,6,7,248,57,0,5,57,3,3,77,6,0.446,0.396,0.842,50,0.314,0,23),(4,'홍창기','LG',0.332,141,643,524,109,174,35,2,1,216,65,3,6,88,3,22,83,6,0.412,0.444,0.856,58,0.361,0.5,23),(5,'에레디아','SSG',0.323,122,523,473,76,153,29,0,12,218,76,1,1,39,4,9,75,13,0.461,0.385,0.846,43,0.338,0,23),(6,'김선빈','KIA',0.32,119,473,419,41,134,16,0,0,150,48,8,3,38,0,5,26,10,0.358,0.381,0.739,36,0.333,0,23),(7,'박건우','NC',0.319,130,533,458,70,146,34,2,12,220,85,1,9,56,0,9,71,14,0.48,0.397,0.877,49,0.304,0,23),(8,'박민우','NC',0.316,124,509,452,76,143,20,7,2,183,46,5,3,40,3,9,57,13,0.405,0.381,0.786,39,0.309,0,23),(9,'오스틴','LG',0.313,139,583,520,87,163,29,4,23,269,95,0,7,53,2,3,75,11,0.517,0.376,0.893,43,0.299,0.5,23),(10,'전준우','롯데',0.312,138,559,493,80,154,21,3,17,232,77,0,7,52,4,7,65,12,0.471,0.381,0.852,45,0.29,0.3,23),(11,'양의지','두산',0.305,129,510,439,56,134,23,0,17,208,68,0,3,57,8,11,56,20,0.474,0.396,0.87,31,0.315,0.667,23),(12,'최형우','KIA',0.302,121,508,431,64,130,27,1,17,210,81,0,4,65,1,8,83,5,0.487,0.4,0.887,35,0.317,0.667,23),(13,'박찬호','KIA',0.301,130,507,452,73,136,18,4,3,171,52,7,6,40,0,2,56,13,0.378,0.356,0.734,42,0.355,0,23),(14,'문보경','LG',0.301,131,542,469,77,141,29,5,10,210,72,9,4,58,2,2,83,5,0.448,0.377,0.825,39,0.281,0.25,23),(15,'노시환','한화',0.298,131,595,514,85,153,30,1,31,278,101,0,3,74,5,4,118,13,0.541,0.388,0.929,47,0.299,0,23),(16,'최정','SSG',0.297,128,552,471,94,140,31,0,29,258,87,1,6,59,6,15,87,12,0.548,0.388,0.936,39,0.264,0,23),(17,'김민혁','KT',0.297,113,448,397,68,118,20,3,3,153,41,7,5,36,0,3,48,4,0.385,0.356,0.741,33,0.284,0.286,23),(18,'황재균','KT',0.295,109,457,407,62,120,26,2,6,168,49,3,1,45,1,1,64,15,0.413,0.366,0.779,35,0.314,0,23),(19,'문성주','LG',0.294,136,534,449,77,132,21,4,2,167,57,6,4,67,0,8,34,10,0.372,0.392,0.764,31,0.297,0.375,23),(20,'김현수','LG',0.293,133,556,488,53,143,22,2,6,187,88,1,8,58,4,1,53,10,0.383,0.364,0.747,43,0.348,0.25,23),(21,'안치홍','롯데',0.292,121,494,425,57,124,20,1,8,170,63,5,5,49,3,10,53,14,0.4,0.374,0.774,36,0.355,0.167,23),(22,'강민호','삼성',0.29,125,495,434,60,126,19,0,16,193,77,1,5,49,4,6,65,17,0.445,0.366,0.811,32,0.301,0,23),(23,'알포드','KT',0.289,133,547,491,83,142,31,3,15,224,70,0,3,47,1,6,140,6,0.456,0.356,0.812,43,0.303,0.667,23),(24,'장성우','KT',0.288,131,464,410,37,118,22,0,11,173,65,3,7,42,1,2,70,12,0.422,0.351,0.773,36,0.267,0.25,23),(25,'정수빈','두산',0.287,137,583,498,75,143,14,11,2,185,33,12,2,64,1,7,63,2,0.371,0.375,0.746,42,0.253,0.5,23),(26,'피렐라','삼성',0.285,139,605,557,66,159,28,1,16,237,80,0,2,42,5,4,69,20,0.425,0.339,0.764,43,0.253,0,23),(27,'소크라테스','KIA',0.285,142,608,547,91,156,31,3,20,253,96,0,8,52,4,1,80,13,0.463,0.344,0.807,41,0.303,0,23),(28,'박해민','LG',0.285,144,558,485,80,138,14,2,6,174,59,24,1,45,0,3,74,7,0.359,0.348,0.707,33,0.313,0.5,23),(29,'박병호','KT',0.283,132,493,431,53,122,15,0,18,191,87,0,8,46,2,8,114,9,0.443,0.357,0.8,31,0.34,0.25,23),(30,'마틴','NC',0.283,118,503,435,55,123,20,2,17,198,90,0,10,57,2,1,107,8,0.455,0.36,0.815,33,0.317,0,23),(31,'양석환','두산',0.281,140,582,524,73,147,28,0,21,238,89,0,11,41,3,6,133,9,0.454,0.333,0.787,40,0.261,0,23),(32,'김현준','삼성',0.275,109,479,433,62,119,10,6,3,150,46,8,3,30,0,5,84,5,0.346,0.327,0.673,28,0.288,0,23),(33,'김상수','KT',0.271,129,512,443,58,120,19,1,3,150,56,8,3,55,0,3,68,9,0.339,0.353,0.692,30,0.336,0.5,23),(34,'최지훈','SSG',0.268,117,503,462,65,124,19,8,2,165,30,8,1,29,0,3,50,3,0.357,0.315,0.672,31,0.223,0,23),(35,'류지혁','삼성',0.268,132,522,455,63,122,11,1,2,141,45,10,5,46,1,6,73,12,0.31,0.34,0.65,35,0.271,0.167,23),(36,'허경민','두산',0.268,130,475,429,44,115,23,1,7,161,48,0,5,35,3,6,26,6,0.375,0.328,0.703,26,0.224,0.667,23),(37,'오지환','LG',0.268,126,502,422,65,113,24,3,8,167,62,4,4,64,0,8,82,4,0.396,0.371,0.767,25,0.298,0.333,23),(38,'문현빈','한화',0.266,137,481,428,47,114,22,2,5,155,49,9,5,33,2,6,84,7,0.362,0.324,0.686,31,0.252,0.25,23),(39,'박성한','SSG',0.266,128,529,459,53,122,19,0,9,168,47,7,4,58,1,1,56,7,0.366,0.347,0.713,30,0.254,0,23),(40,'강승호','두산',0.265,127,459,419,51,111,18,6,7,162,59,4,3,27,0,6,110,12,0.387,0.316,0.703,24,0.273,0.167,23),(41,'채은성','한화',0.263,137,596,521,71,137,17,0,23,223,84,0,3,52,8,20,102,16,0.428,0.351,0.779,39,0.311,0,23),(42,'김민석','롯데',0.255,129,454,400,53,102,24,0,3,135,39,12,5,31,1,6,112,6,0.338,0.314,0.652,25,0.274,0,23),(43,'추신수','SSG',0.254,112,462,382,65,97,17,1,12,152,41,0,2,65,1,13,79,8,0.398,0.379,0.777,24,0.26,0.3,23),(44,'로하스','두산',0.253,122,464,403,52,102,24,4,19,191,65,0,3,55,2,3,68,5,0.474,0.345,0.819,28,0.255,0,23),(45,'박동원','LG',0.249,130,481,409,54,102,17,1,20,181,75,8,8,49,3,7,90,7,0.443,0.334,0.777,27,0.212,0.333,23),(46,'이재현','삼성',0.249,143,538,458,61,114,19,2,12,173,60,16,6,52,0,6,89,9,0.378,0.33,0.708,24,0.24,0,23),(47,'최주환','SSG',0.235,134,478,426,48,100,24,0,20,184,63,1,3,44,4,4,94,6,0.432,0.31,0.742,22,0.212,0.286,23),(48,'김주원','NC',0.233,127,474,403,56,94,9,2,10,137,54,8,4,44,1,15,106,6,0.34,0.328,0.668,21,0.267,0,23),(49,'정은원','한화',0.222,122,459,388,50,86,12,0,2,104,30,5,1,62,1,3,73,4,0.268,0.333,0.601,16,0.214,0,23),(50,'김재환','두산',0.22,132,484,405,40,89,15,0,10,134,46,0,2,72,4,5,100,8,0.331,0.343,0.674,21,0.264,0.214,23),(1,'이정후','키움',0.349,142,627,553,85,193,36,10,23,318,113,0,3,66,12,5,32,10,0.575,0.421,0.996,58,0.387,0.333,22),(2,'피렐라','삼성',0.342,141,630,561,102,192,33,4,28,317,109,0,2,55,12,12,81,19,0.565,0.411,0.976,57,0.375,0,22),(3,'박건우','NC',0.336,111,463,408,52,137,18,1,10,187,61,0,3,44,1,8,62,10,0.458,0.408,0.866,40,0.317,0,22),(4,'이대호','롯데',0.331,142,591,540,53,179,23,0,23,271,101,0,6,43,7,2,56,26,0.502,0.379,0.881,53,0.318,0.2,22),(5,'나성범','KIA',0.32,144,649,563,92,180,39,2,21,286,97,0,5,64,6,17,137,7,0.508,0.402,0.91,54,0.316,0,22),(6,'김혜성','키움',0.318,129,566,516,81,164,18,7,4,208,48,0,3,47,3,0,83,9,0.403,0.373,0.776,43,0.295,0,22),(7,'문보경','LG',0.315,126,466,406,52,128,22,3,9,183,56,5,7,47,1,1,56,11,0.451,0.382,0.833,35,0.287,0.25,22),(8,'소크라테스','KIA',0.311,127,554,514,83,160,29,7,17,254,77,0,4,34,4,2,81,11,0.494,0.354,0.848,47,0.296,0,22),(9,'페르난데스','두산',0.309,139,550,508,52,157,28,0,6,203,77,0,5,35,0,2,45,34,0.4,0.353,0.753,43,0.343,0.5,22),(10,'조용호','KT',0.308,131,531,474,52,146,18,4,3,181,44,2,3,49,3,3,74,3,0.382,0.374,0.756,39,0.293,0.2,22),(11,'한동희','롯데',0.307,129,499,456,43,140,27,0,14,209,65,0,4,33,2,6,64,15,0.458,0.359,0.817,41,0.278,0.444,22),(12,'전준우','롯데',0.304,120,517,470,73,143,31,1,11,209,68,0,9,35,1,3,73,14,0.445,0.35,0.795,45,0.285,0.25,22),(13,'최지훈','SSG',0.304,144,640,569,93,173,32,4,10,243,61,13,4,47,0,7,77,7,0.427,0.362,0.789,43,0.362,1,22),(14,'박성한','SSG',0.298,140,564,494,68,147,24,4,2,185,56,6,2,60,1,2,81,5,0.374,0.375,0.749,35,0.31,0,22),(15,'마티니','NC',0.296,139,576,510,67,151,34,1,16,235,85,0,7,51,5,8,86,8,0.461,0.365,0.826,42,0.306,1,22),(16,'채은성','LG',0.296,126,526,467,48,138,26,2,12,204,83,0,11,27,3,21,88,16,0.437,0.354,0.791,31,0.279,0,22),(17,'박해민','LG',0.289,144,636,570,97,165,20,8,3,210,49,7,6,44,0,9,85,4,0.368,0.347,0.715,42,0.333,0,22),(18,'허경민','두산',0.289,121,493,432,59,125,23,0,8,172,60,2,7,36,3,16,40,12,0.398,0.36,0.758,33,0.317,0,22),(19,'터크먼','한화',0.289,144,648,575,88,166,37,4,12,247,43,0,2,64,5,7,104,12,0.43,0.366,0.796,47,0.216,0,22),(20,'김선빈','KIA',0.287,140,587,505,51,145,23,0,3,177,61,7,3,65,0,6,47,14,0.35,0.373,0.723,40,0.265,0.333,22),(21,'김현수','LG',0.286,141,604,524,78,150,25,2,23,248,106,0,3,71,7,5,62,5,0.473,0.375,0.848,43,0.275,0,22),(22,'홍창기','LG',0.286,118,525,437,76,125,19,4,1,155,51,5,5,59,0,19,75,11,0.355,0.39,0.745,34,0.385,0,22),(23,'안치홍','롯데',0.284,132,562,493,71,140,27,3,14,215,58,8,5,51,4,5,52,13,0.436,0.354,0.79,38,0.222,0.333,22),(24,'양의지','NC',0.283,130,510,427,61,121,24,0,20,205,94,0,10,60,6,13,48,16,0.48,0.38,0.86,28,0.35,0.667,22),(25,'노시환','한화',0.281,115,490,434,55,122,24,1,6,166,59,0,4,48,1,4,95,13,0.382,0.355,0.737,33,0.322,1,22),(26,'노진혁','NC',0.28,115,451,396,50,111,24,0,15,180,75,3,5,45,3,2,105,11,0.455,0.353,0.808,26,0.295,0,22),(27,'손아섭','NC',0.277,138,617,548,72,152,29,4,4,201,48,1,6,59,2,3,76,9,0.367,0.347,0.714,45,0.3,0,22),(28,'푸이그','키움',0.277,126,547,473,65,131,30,0,21,224,73,0,4,58,1,12,100,6,0.474,0.367,0.841,37,0.268,0,22),(29,'박병호','KT',0.275,124,487,429,72,118,17,0,35,240,98,0,6,40,3,12,131,7,0.559,0.349,0.908,24,0.259,0.429,22),(30,'류지혁','KIA',0.274,127,477,405,55,111,19,2,2,140,48,8,2,56,0,6,83,6,0.346,0.369,0.715,28,0.305,0.286,22),(31,'정은원','한화',0.274,140,601,508,67,139,20,2,8,187,49,4,3,85,0,1,109,10,0.368,0.377,0.745,37,0.254,0.333,22),(32,'박찬호','KIA',0.272,130,566,493,81,134,22,0,4,168,45,8,7,57,0,1,67,9,0.341,0.344,0.685,34,0.277,0,22),(33,'오지환','LG',0.269,142,569,494,75,133,16,4,25,232,87,3,3,62,2,7,107,11,0.47,0.357,0.827,35,0.32,1,22),(34,'오재일','삼성',0.268,135,536,470,57,126,42,0,21,231,94,0,7,57,8,2,133,7,0.491,0.345,0.836,31,0.304,0.333,22),(35,'이지영','키움',0.267,137,450,420,38,112,13,4,2,139,37,8,0,20,2,2,44,16,0.331,0.303,0.634,26,0.262,0.364,22),(35,'박민우','NC',0.267,104,451,390,61,104,22,1,4,140,38,6,3,42,5,10,55,7,0.359,0.351,0.71,28,0.264,0,22),(37,'배정대','KT',0.266,144,575,508,64,135,24,2,6,181,56,5,4,54,0,4,126,2,0.356,0.339,0.695,34,0.281,0.333,22),(38,'최정','SSG',0.266,121,505,414,80,110,21,0,26,209,87,0,6,66,3,19,96,6,0.505,0.386,0.891,27,0.292,0.5,22),(39,'최형우','KIA',0.264,132,530,454,55,120,27,1,14,191,71,0,2,73,5,1,92,9,0.421,0.366,0.787,33,0.282,0.286,22),(40,'한유섬','SSG',0.264,135,545,458,62,121,33,1,21,219,100,0,5,66,6,16,137,8,0.478,0.372,0.85,31,0.284,0.111,22),(41,'강승호','두산',0.264,134,487,444,54,117,28,1,10,177,62,6,5,29,0,3,100,8,0.399,0.31,0.709,34,0.299,0.25,22),(42,'황재균','KT',0.262,141,581,519,59,136,25,3,10,197,64,2,2,53,5,5,99,17,0.38,0.335,0.715,36,0.303,0,22),(43,'정수빈','두산',0.259,127,455,405,58,105,12,4,3,134,41,6,4,39,1,1,56,2,0.331,0.323,0.654,29,0.237,0,22),(44,'추신수','SSG',0.259,112,499,409,77,106,20,1,16,176,58,2,4,71,1,13,100,6,0.43,0.382,0.812,29,0.299,0.25,22),(45,'하주석','한화',0.258,125,483,445,50,115,18,2,5,152,58,1,3,31,1,3,126,4,0.342,0.309,0.651,29,0.255,0.75,22),(46,'황대인','KIA',0.256,129,524,476,40,122,27,0,14,191,91,0,5,36,2,7,92,20,0.401,0.315,0.716,34,0.296,0,22),(47,'유강남','LG',0.255,139,469,416,54,106,16,0,8,146,47,6,2,34,1,11,98,9,0.351,0.326,0.677,27,0.255,0.385,22),(48,'김재환','두산',0.248,128,517,448,64,111,24,1,23,206,72,0,4,61,4,4,133,5,0.46,0.34,0.8,22,0.271,0.333,22),(49,'송성문','키움',0.247,142,601,547,67,135,21,4,13,203,79,1,7,45,6,1,65,8,0.371,0.302,0.673,31,0.269,0,22),(50,'양석환','두산',0.244,107,446,405,58,99,14,1,20,175,51,0,2,32,3,7,101,3,0.432,0.309,0.741,23,0.245,0,22),(51,'박동원','KIA',0.242,123,447,385,52,93,21,0,18,168,57,7,1,45,4,9,95,9,0.436,0.334,0.77,21,0.234,0.077,22),(52,'김태연','한화',0.24,119,464,404,46,97,18,0,7,136,53,3,4,48,1,5,106,9,0.337,0.325,0.662,25,0.239,0,22),(53,'심우준','KT',0.24,132,449,388,69,93,8,2,4,117,34,11,4,43,0,2,75,11,0.302,0.316,0.618,23,0.175,0.333,22);
+/*!40000 ALTER TABLE `기록실_선수기록_타자` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-07 15:58:33

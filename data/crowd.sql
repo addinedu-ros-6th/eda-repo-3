@@ -1,277 +1,63 @@
-mysql  Ver 8.0.39-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+-- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+--
+-- Host: database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com    Database: KBO
+-- ------------------------------------------------------
+-- Server version	8.0.35
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
-Usage: mysql [OPTIONS] [database]
-  -?, --help          Display this help and exit.
-  -I, --help          Synonym for -?
-  --auto-rehash       Enable automatic rehashing. One doesn't need to use
-                      'rehash' to get table and field completion, but startup
-                      and reconnecting may take a longer time. Disable with
-                      --disable-auto-rehash.
-                      (Defaults to on; use --skip-auto-rehash to disable.)
-  -A, --no-auto-rehash 
-                      No automatic rehashing. One has to use 'rehash' to get
-                      table and field completion. This gives a quicker start of
-                      mysql and disables rehashing on reconnect.
-  --auto-vertical-output 
-                      Automatically switch to vertical output mode if the
-                      result is wider than the terminal width.
-  -B, --batch         Don't use history file. Disable interactive behavior.
-                      (Enables --silent.)
-  --bind-address=name IP address to bind to.
-  --binary-as-hex     Print binary data as hex. Enabled by default for
-                      interactive terminals.
-  --character-sets-dir=name 
-                      Directory for character set files.
-  --column-type-info  Display column type information.
-  -c, --comments      Preserve comments. Send comments to the server. The
-                      default is --skip-comments (discard comments), enable
-                      with --comments.
-  -C, --compress      Use compression in server/client protocol.
-  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
-  --debug-check       This is a non-debug version. Catch this and exit.
-  -T, --debug-info    This is a non-debug version. Catch this and exit.
-  -D, --database=name Database to use.
-  --default-character-set=name 
-                      Set the default character set.
-  --delimiter=name    Delimiter to be used.
-  --enable-cleartext-plugin 
-                      Enable/disable the clear text authentication plugin.
-  -e, --execute=name  Execute command and quit. (Disables --force and history
-                      file.)
-  -E, --vertical      Print the output of a query (rows) vertically.
-  -f, --force         Continue even if we get an SQL error.
-  --histignore=name   A colon-separated list of patterns to keep statements
-                      from getting logged into syslog and mysql history.
-  -G, --named-commands 
-                      Enable named commands. Named commands mean this program's
-                      internal commands; see mysql> help . When enabled, the
-                      named commands can be used from any line of the query,
-                      otherwise only from the first line, before an enter.
-                      Disable with --disable-named-commands. This option is
-                      disabled by default.
-  -i, --ignore-spaces Ignore space after function names.
-  --init-command=name SQL Command to execute when connecting to MySQL server.
-                      Will automatically be re-executed when reconnecting.
-  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
-  -b, --no-beep       Turn off beep on error.
-  -h, --host=name     Connect to host.
-  --dns-srv-name=name Connect to a DNS SRV resource
-  -H, --html          Produce HTML output.
-  -X, --xml           Produce XML output.
-  --line-numbers      Write line numbers for errors.
-                      (Defaults to on; use --skip-line-numbers to disable.)
-  -L, --skip-line-numbers 
-                      Don't write line number for errors.
-  -n, --unbuffered    Flush buffer after each query.
-  --column-names      Write column names in results.
-                      (Defaults to on; use --skip-column-names to disable.)
-  -N, --skip-column-names 
-                      Don't write column names in results.
-  --sigint-ignore     Ignore SIGINT (CTRL-C).
-  -o, --one-database  Ignore statements except those that occur while the
-                      default database is the one named at the command line.
-  --pager[=name]      Pager to use to display results. If you don't supply an
-                      option, the default pager is taken from your ENV variable
-                      PAGER. Valid pagers are less, more, cat [> filename],
-                      etc. See interactive help (\h) also. This option does not
-                      work in batch mode. Disable with --disable-pager. This
-                      option is disabled by default.
-  -p, --password[=name] 
-                      Password to use when connecting to server. If password is
-                      not given it's asked from the tty.
-  -,, --password1[=name] 
-                      Password for first factor authentication plugin.
-  -,, --password2[=name] 
-                      Password for second factor authentication plugin.
-  -,, --password3[=name] 
-                      Password for third factor authentication plugin.
-  -P, --port=#        Port number to use for connection or 0 for default to, in
-                      order of preference, my.cnf, $MYSQL_TCP_PORT,
-                      /etc/services, built-in default (3306).
-  --prompt=name       Set the mysql prompt to this value.
-  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
-                      memory).
-  -q, --quick         Don't cache result, print it row by row. This may slow
-                      down the server if the output is suspended. Doesn't use
-                      history file.
-  -r, --raw           Write fields without conversion. Used with --batch.
-  --reconnect         Reconnect if the connection is lost. Disable with
-                      --disable-reconnect. This option is enabled by default.
-                      (Defaults to on; use --skip-reconnect to disable.)
-  -s, --silent        Be more silent. Print results with a tab as separator,
-                      each row on new line.
-  -S, --socket=name   The socket file to use for connection.
-  --server-public-key-path=name 
-                      File path to the server public RSA key in PEM format.
-  --get-server-public-key 
-                      Get server public key
-  --ssl-mode=name     SSL connection mode.
-  --ssl-ca=name       CA file in PEM format.
-  --ssl-capath=name   CA directory.
-  --ssl-cert=name     X509 cert in PEM format.
-  --ssl-cipher=name   SSL cipher to use.
-  --ssl-key=name      X509 key in PEM format.
-  --ssl-crl=name      Certificate revocation list.
-  --ssl-crlpath=name  Certificate revocation list path.
-  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
-                      TLSv1.3
-  --ssl-fips-mode=name 
-                      SSL FIPS mode (applies only for OpenSSL); permitted
-                      values are: OFF, ON, STRICT
-  --tls-ciphersuites=name 
-                      TLS v1.3 cipher to use.
-  --ssl-session-data=name 
-                      Session data file to use to enable ssl session reuse
-  --ssl-session-data-continue-on-failed-reuse 
-                      If set to ON, this option will allow connection to
-                      succeed even if session data cannot be reused.
-  -t, --table         Output in table format.
-  --tee=name          Append everything into outfile. See interactive help (\h)
-                      also. Does not work in batch mode. Disable with
-                      --disable-tee. This option is disabled by default.
-  -u, --user=name     User for login if not current user.
-  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
-  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
-  -v, --verbose       Write more. (-v -v -v gives the table output format).
-  -V, --version       Output version information and exit.
-  -w, --wait          Wait and retry if connection is down.
-  --connect-timeout=# Number of seconds before connection timeout.
-  --max-allowed-packet=# 
-                      The maximum packet length to send to or receive from
-                      server.
-  --net-buffer-length=# 
-                      The buffer size for TCP/IP and socket communication.
-  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
-  --max-join-size=#   Automatic limit for rows in a join when using
-                      --safe-updates.
-  --show-warnings     Show warnings after every statement.
-  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
-                      commands depends on the patterns supplied via histignore
-                      option besides the default patterns.
-  --plugin-dir=name   Directory for client-side plugins.
-  --default-auth=name Default authentication client-side plugin to use.
-  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
-                      translated to '\n'. This switch turns off both features,
-                      and also turns off parsing of all clientcommands except
-                      \C and DELIMITER, in non-interactive mode (for input
-                      piped to mysql or loaded using the 'source' command).
-                      This is necessary when processing output from mysqlbinlog
-                      that may contain blobs.
-  --connect-expired-password 
-                      Notify the server that this client is prepared to handle
-                      expired password sandbox mode.
-  --network-namespace=name 
-                      Network namespace to use for connection via tcp with a
-                      server.
-  --compression-algorithms=name 
-                      Use compression algorithm in server/client protocol.
-                      Valid values are any combination of
-                      'zstd','zlib','uncompressed'.
-  --zstd-compression-level=# 
-                      Use this compression level in the client/server protocol,
-                      in case --compression-algorithms=zstd. Valid range is
-                      between 1 and 22, inclusive. Default is 3.
-  --load-data-local-dir=name 
-                      Directory path safe for LOAD DATA LOCAL INFILE to read
-                      from.
-  --fido-register-factor=name 
-                      Specifies authentication factor, for which registration
-                      needs to be done.
-  --authentication-oci-client-config-profile=name 
-                      Specifies the configuration profile whose configuration
-                      options are to be read from the OCI configuration file.
-                      Default is DEFAULT.
-  --oci-config-file=name 
-                      Specifies the location of the OCI configuration file.
-                      Default for Linux is ~/.oci/config and %HOME/.oci/config
-                      on Windows.
+--
+-- GTID state at the beginning of the backup 
+--
 
-Default options are read from the following files in the given order:
-/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf 
-The following groups are read: mysql client
-The following options may be given as the first argument:
---print-defaults        Print the program argument list and exit.
---no-defaults           Don't read default options from any option file,
-                        except for login file.
---defaults-file=#       Only read default options from the given file #.
---defaults-extra-file=# Read this file after the global files are read.
---defaults-group-suffix=#
-                        Also read groups with concat(group, suffix)
---login-path=#          Read this path from the login file.
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
-Variables (--variable-name=value)
-and boolean options {FALSE|TRUE}          Value (after reading options)
------------------------------------------ --------------------------------
-auto-rehash                               TRUE
-auto-vertical-output                      FALSE
-bind-address                              (No default value)
-binary-as-hex                             FALSE
-character-sets-dir                        (No default value)
-column-type-info                          FALSE
-comments                                  FALSE
-compress                                  FALSE
-database                                  (No default value)
-default-character-set                     auto
-delimiter                                 ;
-enable-cleartext-plugin                   FALSE
-vertical                                  FALSE
-force                                     FALSE
-histignore                                (No default value)
-named-commands                            FALSE
-ignore-spaces                             FALSE
-init-command                              (No default value)
-local-infile                              FALSE
-no-beep                                   FALSE
-host                                      database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com
-dns-srv-name                              (No default value)
-html                                      FALSE
-xml                                       FALSE
-line-numbers                              TRUE
-unbuffered                                FALSE
-column-names                              TRUE
-sigint-ignore                             FALSE
-port                                      3306
-prompt                                    mysql> 
-quick                                     FALSE
-raw                                       FALSE
-reconnect                                 FALSE
-socket                                    (No default value)
-server-public-key-path                    (No default value)
-get-server-public-key                     FALSE
-ssl-ca                                    (No default value)
-ssl-capath                                (No default value)
-ssl-cert                                  (No default value)
-ssl-cipher                                (No default value)
-ssl-key                                   (No default value)
-ssl-crl                                   (No default value)
-ssl-crlpath                               (No default value)
-tls-version                               (No default value)
-tls-ciphersuites                          (No default value)
-ssl-session-data                          (No default value)
-ssl-session-data-continue-on-failed-reuse FALSE
-table                                     FALSE
-user                                      EDA_project
-safe-updates                              FALSE
-i-am-a-dummy                              FALSE
-connect-timeout                           0
-max-allowed-packet                        16777216
-net-buffer-length                         16384
-select-limit                              1000
-max-join-size                             1000000
-show-warnings                             FALSE
-plugin-dir                                (No default value)
-default-auth                              (No default value)
-binary-mode                               FALSE
-connect-expired-password                  FALSE
-network-namespace                         (No default value)
-compression-algorithms                    (No default value)
-zstd-compression-level                    3
-load-data-local-dir                       (No default value)
-fido-register-factor                      (No default value)
-authentication-oci-client-config-profile  (No default value)
-oci-config-file                           (No default value)
+--
+-- Table structure for table `crowd`
+--
+
+DROP TABLE IF EXISTS `crowd`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `crowd` (
+  `date` date DEFAULT NULL,
+  `weekdays` varchar(4) DEFAULT NULL,
+  `home` varchar(4) DEFAULT NULL,
+  `away` varchar(4) DEFAULT NULL,
+  `stadium` varchar(4) DEFAULT NULL,
+  `crowd` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crowd`
+--
+
+LOCK TABLES `crowd` WRITE;
+/*!40000 ALTER TABLE `crowd` DISABLE KEYS */;
+INSERT INTO `crowd` VALUES ('2022-04-02','토','두산','한화','잠실',16271),('2022-04-02','토','KIA','LG','광주',16908),('2022-04-02','토','키움','롯데','고척',8257),('2022-04-02','토','NC','SSG','창원',7814),('2022-04-02','토','KT','삼성','수원',17057),('2022-04-03','일','두산','한화','잠실',11345),('2022-04-03','일','KIA','LG','광주',10290),('2022-04-03','일','키움','롯데','고척',6115),('2022-04-03','일','NC','SSG','창원',4808),('2022-04-03','일','KT','삼성','수원',10321),('2022-04-05','화','KIA','한화','광주',2840),('2022-04-05','화','키움','LG','고척',2298),('2022-04-05','화','NC','롯데','창원',3246),('2022-04-05','화','KT','SSG','수원',2055),('2022-04-05','화','두산','삼성','잠실',4109),('2022-04-06','수','KIA','한화','광주',3117),('2022-04-06','수','키움','LG','고척',2304),('2022-04-06','수','NC','롯데','창원',3000),('2022-04-06','수','KT','SSG','수원',2094),('2022-04-06','수','두산','삼성','잠실',4161),('2022-04-07','목','KIA','한화','광주',2773),('2022-04-07','목','키움','LG','고척',2055),('2022-04-07','목','NC','롯데','창원',3017),('2022-04-07','목','KT','SSG','수원',2530),('2022-04-07','목','두산','삼성','잠실',4055),('2022-04-08','금','SSG','KIA','문학',15615),('2022-04-08','금','한화','KT','대전',5520),('2022-04-08','금','LG','NC','잠실',10623),('2022-04-08','금','롯데','두산','사직',8860),('2022-04-08','금','삼성','키움','대구',9244),('2022-04-09','토','SSG','KIA','문학',21005),('2022-04-09','토','한화','KT','대전',6538),('2022-04-09','토','LG','NC','잠실',14328),('2022-04-09','토','롯데','두산','사직',13045),('2022-04-09','토','삼성','키움','대구',13059),('2022-04-10','일','SSG','KIA','문학',17849),('2022-04-10','일','한화','KT','대전',5735),('2022-04-10','일','LG','NC','잠실',13095),('2022-04-10','일','롯데','두산','사직',11646),('2022-04-10','일','삼성','키움','대구',11610),('2022-04-12','화','삼성','한화','대구',4047),('2022-04-12','화','KIA','롯데','광주',3654),('2022-04-12','화','키움','NC','고척',774),('2022-04-12','화','KT','두산','수원',2450),('2022-04-12','화','LG','SSG','잠실',6028),('2022-04-13','수','삼성','한화','대구',2156),('2022-04-13','수','키움','NC','고척',893),('2022-04-13','수','LG','SSG','잠실',4547),('2022-04-14','목','삼성','한화','대구',2869),('2022-04-14','목','KIA','롯데','광주',3838),('2022-04-14','목','키움','NC','고척',1020),('2022-04-14','목','KT','두산','수원',2241),('2022-04-14','목','LG','SSG','잠실',6500),('2022-04-15','금','NC','KIA','창원',3002),('2022-04-15','금','롯데','KT','사직',4610),('2022-04-15','금','한화','LG','대전',3320),('2022-04-15','금','SSG','삼성','문학',9441),('2022-04-15','금','두산','키움','잠실',4423),('2022-04-16','토','NC','KIA','창원',4580),('2022-04-16','토','롯데','KT','사직',10639),('2022-04-16','토','한화','LG','대전',8112),('2022-04-16','토','SSG','삼성','문학',16037),('2022-04-16','토','두산','키움','잠실',9737),('2022-04-17','일','NC','KIA','창원',3902),('2022-04-17','일','롯데','KT','사직',9231),('2022-04-17','일','한화','LG','대전',6566),('2022-04-17','일','SSG','삼성','문학',15104),('2022-04-17','일','두산','키움','잠실',8762),('2022-04-19','화','롯데','한화','사직',4053),('2022-04-19','화','LG','KT','잠실',4537),('2022-04-19','화','KIA','두산','광주',2658),('2022-04-19','화','NC','삼성','창원',1725),('2022-04-19','화','SSG','키움','문학',5931),('2022-04-20','수','롯데','한화','사직',4340),('2022-04-20','수','LG','KT','잠실',4595),('2022-04-20','수','KIA','두산','광주',4010),('2022-04-20','수','NC','삼성','창원',2104),('2022-04-20','수','SSG','키움','문학',5061),('2022-04-21','목','롯데','한화','사직',3306),('2022-04-21','목','LG','KT','잠실',4410),('2022-04-21','목','KIA','두산','광주',3474),('2022-04-21','목','NC','삼성','창원',1675),('2022-04-21','목','SSG','키움','문학',8080),('2022-04-22','금','키움','KIA','고척',4289),('2022-04-22','금','두산','LG','잠실',8472),('2022-04-22','금','삼성','롯데','대구',7951),('2022-04-22','금','KT','NC','수원',2276),('2022-04-22','금','한화','SSG','대전',3146),('2022-04-23','토','키움','KIA','고척',8338),('2022-04-23','토','두산','LG','잠실',17799),('2022-04-23','토','삼성','롯데','대구',14983),('2022-04-23','토','KT','NC','수원',8255),('2022-04-23','토','한화','SSG','대전',7514),('2022-04-24','일','키움','KIA','고척',7406),('2022-04-24','일','두산','LG','잠실',14848),('2022-04-24','일','삼성','롯데','대구',12782),('2022-04-24','일','KT','NC','수원',5719),('2022-04-24','일','한화','SSG','대전',6612),('2022-04-26','화','KT','KIA','수원',6277),('2022-04-26','화','삼성','LG','대구',3920),('2022-04-26','화','두산','NC','잠실',3644),('2022-04-26','화','롯데','SSG','사직',2731),('2022-04-26','화','한화','키움','대전',2647),('2022-04-27','수','KT','KIA','수원',6123),('2022-04-27','수','삼성','LG','대구',5063),('2022-04-27','수','두산','NC','잠실',3450),('2022-04-27','수','롯데','SSG','사직',6831),('2022-04-27','수','한화','키움','대전',3459),('2022-04-28','목','KT','KIA','수원',6111),('2022-04-28','목','삼성','LG','대구',5279),('2022-04-28','목','두산','NC','잠실',5223),('2022-04-28','목','롯데','SSG','사직',7126),('2022-04-28','목','한화','키움','대전',3531),('2022-04-29','금','NC','한화','창원',3405),('2022-04-29','금','키움','KT','고척',1770),('2022-04-29','금','LG','롯데','잠실',15681),('2022-04-29','금','SSG','두산','문학',10306),('2022-04-29','금','KIA','삼성','광주',7487),('2022-04-30','토','NC','한화','창원',6045),('2022-04-30','토','키움','KT','고척',4075),('2022-04-30','토','LG','롯데','잠실',23018),('2022-04-30','토','SSG','두산','문학',20094),('2022-04-30','토','KIA','삼성','광주',11159),('2022-05-01','일','NC','한화','창원',5185),('2022-05-01','일','키움','KT','고척',3213),('2022-05-01','일','LG','롯데','잠실',20513),('2022-05-01','일','SSG','두산','문학',18130),('2022-05-01','일','KIA','삼성','광주',11555),('2022-05-03','화','SSG','한화','문학',9110),('2022-05-03','화','KT','롯데','수원',6251),('2022-05-03','화','삼성','NC','대구',5728),('2022-05-03','화','LG','두산','잠실',10124),('2022-05-03','화','KIA','키움','광주',5277),('2022-05-04','수','SSG','한화','문학',11331),('2022-05-04','수','KT','롯데','수원',7532),('2022-05-04','수','삼성','NC','대구',8712),('2022-05-04','수','LG','두산','잠실',14480),('2022-05-04','수','KIA','키움','광주',11234),('2022-05-05','목','SSG','한화','문학',23000),('2022-05-05','목','KT','롯데','수원',20000),('2022-05-05','목','삼성','NC','대구',20938),('2022-05-05','목','LG','두산','잠실',24012),('2022-05-05','목','KIA','키움','광주',16072),('2022-05-06','금','한화','KIA','대전',10305),('2022-05-06','금','두산','KT','잠실',8709),('2022-05-06','금','NC','LG','창원',5883),('2022-05-06','금','키움','SSG','고척',4627),('2022-05-06','금','롯데','삼성','사직',22990),('2022-05-07','토','한화','KIA','대전',11114),('2022-05-07','토','두산','KT','잠실',10546),('2022-05-07','토','NC','LG','창원',5585),('2022-05-07','토','키움','SSG','고척',5637),('2022-05-07','토','롯데','삼성','사직',22990),('2022-05-08','일','한화','KIA','대전',7918),('2022-05-08','일','두산','KT','잠실',7124),('2022-05-08','일','NC','LG','창원',3642),('2022-05-08','일','키움','SSG','고척',4765),('2022-05-08','일','롯데','삼성','사직',16456),('2022-05-10','화','LG','한화','잠실',7270),('2022-05-10','화','KIA','KT','광주',5240),('2022-05-10','화','롯데','NC','사직',8521),('2022-05-10','화','키움','두산','고척',3564),('2022-05-10','화','삼성','SSG','대구',5088),('2022-05-11','수','LG','한화','잠실',8064),('2022-05-11','수','KIA','KT','광주',6542),('2022-05-11','수','롯데','NC','사직',7761),('2022-05-11','수','키움','두산','고척',2641),('2022-05-11','수','삼성','SSG','대구',4786),('2022-05-12','목','LG','한화','잠실',8620),('2022-05-12','목','KIA','KT','광주',5224),('2022-05-12','목','롯데','NC','사직',8782),('2022-05-12','목','키움','두산','고척',2649),('2022-05-12','목','삼성','SSG','대구',5541),('2022-05-13','금','LG','KIA','잠실',19411),('2022-05-13','금','한화','롯데','대전',6773),('2022-05-13','금','SSG','NC','문학',8121),('2022-05-13','금','KT','키움','수원',4246),('2022-05-14','토','LG','KIA','잠실',24132),('2022-05-14','토','한화','롯데','대전',10860),('2022-05-14','토','SSG','NC','문학',15131),('2022-05-14','토','삼성','두산','대구',17161),('2022-05-14','토','KT','키움','수원',10061),('2022-05-15','일','LG','KIA','잠실',23097),('2022-05-15','일','한화','롯데','대전',8154),('2022-05-15','일','SSG','NC','문학',11414),('2022-05-15','일','삼성','두산','대구',14754),('2022-05-15','일','KT','키움','수원',6587),('2022-05-17','화','롯데','KIA','사직',9055),('2022-05-17','화','KT','LG','수원',5600),('2022-05-17','화','두산','SSG','잠실',5743),('2022-05-17','화','한화','삼성','대전',3941),('2022-05-17','화','NC','키움','창원',2420),('2022-05-18','수','롯데','KIA','사직',9885),('2022-05-18','수','KT','LG','수원',5106),('2022-05-18','수','두산','SSG','잠실',5586),('2022-05-18','수','한화','삼성','대전',4107),('2022-05-18','수','NC','키움','창원',2526),('2022-05-19','목','롯데','KIA','사직',10396),('2022-05-19','목','KT','LG','수원',5234),('2022-05-19','목','두산','SSG','잠실',7360),('2022-05-19','목','한화','삼성','대전',4014),('2022-05-19','목','NC','키움','창원',2686),('2022-05-20','금','키움','한화','고척',3080),('2022-05-20','금','삼성','KT','대구',9838),('2022-05-20','금','SSG','LG','문학',13904),('2022-05-20','금','두산','롯데','잠실',15486),('2022-05-20','금','KIA','NC','광주',9135),('2022-05-21','토','키움','한화','고척',6689),('2022-05-21','토','삼성','KT','대구',15676),('2022-05-21','토','SSG','LG','문학',21315),('2022-05-21','토','두산','롯데','잠실',20588),('2022-05-21','토','KIA','NC','광주',15565),('2022-05-22','일','키움','한화','고척',5330),('2022-05-22','일','삼성','KT','대구',11507),('2022-05-22','일','SSG','LG','문학',18157),('2022-05-22','일','두산','롯데','잠실',19143),('2022-05-22','일','KIA','NC','광주',16282),('2022-05-24','화','삼성','KIA','대구',7081),('2022-05-24','화','NC','KT','창원',1686),('2022-05-24','화','SSG','롯데','문학',11996),('2022-05-24','화','한화','두산','대전',3172),('2022-05-24','화','LG','키움','잠실',6074),('2022-05-25','수','삼성','KIA','대구',8000),('2022-05-25','수','NC','KT','창원',2428),('2022-05-25','수','SSG','롯데','문학',9890),('2022-05-25','수','한화','두산','대전',5253),('2022-05-25','수','LG','키움','잠실',6937),('2022-05-26','목','삼성','KIA','대구',7568),('2022-05-26','목','NC','KT','창원',1728),('2022-05-26','목','SSG','롯데','문학',13672),('2022-05-26','목','한화','두산','대전',4638),('2022-05-26','목','LG','키움','잠실',6655),('2022-05-27','금','KT','한화','수원',6090),('2022-05-27','금','NC','두산','창원',3328),('2022-05-27','금','KIA','SSG','광주',10208),('2022-05-27','금','LG','삼성','잠실',13775),('2022-05-27','금','롯데','키움','사직',11008),('2022-05-28','토','KT','한화','수원',11494),('2022-05-28','토','NC','두산','창원',7638),('2022-05-28','토','KIA','SSG','광주',12245),('2022-05-28','토','LG','삼성','잠실',21100),('2022-05-28','토','롯데','키움','사직',13820),('2022-05-29','일','KT','한화','수원',9503),('2022-05-29','일','NC','두산','창원',3979),('2022-05-29','일','KIA','SSG','광주',12595),('2022-05-29','일','LG','삼성','잠실',17435),('2022-05-29','일','롯데','키움','사직',12038),('2022-05-31','화','두산','KIA','잠실',18194),('2022-05-31','화','SSG','KT','문학',7883),('2022-05-31','화','롯데','LG','사직',7815),('2022-05-31','화','한화','NC','대전',4269),('2022-05-31','화','키움','삼성','고척',4100),('2022-06-01','수','두산','KIA','잠실',23244),('2022-06-01','수','SSG','KT','문학',15288),('2022-06-01','수','롯데','LG','사직',11093),('2022-06-01','수','한화','NC','대전',6851),('2022-06-01','수','키움','삼성','고척',7181),('2022-06-02','목','두산','KIA','잠실',11029),('2022-06-02','목','SSG','KT','문학',5525),('2022-06-02','목','롯데','LG','사직',8384),('2022-06-02','목','한화','NC','대전',3003),('2022-06-02','목','키움','삼성','고척',2477),('2022-06-03','금','KT','KIA','수원',10749),('2022-06-03','금','NC','롯데','창원',9544),('2022-06-03','금','삼성','두산','대구',8600),('2022-06-03','금','LG','SSG','잠실',9487),('2022-06-03','금','한화','키움','대전',4166),('2022-06-04','토','KT','KIA','수원',20000),('2022-06-04','토','NC','롯데','창원',11736),('2022-06-04','토','삼성','두산','대구',16425),('2022-06-04','토','LG','SSG','잠실',16345),('2022-06-04','토','한화','키움','대전',9140),('2022-06-05','일','KT','KIA','수원',20000),('2022-06-05','일','LG','SSG','잠실',14964),('2022-06-07','화','두산','한화','잠실',4702),('2022-06-07','화','키움','KT','고척',1904),('2022-06-07','화','NC','SSG','창원',2158),('2022-06-07','화','롯데','삼성','사직',4680),('2022-06-08','수','두산','한화','잠실',4882),('2022-06-08','수','키움','KT','고척',1342),('2022-06-08','수','KIA','LG','광주',6812),('2022-06-08','수','NC','SSG','창원',2316),('2022-06-08','수','롯데','삼성','사직',4733),('2022-06-09','목','두산','한화','잠실',6612),('2022-06-09','목','키움','KT','고척',1414),('2022-06-09','목','KIA','LG','광주',7606),('2022-06-09','목','NC','SSG','창원',3010),('2022-06-09','목','롯데','삼성','사직',5236),('2022-06-10','금','SSG','한화','문학',9958),('2022-06-10','금','롯데','KT','사직',4902),('2022-06-10','금','삼성','NC','대구',10012),('2022-06-10','금','LG','두산','잠실',11791),('2022-06-10','금','KIA','키움','광주',8951),('2022-06-11','토','SSG','한화','문학',20078),('2022-06-11','토','롯데','KT','사직',10087),('2022-06-11','토','삼성','NC','대구',14155),('2022-06-11','토','LG','두산','잠실',19035),('2022-06-11','토','KIA','키움','광주',16267),('2022-06-12','일','SSG','한화','문학',15128),('2022-06-12','일','롯데','KT','사직',5997),('2022-06-12','일','삼성','NC','대구',10614),('2022-06-12','일','LG','두산','잠실',15235),('2022-06-12','일','KIA','키움','광주',14849),('2022-06-14','화','키움','두산','고척',2536),('2022-06-14','화','KT','SSG','수원',3108),('2022-06-14','화','LG','삼성','잠실',6824),('2022-06-15','수','NC','KIA','창원',3444),('2022-06-15','수','한화','롯데','대전',3403),('2022-06-15','수','키움','두산','고척',2062),('2022-06-15','수','KT','SSG','수원',3596),('2022-06-15','수','LG','삼성','잠실',6328),('2022-06-16','목','NC','KIA','창원',4547),('2022-06-16','목','한화','롯데','대전',3640),('2022-06-16','목','키움','두산','고척',2349),('2022-06-16','목','KT','SSG','수원',4355),('2022-06-16','목','LG','삼성','잠실',8976),('2022-06-17','금','NC','한화','창원',3678),('2022-06-17','금','두산','KT','잠실',4898),('2022-06-17','금','키움','LG','고척',4608),('2022-06-17','금','롯데','SSG','사직',5687),('2022-06-17','금','KIA','삼성','광주',8865),('2022-06-18','토','NC','한화','창원',7205),('2022-06-18','토','두산','KT','잠실',9033),('2022-06-18','토','키움','LG','고척',8705),('2022-06-18','토','롯데','SSG','사직',10173),('2022-06-18','토','KIA','삼성','광주',14825),('2022-06-19','일','NC','한화','창원',4605),('2022-06-19','일','두산','KT','잠실',6966),('2022-06-19','일','키움','LG','고척',7849),('2022-06-19','일','롯데','SSG','사직',6314),('2022-06-19','일','KIA','삼성','광주',9977),('2022-06-21','화','LG','한화','잠실',7317),('2022-06-21','화','KIA','롯데','광주',5956),('2022-06-21','화','KT','NC','수원',2292),('2022-06-21','화','SSG','두산','문학',8067),('2022-06-21','화','삼성','키움','대구',5936),('2022-06-22','수','LG','한화','잠실',8200),('2022-06-22','수','KIA','롯데','광주',8754),('2022-06-22','수','KT','NC','수원',2866),('2022-06-22','수','SSG','두산','문학',9261),('2022-06-22','수','삼성','키움','대구',6515),('2022-06-23','목','KIA','롯데','광주',5909),('2022-06-23','목','삼성','키움','대구',4959),('2022-06-24','금','두산','KIA','잠실',14470),('2022-06-24','금','KT','LG','수원',7021),('2022-06-24','금','SSG','NC','문학',11040),('2022-06-24','금','한화','삼성','대전',4132),('2022-06-24','금','롯데','키움','사직',3769),('2022-06-25','토','두산','KIA','잠실',22093),('2022-06-25','토','KT','LG','수원',13557),('2022-06-25','토','SSG','NC','문학',17058),('2022-06-25','토','한화','삼성','대전',8225),('2022-06-25','토','롯데','키움','사직',8922),('2022-06-26','일','두산','KIA','잠실',16298),('2022-06-26','일','KT','LG','수원',8044),('2022-06-26','일','SSG','NC','문학',13149),('2022-06-26','일','한화','삼성','대전',5214),('2022-06-26','일','롯데','키움','사직',6596),('2022-06-28','화','키움','KIA','고척',7388),('2022-06-28','화','삼성','KT','대구',3769),('2022-06-28','화','LG','NC','잠실',3361),('2022-06-28','화','롯데','두산','사직',3429),('2022-06-28','화','한화','SSG','대전',3027),('2022-06-29','수','키움','KIA','고척',7941),('2022-06-29','수','삼성','KT','대구',4679),('2022-06-29','수','한화','SSG','대전',1747),('2022-06-30','목','키움','KIA','고척',7165),('2022-06-30','목','삼성','KT','대구',4809),('2022-06-30','목','롯데','두산','사직',6566),('2023-04-01','토','키움','한화','고척',16000),('2023-04-01','토','SSG','KIA','문학',23000),('2023-04-01','토','KT','LG','수원',18700),('2023-04-01','토','두산','롯데','잠실',23750),('2023-04-01','토','삼성','NC','대구',24000),('2023-04-02','일','키움','한화','고척',11562),('2023-04-02','일','SSG','KIA','문학',23000),('2023-04-02','일','KT','LG','수원',14700),('2023-04-02','일','두산','롯데','잠실',23750),('2023-04-02','일','삼성','NC','대구',18483),('2023-04-04','화','삼성','한화','대구',5936),('2023-04-04','화','키움','LG','고척',4510),('2023-04-04','화','SSG','롯데','문학',5809),('2023-04-04','화','두산','NC','잠실',3924),('2023-04-05','수','키움','LG','고척',4194),('2023-04-05','수','두산','NC','잠실',2172),('2023-04-06','목','삼성','한화','대구',6525),('2023-04-06','목','키움','LG','고척',4556),('2023-04-06','목','두산','NC','잠실',3724),('2023-04-07','금','롯데','KT','사직',14734),('2023-04-07','금','KIA','두산','광주',12821),('2023-04-07','금','한화','SSG','대전',10415),('2023-04-07','금','LG','삼성','잠실',17201),('2023-04-07','금','NC','키움','창원',6867),('2023-04-08','토','롯데','KT','사직',16555),('2023-04-08','토','KIA','두산','광주',16432),('2023-04-08','토','한화','SSG','대전',11232),('2023-04-08','토','LG','삼성','잠실',22141),('2023-04-08','토','NC','키움','창원',9763),('2023-04-09','일','롯데','KT','사직',12283),('2023-04-09','일','KIA','두산','광주',14070),('2023-04-09','일','한화','SSG','대전',9455),('2023-04-09','일','LG','삼성','잠실',20439),('2023-04-09','일','NC','키움','창원',7686),('2023-04-11','화','KIA','한화','광주',3623),('2023-04-11','화','NC','KT','창원',2069),('2023-04-11','화','롯데','LG','사직',5286),('2023-04-11','화','삼성','SSG','대구',3907),('2023-04-11','화','두산','키움','잠실',4372),('2023-04-12','수','KIA','한화','광주',5252),('2023-04-12','수','NC','KT','창원',2448),('2023-04-12','수','롯데','LG','사직',6519),('2023-04-12','수','삼성','SSG','대구',5405),('2023-04-13','목','KIA','한화','광주',5457),('2023-04-13','목','NC','KT','창원',3174),('2023-04-13','목','롯데','LG','사직',6505),('2023-04-13','목','삼성','SSG','대구',4648),('2023-04-13','목','두산','키움','잠실',6917),('2023-04-14','금','KT','한화','수원',7145),('2023-04-14','금','키움','KIA','고척',8043),('2023-04-14','금','삼성','롯데','대구',9124),('2023-04-14','금','SSG','NC','문학',8218),('2023-04-14','금','LG','두산','잠실',16528),('2023-04-15','토','KT','한화','수원',13212),('2023-04-15','토','키움','KIA','고척',13752),('2023-04-15','토','삼성','롯데','대구',18231),('2023-04-15','토','SSG','NC','문학',13956),('2023-04-15','토','LG','두산','잠실',21243),('2023-04-16','일','KT','한화','수원',13010),('2023-04-16','일','키움','KIA','고척',11265),('2023-04-16','일','삼성','롯데','대구',16076),('2023-04-16','일','SSG','NC','문학',13460),('2023-04-16','일','LG','두산','잠실',20090),('2023-04-18','화','롯데','KIA','사직',3829),('2023-04-18','화','LG','NC','잠실',6574),('2023-04-18','화','한화','두산','대전',4012),('2023-04-18','화','KT','SSG','수원',3398),('2023-04-18','화','키움','삼성','고척',3104),('2023-04-19','수','롯데','KIA','사직',4869),('2023-04-19','수','LG','NC','잠실',7090),('2023-04-19','수','한화','두산','대전',4212),('2023-04-19','수','KT','SSG','수원',3405),('2023-04-19','수','키움','삼성','고척',3869),('2023-04-20','목','롯데','KIA','사직',6423),('2023-04-20','목','LG','NC','잠실',9090),('2023-04-20','목','한화','두산','대전',4122),('2023-04-20','목','KT','SSG','수원',4472),('2023-04-20','목','키움','삼성','고척',3918),('2023-04-21','금','두산','KT','잠실',6896),('2023-04-21','금','한화','LG','대전',6004),('2023-04-21','금','NC','롯데','창원',12613),('2023-04-21','금','KIA','삼성','광주',6870),('2023-04-21','금','SSG','키움','문학',12374),('2023-04-22','토','두산','KT','잠실',13410),('2023-04-22','토','한화','LG','대전',11152),('2023-04-22','토','NC','롯데','창원',15130),('2023-04-22','토','KIA','삼성','광주',12990),('2023-04-22','토','SSG','키움','문학',16535),('2023-04-23','일','두산','KT','잠실',10151),('2023-04-23','일','한화','LG','대전',9023),('2023-04-23','일','NC','롯데','창원',13286),('2023-04-23','일','KIA','삼성','광주',10026),('2023-04-23','일','SSG','키움','문학',15878),('2023-04-25','화','키움','KT','고척',2956),('2023-04-25','화','KIA','NC','광주',2216),('2023-04-25','화','LG','SSG','잠실',7344),('2023-04-26','수','롯데','한화','사직',7905),('2023-04-26','수','키움','KT','고척',2489),('2023-04-26','수','KIA','NC','광주',4798),('2023-04-26','수','삼성','두산','대구',9213),('2023-04-26','수','LG','SSG','잠실',10419),('2023-04-27','목','롯데','한화','사직',10393),('2023-04-27','목','키움','KT','고척',3024),('2023-04-27','목','KIA','NC','광주',6017),('2023-04-27','목','삼성','두산','대구',8473),('2023-04-27','목','LG','SSG','잠실',13061),('2023-04-28','금','LG','KIA','잠실',22695),('2023-04-28','금','한화','NC','대전',7242),('2023-04-28','금','SSG','두산','문학',14909),('2023-04-28','금','KT','삼성','수원',7314),('2023-04-28','금','롯데','키움','사직',14343),('2023-04-29','토','LG','KIA','잠실',23750),('2023-04-29','토','한화','NC','대전',7813),('2023-04-29','토','SSG','두산','문학',20180),('2023-04-29','토','KT','삼성','수원',12039),('2023-04-30','일','LG','KIA','잠실',23750),('2023-04-30','일','한화','NC','대전',10442),('2023-04-30','일','SSG','두산','문학',21026),('2023-04-30','일','KT','삼성','수원',14582),('2023-04-30','일','롯데','키움','사직',22990),('2023-05-02','화','두산','한화','잠실',9834),('2023-05-02','화','SSG','KT','문학',6950),('2023-05-02','화','NC','LG','창원',3939),('2023-05-02','화','KIA','롯데','광주',8892),('2023-05-02','화','삼성','키움','대구',10624),('2023-05-03','수','두산','한화','잠실',14271),('2023-05-03','수','SSG','KT','문학',7703),('2023-05-03','수','NC','LG','창원',4874),('2023-05-03','수','KIA','롯데','광주',13815),('2023-05-03','수','삼성','키움','대구',13394),('2023-05-04','목','두산','한화','잠실',10825),('2023-05-04','목','SSG','KT','문학',7529),('2023-05-04','목','삼성','키움','대구',12076),('2023-05-05','금','키움','SSG','고척',16000),('2023-05-06','토','키움','SSG','고척',11063),('2023-05-07','일','한화','KT','대전',8551),('2023-05-07','일','두산','LG','잠실',22073),('2023-05-07','일','키움','SSG','고척',7623),('2023-05-09','화','KT','NC','수원',2764),('2023-05-09','화','롯데','두산','사직',11643),('2023-05-09','화','KIA','SSG','광주',8916),('2023-05-09','화','한화','삼성','대전',5014),('2023-05-09','화','LG','키움','잠실',10421),('2023-05-10','수','KT','NC','수원',3734),('2023-05-10','수','롯데','두산','사직',11435),('2023-05-10','수','KIA','SSG','광주',8481),('2023-05-10','수','한화','삼성','대전',5865),('2023-05-10','수','LG','키움','잠실',12125),('2023-05-11','목','KT','NC','수원',3934),('2023-05-11','목','롯데','두산','사직',13350),('2023-05-11','목','KIA','SSG','광주',8898),('2023-05-11','목','한화','삼성','대전',6007),('2023-05-11','목','LG','키움','잠실',11773),('2023-05-12','금','SSG','한화','문학',14395),('2023-05-12','금','두산','KIA','잠실',20563),('2023-05-12','금','삼성','LG','대구',13765),('2023-05-12','금','KT','롯데','수원',10937),('2023-05-12','금','키움','NC','고척',3866),('2023-05-13','토','SSG','한화','문학',23000),('2023-05-13','토','두산','KIA','잠실',23750),('2023-05-13','토','삼성','LG','대구',21817),('2023-05-13','토','KT','롯데','수원',18700),('2023-05-13','토','키움','NC','고척',6573),('2023-05-14','일','SSG','한화','문학',20757),('2023-05-14','일','두산','KIA','잠실',23750),('2023-05-14','일','삼성','LG','대구',18569),('2023-05-14','일','KT','롯데','수원',15470),('2023-05-14','일','키움','NC','고척',5634),('2023-05-16','화','삼성','KIA','대구',9112),('2023-05-16','화','LG','KT','잠실',8567),('2023-05-16','화','한화','롯데','대전',6138),('2023-05-16','화','키움','두산','고척',5662),('2023-05-16','화','NC','SSG','창원',4113),('2023-05-17','수','삼성','KIA','대구',10979),('2023-05-17','수','LG','KT','잠실',9838),('2023-05-17','수','한화','롯데','대전',6269),('2023-05-17','수','키움','두산','고척',5232),('2023-05-17','수','NC','SSG','창원',4344),('2023-05-18','목','LG','KT','잠실',9155),('2023-05-18','목','한화','롯데','대전',6116),('2023-05-18','목','키움','두산','고척',5742),('2023-05-19','금','LG','한화','잠실',19798),('2023-05-19','금','KT','두산','수원',6817),('2023-05-19','금','롯데','SSG','사직',19011),('2023-05-19','금','NC','삼성','창원',8493),('2023-05-19','금','KIA','키움','광주',11290),('2023-05-20','토','LG','한화','잠실',23750),('2023-05-20','토','KT','두산','수원',13253),('2023-05-20','토','롯데','SSG','사직',22990),('2023-05-20','토','NC','삼성','창원',14870),('2023-05-20','토','KIA','키움','광주',19030),('2023-05-21','일','LG','한화','잠실',22054),('2023-05-21','일','KT','두산','수원',10521),('2023-05-21','일','롯데','SSG','사직',22990),('2023-05-21','일','NC','삼성','창원',10910),('2023-05-21','일','KIA','키움','광주',14617),('2023-05-23','화','한화','KIA','대전',6376),('2023-05-23','화','SSG','LG','문학',12508),('2023-05-23','화','롯데','NC','사직',15047),('2023-05-23','화','두산','삼성','잠실',10733),('2023-05-23','화','KT','키움','수원',4203),('2023-05-24','수','한화','KIA','대전',7004),('2023-05-24','수','SSG','LG','문학',16829),('2023-05-24','수','롯데','NC','사직',14244),('2023-05-24','수','두산','삼성','잠실',11108),('2023-05-24','수','KT','키움','수원',5173),('2023-05-25','목','한화','KIA','대전',8186),('2023-05-25','목','SSG','LG','문학',17575),('2023-05-25','목','롯데','NC','사직',15221),('2023-05-25','목','두산','삼성','잠실',11005),('2023-05-25','목','KT','키움','수원',5235),('2023-05-26','금','NC','한화','창원',5952),('2023-05-26','금','삼성','KT','대구',12874),('2023-05-26','금','KIA','LG','광주',10954),('2023-05-26','금','키움','롯데','고척',11692),('2023-05-26','금','두산','SSG','잠실',10428),('2023-05-27','토','NC','한화','창원',9558),('2023-05-27','토','삼성','KT','대구',17305),('2023-05-27','토','KIA','LG','광주',17931),('2023-05-27','토','키움','롯데','고척',16000),('2023-05-28','일','삼성','KT','대구',14523),('2023-05-28','일','KIA','LG','광주',17015),('2023-05-28','일','키움','롯데','고척',16000),('2023-05-30','화','KIA','KT','광주',5352),('2023-05-30','화','LG','롯데','잠실',20330),('2023-05-30','화','NC','두산','창원',3180),('2023-05-30','화','SSG','삼성','문학',10232),('2023-05-30','화','한화','키움','대전',4486),('2023-05-31','수','KIA','KT','광주',7244),('2023-05-31','수','LG','롯데','잠실',21269),('2023-05-31','수','NC','두산','창원',4180),('2023-05-31','수','SSG','삼성','문학',10745),('2023-05-31','수','한화','키움','대전',4384),('2023-06-01','목','LG','롯데','잠실',22020),('2023-06-01','목','SSG','삼성','문학',9028),('2023-06-01','목','한화','키움','대전',5040),('2023-06-02','금','롯데','KIA','사직',18996),('2023-06-02','금','LG','NC','잠실',10238),('2023-06-02','금','KT','두산','수원',5157),('2023-06-02','금','한화','삼성','대전',6675),('2023-06-02','금','SSG','키움','문학',12533),('2023-06-03','토','롯데','KIA','사직',22990),('2023-06-03','토','LG','NC','잠실',18890),('2023-06-03','토','KT','두산','수원',12155),('2023-06-03','토','한화','삼성','대전',12000),('2023-06-03','토','SSG','키움','문학',19071),('2023-06-04','일','롯데','KIA','사직',22990),('2023-06-04','일','LG','NC','잠실',15096),('2023-06-04','일','KT','두산','수원',10239),('2023-06-04','일','한화','삼성','대전',12000),('2023-06-04','일','SSG','키움','문학',17007),('2023-06-06','화','두산','한화','잠실',21146),('2023-06-06','화','롯데','KT','사직',20441),('2023-06-06','화','키움','LG','고척',14903),('2023-06-06','화','삼성','NC','대구',14639),('2023-06-06','화','KIA','SSG','광주',15130),('2023-06-07','수','두산','한화','잠실',8497),('2023-06-07','수','롯데','KT','사직',10066),('2023-06-07','수','키움','LG','고척',5390),('2023-06-07','수','삼성','NC','대구',7119),('2023-06-07','수','KIA','SSG','광주',7569),('2023-06-08','목','두산','한화','잠실',8509),('2023-06-08','목','롯데','KT','사직',10504),('2023-06-08','목','키움','LG','고척',6076),('2023-06-08','목','삼성','NC','대구',5989),('2023-06-08','목','KIA','SSG','광주',6646),('2023-06-09','금','두산','KIA','잠실',16250),('2023-06-09','금','한화','LG','대전',6005),('2023-06-09','금','삼성','롯데','대구',15893),('2023-06-09','금','NC','SSG','창원',5110),('2023-06-09','금','KT','키움','수원',5033),('2023-06-10','토','두산','KIA','잠실',22233),('2023-06-10','토','한화','LG','대전',11072),('2023-06-10','토','삼성','롯데','대구',24000),('2023-06-10','토','NC','SSG','창원',11026),('2023-06-10','토','KT','키움','수원',9622),('2023-06-11','일','두산','KIA','잠실',18623),('2023-06-11','일','한화','LG','대전',7601),('2023-06-11','일','삼성','롯데','대구',18496),('2023-06-11','일','NC','SSG','창원',7210),('2023-06-11','일','KT','키움','수원',6806),('2023-06-13','화','롯데','한화','사직',16007),('2023-06-13','화','키움','KIA','고척',7834),('2023-06-13','화','SSG','KT','문학',6568),('2023-06-13','화','NC','두산','창원',3699),('2023-06-13','화','LG','삼성','잠실',11103),('2023-06-14','수','롯데','한화','사직',10803),('2023-06-14','수','키움','KIA','고척',8016),('2023-06-14','수','SSG','KT','문학',6579),('2023-06-14','수','NC','두산','창원',3154),('2023-06-14','수','LG','삼성','잠실',11725),('2023-06-15','목','롯데','한화','사직',12594),('2023-06-15','목','키움','KIA','고척',8528),('2023-06-15','목','SSG','KT','문학',6736),('2023-06-15','목','NC','두산','창원',3633),('2023-06-15','목','LG','삼성','잠실',12023),('2023-06-16','금','SSG','롯데','문학',18013),('2023-06-16','금','KIA','NC','광주',10170),('2023-06-16','금','LG','두산','잠실',18826),('2023-06-16','금','KT','삼성','수원',6998),('2023-06-16','금','한화','키움','대전',7005),('2023-06-17','토','SSG','롯데','문학',23000),('2023-06-17','토','KIA','NC','광주',15992),('2023-06-17','토','LG','두산','잠실',22878),('2023-06-17','토','KT','삼성','수원',14935),('2023-06-17','토','한화','키움','대전',11008),('2023-06-18','일','SSG','롯데','문학',19156),('2023-06-18','일','KIA','NC','광주',13967),('2023-06-18','일','LG','두산','잠실',19038),('2023-06-18','일','KT','삼성','수원',10137),('2023-06-18','일','한화','키움','대전',8163),('2023-06-20','화','한화','KIA','대전',5451),('2023-06-20','화','NC','LG','창원',3433),('2023-06-20','화','KT','롯데','수원',5773),('2023-06-20','화','두산','SSG','잠실',6186),('2023-06-20','화','삼성','키움','대구',7667),('2023-06-21','수','한화','KIA','대전',5207),('2023-06-21','수','NC','LG','창원',3571),('2023-06-21','수','KT','롯데','수원',6024),('2023-06-21','수','두산','SSG','잠실',5473),('2023-06-21','수','삼성','키움','대구',7453),('2023-06-22','목','한화','KIA','대전',7675),('2023-06-22','목','NC','LG','창원',4997),('2023-06-22','목','KT','롯데','수원',7861),('2023-06-22','목','두산','SSG','잠실',7291),('2023-06-22','목','삼성','키움','대구',10176),('2023-06-23','금','NC','한화','창원',6376),('2023-06-23','금','KIA','KT','광주',9018),('2023-06-23','금','LG','롯데','잠실',21089),('2023-06-23','금','키움','두산','고척',7316),('2023-06-23','금','SSG','삼성','문학',12744),('2023-06-24','토','NC','한화','창원',13791),('2023-06-24','토','KIA','KT','광주',14043),('2023-06-24','토','LG','롯데','잠실',23750),('2023-06-24','토','키움','두산','고척',11717),('2023-06-24','토','SSG','삼성','문학',20062),('2023-06-25','일','LG','롯데','잠실',20846),('2023-06-25','일','키움','두산','고척',9549),('2023-06-25','일','SSG','삼성','문학',14722),('2023-06-27','화','한화','KT','대전',4625),('2023-06-27','화','SSG','LG','문학',12244),('2023-06-27','화','두산','NC','잠실',5302),('2023-06-27','화','롯데','삼성','사직',11654),('2023-06-27','화','KIA','키움','광주',5349),('2023-06-28','수','한화','KT','대전',5007),('2023-06-28','수','SSG','LG','문학',11045),('2023-06-28','수','두산','NC','잠실',5400),('2023-06-28','수','롯데','삼성','사직',13787),('2023-06-28','수','KIA','키움','광주',4816),('2023-06-30','금','삼성','한화','대구',8114),('2023-06-30','금','LG','KIA','잠실',20568),('2023-06-30','금','KT','NC','수원',4596),('2023-06-30','금','롯데','두산','울산',6894),('2023-06-30','금','키움','SSG','고척',7164),('2024-03-23','토','LG','한화','잠실',23750),('2024-03-23','토','SSG','롯데','문학',23000),('2024-03-23','토','NC','두산','창원',17891),('2024-03-23','토','KT','삼성','수원',18700),('2024-03-23','토','KIA','키움','광주',20500),('2024-03-24','일','LG','한화','잠실',23750),('2024-03-24','일','SSG','롯데','문학',23000),('2024-03-24','일','NC','두산','창원',14555),('2024-03-24','일','KT','삼성','수원',18700),('2024-03-26','화','SSG','한화','문학',10541),('2024-03-26','화','KIA','롯데','광주',7328),('2024-03-26','화','KT','두산','수원',4378),('2024-03-26','화','LG','삼성','잠실',14229),('2024-03-26','화','NC','키움','창원',2839),('2024-03-27','수','SSG','한화','문학',11005),('2024-03-27','수','KIA','롯데','광주',8672),('2024-03-27','수','KT','두산','수원',5271),('2024-03-27','수','LG','삼성','잠실',18041),('2024-03-27','수','NC','키움','창원',3681),('2024-03-28','목','SSG','한화','문학',11755),('2024-03-28','목','KT','두산','수원',4304),('2024-03-28','목','LG','삼성','잠실',13420),('2024-03-29','금','두산','KIA','잠실',23750),('2024-03-29','금','한화','KT','대전',12000),('2024-03-29','금','키움','LG','고척',8465),('2024-03-29','금','롯데','NC','사직',21554),('2024-03-29','금','삼성','SSG','대구',21479),('2024-03-30','토','두산','KIA','잠실',23750),('2024-03-30','토','한화','KT','대전',12000),('2024-03-30','토','키움','LG','고척',13462),('2024-03-30','토','롯데','NC','사직',22754),('2024-03-30','토','삼성','SSG','대구',24000),('2024-03-31','일','두산','KIA','잠실',23750),('2024-03-31','일','한화','KT','대전',12000),('2024-03-31','일','키움','LG','고척',11822),('2024-03-31','일','롯데','NC','사직',21578),('2024-03-31','일','삼성','SSG','대구',22886),('2024-04-02','화','KT','KIA','수원',9682),('2024-04-02','화','한화','롯데','대전',12000),('2024-04-02','화','LG','NC','잠실',11845),('2024-04-02','화','SSG','두산','문학',12379),('2024-04-02','화','삼성','키움','대구',8541),('2024-04-03','수','KT','KIA','수원',8050),('2024-04-03','수','LG','NC','잠실',10239),('2024-04-03','수','SSG','두산','문학',12128),('2024-04-04','목','KT','KIA','수원',10722),('2024-04-04','목','한화','롯데','대전',12000),('2024-04-04','목','LG','NC','잠실',11406),('2024-04-04','목','SSG','두산','문학',14249),('2024-04-04','목','삼성','키움','대구',8193),('2024-04-05','금','키움','한화','고척',16000),('2024-04-05','금','LG','KT','잠실',13818),('2024-04-05','금','롯데','두산','사직',12289),('2024-04-05','금','NC','SSG','창원',5452),('2024-04-05','금','KIA','삼성','광주',14233),('2024-04-06','토','키움','한화','고척',16000),('2024-04-06','토','LG','KT','잠실',21824),('2024-04-06','토','롯데','두산','사직',19208),('2024-04-06','토','NC','SSG','창원',11064),('2024-04-06','토','KIA','삼성','광주',20500),('2024-04-07','일','키움','한화','고척',16000),('2024-04-07','일','LG','KT','잠실',19249),('2024-04-07','일','롯데','두산','사직',16755),('2024-04-07','일','NC','SSG','창원',8861),('2024-04-07','일','KIA','삼성','광주',20500),('2024-04-09','화','두산','한화','잠실',23598),('2024-04-09','화','NC','KT','창원',4918),('2024-04-09','화','KIA','LG','광주',11817),('2024-04-09','화','롯데','삼성','사직',15076),('2024-04-09','화','SSG','키움','문학',9468),('2024-04-10','수','두산','한화','잠실',23750),('2024-04-10','수','NC','KT','창원',9895),('2024-04-10','수','KIA','LG','광주',20500),('2024-04-10','수','롯데','삼성','사직',22758),('2024-04-10','수','SSG','키움','문학',20511),('2024-04-11','목','두산','한화','잠실',22157),('2024-04-11','목','NC','KT','창원',3311),('2024-04-11','목','KIA','LG','광주',11475),('2024-04-11','목','롯데','삼성','사직',11628),('2024-04-11','목','SSG','키움','문학',7250),('2024-04-12','금','한화','KIA','대전',12000),('2024-04-12','금','두산','LG','잠실',19916),('2024-04-12','금','키움','롯데','고척',8838),('2024-04-12','금','삼성','NC','대구',13104),('2024-04-12','금','KT','SSG','수원',6912),('2024-04-13','토','한화','KIA','대전',12000),('2024-04-13','토','두산','LG','잠실',23750),('2024-04-13','토','키움','롯데','고척',14197),('2024-04-13','토','삼성','NC','대구',24000),('2024-04-13','토','KT','SSG','수원',13995),('2024-04-14','일','한화','KIA','대전',12000),('2024-04-14','일','두산','LG','잠실',22586),('2024-04-14','일','키움','롯데','고척',12333),('2024-04-14','일','삼성','NC','대구',20667),('2024-04-14','일','KT','SSG','수원',11280),('2024-04-16','화','NC','한화','창원',4658),('2024-04-16','화','SSG','KIA','문학',12712),('2024-04-16','화','키움','KT','고척',2877),('2024-04-16','화','LG','롯데','잠실',16635),('2024-04-16','화','삼성','두산','대구',7793),('2024-04-17','수','NC','한화','창원',9921),('2024-04-17','수','SSG','KIA','문학',16062),('2024-04-17','수','키움','KT','고척',3272),('2024-04-17','수','LG','롯데','잠실',16509),('2024-04-17','수','삼성','두산','대구',8393),('2024-04-18','목','SSG','KIA','문학',14263),('2024-04-18','목','키움','KT','고척',2901),('2024-04-18','목','LG','롯데','잠실',18200),('2024-04-18','목','삼성','두산','대구',8697),('2024-04-19','금','롯데','KT','사직',10636),('2024-04-19','금','SSG','LG','문학',14097),('2024-04-19','금','KIA','NC','광주',16889),('2024-04-19','금','한화','삼성','대전',12000),('2024-04-19','금','두산','키움','잠실',10649),('2024-04-20','토','KIA','NC','광주',17462),('2024-04-20','토','한화','삼성','대전',12000),('2024-04-21','일','롯데','KT','사직',14423),('2024-04-21','일','롯데','KT','사직',7582),('2024-04-21','일','SSG','LG','문학',19858),('2024-04-21','일','SSG','LG','문학',9656),('2024-04-21','일','KIA','NC','광주',20500),('2024-04-21','일','한화','삼성','대전',12000),('2024-04-21','일','두산','키움','잠실',13745),('2024-04-21','일','두산','키움','잠실',6197),('2024-04-23','화','KT','한화','수원',10887),('2024-04-23','화','키움','KIA','고척',10205),('2024-04-23','화','삼성','LG','대구',7494),('2024-04-23','화','두산','NC','잠실',5664),('2024-04-24','수','KT','한화','수원',12538),('2024-04-24','수','키움','KIA','고척',11048),('2024-04-24','수','삼성','LG','대구',10159),('2024-04-24','수','두산','NC','잠실',6444),('2024-04-24','수','롯데','SSG','사직',8499),('2024-04-25','목','KT','한화','수원',11247),('2024-04-25','목','키움','KIA','고척',13287),('2024-04-25','목','삼성','LG','대구',12012),('2024-04-25','목','두산','NC','잠실',7385),('2024-04-25','목','롯데','SSG','사직',10518),('2024-04-26','금','LG','KIA','잠실',23750),('2024-04-26','금','SSG','KT','문학',10075),('2024-04-26','금','NC','롯데','창원',16573),('2024-04-26','금','한화','두산','대전',12000),('2024-04-26','금','키움','삼성','고척',9519),('2024-04-27','토','LG','KIA','잠실',23750),('2024-04-27','토','SSG','KT','문학',16957),('2024-04-27','토','NC','롯데','창원',17891),('2024-04-27','토','한화','두산','대전',12000),('2024-04-27','토','키움','삼성','고척',15073),('2024-04-28','일','LG','KIA','잠실',23750),('2024-04-28','일','SSG','KT','문학',13196),('2024-04-28','일','NC','롯데','창원',17891),('2024-04-28','일','한화','두산','대전',12000),('2024-04-28','일','키움','삼성','고척',13354),('2024-04-30','화','KIA','KT','광주',17210),('2024-04-30','화','NC','LG','창원',7278),('2024-04-30','화','한화','SSG','대전',12000),('2024-04-30','화','두산','삼성','잠실',20170),('2024-04-30','화','롯데','키움','사직',13376),('2024-05-01','수','KIA','KT','광주',17402),('2024-05-01','수','NC','LG','창원',10397),('2024-05-01','수','한화','SSG','대전',12000),('2024-05-01','수','두산','삼성','잠실',23750),('2024-05-01','수','롯데','키움','사직',14791),('2024-05-02','목','KIA','KT','광주',16502),('2024-05-02','목','NC','LG','창원',6338),('2024-05-02','목','한화','SSG','대전',10890),('2024-05-02','목','두산','삼성','잠실',20395),('2024-05-02','목','롯데','키움','사직',12569),('2024-05-03','금','KIA','한화','광주',20500),('2024-05-03','금','삼성','롯데','대구',24000),('2024-05-03','금','SSG','NC','문학',13737),('2024-05-03','금','LG','두산','잠실',23750),('2024-05-03','금','KT','키움','수원',8213),('2024-05-04','토','KIA','한화','광주',20500),('2024-05-04','토','삼성','롯데','대구',24000),('2024-05-04','토','SSG','NC','문학',22079),('2024-05-04','토','LG','두산','잠실',23750),('2024-05-04','토','KT','키움','수원',14620),('2024-05-07','화','키움','두산','고척',7339),('2024-05-07','화','LG','SSG','잠실',13387),('2024-05-08','수','롯데','한화','사직',11407),('2024-05-08','수','삼성','KIA','대구',15421),('2024-05-08','수','KT','NC','수원',4480),('2024-05-08','수','키움','두산','고척',6405),('2024-05-08','수','LG','SSG','잠실',15699),('2024-05-09','목','롯데','한화','사직',12774),('2024-05-09','목','삼성','KIA','대구',16769),('2024-05-09','목','KT','NC','수원',6369),('2024-05-09','목','키움','두산','고척',8658),('2024-05-09','목','LG','SSG','잠실',16823),('2024-05-10','금','두산','KT','잠실',13013),('2024-05-10','금','롯데','LG','사직',15731),('2024-05-10','금','KIA','SSG','광주',18895),('2024-05-10','금','NC','삼성','창원',12438),('2024-05-10','금','한화','키움','대전',12000),('2024-05-11','토','롯데','LG','사직',22758),('2024-05-11','토','NC','삼성','창원',17891),('2024-05-11','토','한화','키움','대전',12000),('2024-05-12','일','두산','KT','잠실',16308),('2024-05-12','일','두산','KT','잠실',9026),('2024-05-12','일','롯데','LG','사직',18914),('2024-05-12','일','KIA','SSG','광주',20500),('2024-05-12','일','KIA','SSG','광주',12743),('2024-05-12','일','NC','삼성','창원',16181),('2024-05-12','일','한화','키움','대전',12000),('2024-05-14','화','KT','롯데','수원',10120),('2024-05-14','화','한화','NC','대전',12000),('2024-05-14','화','KIA','두산','광주',18675),('2024-05-14','화','SSG','삼성','문학',16595),('2024-05-14','화','LG','키움','잠실',18479),('2024-05-15','수','한화','NC','대전',12000),('2024-05-15','수','KIA','두산','광주',20500),('2024-05-16','목','KT','롯데','수원',8312),('2024-05-16','목','한화','NC','대전',9522),('2024-05-16','목','KIA','두산','광주',15996),('2024-05-16','목','SSG','삼성','문학',13791),('2024-05-16','목','LG','키움','잠실',15054),('2024-05-17','금','삼성','한화','대구',24000),('2024-05-17','금','NC','KIA','창원',12280),('2024-05-17','금','KT','LG','수원',11374),('2024-05-17','금','두산','롯데','잠실',23750),('2024-05-17','금','키움','SSG','고척',9806),('2024-05-18','토','삼성','한화','대구',24000),('2024-05-18','토','NC','KIA','창원',17891),('2024-05-18','토','KT','LG','수원',18700),('2024-05-18','토','두산','롯데','잠실',23750),('2024-05-18','토','키움','SSG','고척',12133),('2024-05-19','일','삼성','한화','대구',24000),('2024-05-19','일','NC','KIA','창원',16253),('2024-05-19','일','KT','LG','수원',15912),('2024-05-19','일','두산','롯데','잠실',23750),('2024-05-19','일','키움','SSG','고척',10049),('2024-05-21','화','롯데','KIA','사직',14006),('2024-05-21','화','삼성','KT','대구',13360),('2024-05-21','화','한화','LG','대전',9335),('2024-05-21','화','키움','NC','고척',3940),('2024-05-21','화','두산','SSG','잠실',13917),('2024-05-22','수','롯데','KIA','사직',14062),('2024-05-22','수','삼성','KT','대구',13232),('2024-05-22','수','한화','LG','대전',9044),('2024-05-22','수','키움','NC','고척',4337),('2024-05-22','수','두산','SSG','잠실',12642),('2024-05-23','목','롯데','KIA','사직',15844),('2024-05-23','목','삼성','KT','대구',13291),('2024-05-23','목','한화','LG','대전',10008),('2024-05-23','목','키움','NC','고척',3897),('2024-05-23','목','두산','SSG','잠실',12131),('2024-05-24','금','SSG','한화','문학',22451),('2024-05-24','금','LG','NC','잠실',18551),('2024-05-24','금','KIA','두산','광주',20500),('2024-05-24','금','롯데','삼성','사직',20577),('2024-05-24','금','KT','키움','수원',6867),('2024-05-25','토','SSG','한화','문학',23000),('2024-05-25','토','LG','NC','잠실',22261),('2024-05-25','토','KIA','두산','광주',20500),('2024-05-25','토','롯데','삼성','사직',22758),('2024-05-25','토','KT','키움','수원',12425),('2024-05-26','일','LG','NC','잠실',17692),('2024-05-26','일','KIA','두산','광주',20500),('2024-05-26','일','롯데','삼성','사직',22758),('2024-05-28','화','NC','KIA','창원',8024),('2024-05-28','화','두산','KT','잠실',8459),('2024-05-28','화','SSG','LG','문학',14116),('2024-05-28','화','한화','롯데','대전',11168),('2024-05-28','화','삼성','키움','대구',10884),('2024-05-29','수','NC','KIA','창원',7994),('2024-05-29','수','두산','KT','잠실',8811),('2024-05-29','수','SSG','LG','문학',14413),('2024-05-29','수','한화','롯데','대전',10807),('2024-05-29','수','삼성','키움','대구',15080),('2024-05-30','목','NC','KIA','창원',7349),('2024-05-30','목','두산','KT','잠실',7915),('2024-05-30','목','SSG','LG','문학',15902),('2024-05-30','목','한화','롯데','대전',11405),('2024-05-30','목','삼성','키움','대구',12748),('2024-05-31','금','삼성','한화','대구',24000),('2024-05-31','금','KIA','KT','광주',20500),('2024-05-31','금','두산','LG','잠실',23750),('2024-05-31','금','롯데','NC','사직',17760),('2024-05-31','금','키움','SSG','고척',5680),('2024-06-01','토','삼성','한화','대구',24000),('2024-06-01','토','KIA','KT','광주',20500),('2024-06-01','토','두산','LG','잠실',23750),('2024-06-01','토','롯데','NC','사직',22758),('2024-06-01','토','키움','SSG','고척',10462),('2024-06-02','일','삼성','한화','대구',24000),('2024-06-02','일','KIA','KT','광주',20500),('2024-06-02','일','두산','LG','잠실',23750),('2024-06-02','일','롯데','NC','사직',21896),('2024-06-02','일','키움','SSG','고척',8745),('2024-06-04','화','KT','한화','수원',11426),('2024-06-04','화','KIA','롯데','광주',16158),('2024-06-04','화','NC','두산','창원',5448),('2024-06-04','화','SSG','삼성','문학',10135),('2024-06-04','화','LG','키움','잠실',14490),('2024-06-05','수','KT','한화','수원',14626),('2024-06-05','수','KIA','롯데','광주',19045),('2024-06-05','수','NC','두산','창원',9892),('2024-06-05','수','SSG','삼성','문학',14532),('2024-06-05','수','LG','키움','잠실',16681),('2024-06-06','목','KT','한화','수원',18700),('2024-06-06','목','KIA','롯데','광주',20500),('2024-06-06','목','NC','두산','창원',14517),('2024-06-06','목','SSG','삼성','문학',23000),('2024-06-06','목','LG','키움','잠실',23750),('2024-06-07','금','두산','KIA','잠실',23750),('2024-06-07','금','KT','LG','수원',13154),('2024-06-07','금','한화','NC','대전',12000),('2024-06-07','금','롯데','SSG','사직',20678),('2024-06-07','금','키움','삼성','고척',12636),('2024-06-08','토','두산','KIA','잠실',23750),('2024-06-08','토','KT','LG','수원',18700),('2024-06-08','토','한화','NC','대전',12000),('2024-06-08','토','키움','삼성','고척',16000),('2024-06-09','일','두산','KIA','잠실',23750),('2024-06-09','일','KT','LG','수원',13642),('2024-06-09','일','한화','NC','대전',12000),('2024-06-09','일','롯데','SSG','사직',13700),('2024-06-09','일','롯데','SSG','사직',22758),('2024-06-09','일','키움','삼성','고척',13509),('2024-06-11','화','두산','한화','잠실',18475),('2024-06-11','화','SSG','KIA','문학',16007),('2024-06-11','화','NC','KT','창원',4279),('2024-06-11','화','삼성','LG','대구',12436),('2024-06-11','화','롯데','키움','사직',9948),('2024-06-12','수','두산','한화','잠실',21630),('2024-06-12','수','SSG','KIA','문학',16483),('2024-06-12','수','NC','KT','창원',4123),('2024-06-12','수','삼성','LG','대구',13511),('2024-06-12','수','롯데','키움','사직',11390),('2024-06-13','목','두산','한화','잠실',20253),('2024-06-13','목','SSG','KIA','문학',18290),('2024-06-13','목','NC','KT','창원',3764),('2024-06-13','목','삼성','LG','대구',14485),('2024-06-13','목','롯데','키움','사직',11941),('2024-06-14','금','KT','KIA','수원',18420),('2024-06-14','금','LG','롯데','잠실',23750),('2024-06-14','금','키움','두산','고척',8680),('2024-06-14','금','한화','SSG','대전',12000),('2024-06-14','금','NC','삼성','창원',12394),('2024-06-15','토','KT','KIA','수원',18700),('2024-06-15','토','LG','롯데','잠실',23750),('2024-06-15','토','키움','두산','고척',13954),('2024-06-15','토','한화','SSG','대전',12000),('2024-06-15','토','NC','삼성','창원',17891),('2024-06-16','일','KT','KIA','수원',18700),('2024-06-16','일','LG','롯데','잠실',23750),('2024-06-16','일','키움','두산','고척',13184),('2024-06-16','일','한화','SSG','대전',12000),('2024-06-16','일','NC','삼성','창원',12860),('2024-06-18','화','KIA','LG','광주',18131),('2024-06-18','화','KT','롯데','수원',8491),('2024-06-18','화','두산','NC','잠실',9026),('2024-06-18','화','삼성','SSG','대구',10426),('2024-06-18','화','한화','키움','청주',9000),('2024-06-19','수','KIA','LG','광주',15056),('2024-06-19','수','KT','롯데','수원',9106),('2024-06-19','수','두산','NC','잠실',11984),('2024-06-19','수','삼성','SSG','대구',11488),('2024-06-19','수','한화','키움','청주',9000),('2024-06-20','목','KIA','LG','광주',14009),('2024-06-20','목','KT','롯데','수원',10496),('2024-06-20','목','두산','NC','잠실',10909),('2024-06-20','목','삼성','SSG','대구',13024),('2024-06-20','목','한화','키움','청주',9000),('2024-06-21','금','KIA','한화','광주',20500),('2024-06-21','금','LG','KT','잠실',15537),('2024-06-21','금','키움','롯데','고척',11974),('2024-06-21','금','SSG','NC','문학',13560),('2024-06-21','금','삼성','두산','대구',24000),('2024-06-22','토','키움','롯데','고척',16000),('2024-06-22','토','SSG','NC','문학',19789),('2024-06-23','일','KIA','한화','광주',19085),('2024-06-23','일','KIA','한화','광주',18860),('2024-06-23','일','LG','KT','잠실',11417),('2024-06-23','일','LG','KT','잠실',15418),('2024-06-23','일','키움','롯데','고척',16000),('2024-06-23','일','SSG','NC','문학',17200),('2024-06-23','일','삼성','두산','대구',20680),('2024-06-23','일','삼성','두산','대구',24000),('2024-06-25','화','롯데','KIA','사직',19110),('2024-06-25','화','SSG','KT','문학',9629),('2024-06-25','화','키움','NC','고척',5159),('2024-06-25','화','한화','두산','대전',11556),('2024-06-25','화','LG','삼성','잠실',21989),('2024-06-26','수','롯데','KIA','사직',19755),('2024-06-26','수','SSG','KT','문학',10229),('2024-06-26','수','키움','NC','고척',4698),('2024-06-26','수','한화','두산','대전',11564),('2024-06-26','수','LG','삼성','잠실',23281),('2024-06-27','목','롯데','KIA','사직',12867),('2024-06-27','목','SSG','KT','문학',10684),('2024-06-27','목','키움','NC','고척',4726),('2024-06-27','목','한화','두산','대전',11128),('2024-06-27','목','LG','삼성','잠실',22114),('2024-06-28','금','롯데','한화','사직',22758),('2024-06-28','금','NC','LG','창원',13506),('2024-06-28','금','두산','SSG','잠실',17367),('2024-06-28','금','KT','삼성','수원',14678),('2024-06-28','금','KIA','키움','광주',18601),('2024-06-29','토','두산','SSG','잠실',20020),('2024-06-30','일','NC','LG','창원',6991),('2024-06-30','일','두산','SSG','잠실',13985),('2024-06-30','일','KT','삼성','수원',8357),('2024-06-30','일','KT','삼성','수원',12253);
+/*!40000 ALTER TABLE `crowd` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-07 16:00:54

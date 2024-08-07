@@ -1,277 +1,90 @@
-mysql  Ver 8.0.39-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+-- MySQL dump 10.13  Distrib 8.0.39, for Linux (x86_64)
+--
+-- Host: database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com    Database: KBO
+-- ------------------------------------------------------
+-- Server version	8.0.35
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
-Usage: mysql [OPTIONS] [database]
-  -?, --help          Display this help and exit.
-  -I, --help          Synonym for -?
-  --auto-rehash       Enable automatic rehashing. One doesn't need to use
-                      'rehash' to get table and field completion, but startup
-                      and reconnecting may take a longer time. Disable with
-                      --disable-auto-rehash.
-                      (Defaults to on; use --skip-auto-rehash to disable.)
-  -A, --no-auto-rehash 
-                      No automatic rehashing. One has to use 'rehash' to get
-                      table and field completion. This gives a quicker start of
-                      mysql and disables rehashing on reconnect.
-  --auto-vertical-output 
-                      Automatically switch to vertical output mode if the
-                      result is wider than the terminal width.
-  -B, --batch         Don't use history file. Disable interactive behavior.
-                      (Enables --silent.)
-  --bind-address=name IP address to bind to.
-  --binary-as-hex     Print binary data as hex. Enabled by default for
-                      interactive terminals.
-  --character-sets-dir=name 
-                      Directory for character set files.
-  --column-type-info  Display column type information.
-  -c, --comments      Preserve comments. Send comments to the server. The
-                      default is --skip-comments (discard comments), enable
-                      with --comments.
-  -C, --compress      Use compression in server/client protocol.
-  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
-  --debug-check       This is a non-debug version. Catch this and exit.
-  -T, --debug-info    This is a non-debug version. Catch this and exit.
-  -D, --database=name Database to use.
-  --default-character-set=name 
-                      Set the default character set.
-  --delimiter=name    Delimiter to be used.
-  --enable-cleartext-plugin 
-                      Enable/disable the clear text authentication plugin.
-  -e, --execute=name  Execute command and quit. (Disables --force and history
-                      file.)
-  -E, --vertical      Print the output of a query (rows) vertically.
-  -f, --force         Continue even if we get an SQL error.
-  --histignore=name   A colon-separated list of patterns to keep statements
-                      from getting logged into syslog and mysql history.
-  -G, --named-commands 
-                      Enable named commands. Named commands mean this program's
-                      internal commands; see mysql> help . When enabled, the
-                      named commands can be used from any line of the query,
-                      otherwise only from the first line, before an enter.
-                      Disable with --disable-named-commands. This option is
-                      disabled by default.
-  -i, --ignore-spaces Ignore space after function names.
-  --init-command=name SQL Command to execute when connecting to MySQL server.
-                      Will automatically be re-executed when reconnecting.
-  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
-  -b, --no-beep       Turn off beep on error.
-  -h, --host=name     Connect to host.
-  --dns-srv-name=name Connect to a DNS SRV resource
-  -H, --html          Produce HTML output.
-  -X, --xml           Produce XML output.
-  --line-numbers      Write line numbers for errors.
-                      (Defaults to on; use --skip-line-numbers to disable.)
-  -L, --skip-line-numbers 
-                      Don't write line number for errors.
-  -n, --unbuffered    Flush buffer after each query.
-  --column-names      Write column names in results.
-                      (Defaults to on; use --skip-column-names to disable.)
-  -N, --skip-column-names 
-                      Don't write column names in results.
-  --sigint-ignore     Ignore SIGINT (CTRL-C).
-  -o, --one-database  Ignore statements except those that occur while the
-                      default database is the one named at the command line.
-  --pager[=name]      Pager to use to display results. If you don't supply an
-                      option, the default pager is taken from your ENV variable
-                      PAGER. Valid pagers are less, more, cat [> filename],
-                      etc. See interactive help (\h) also. This option does not
-                      work in batch mode. Disable with --disable-pager. This
-                      option is disabled by default.
-  -p, --password[=name] 
-                      Password to use when connecting to server. If password is
-                      not given it's asked from the tty.
-  -,, --password1[=name] 
-                      Password for first factor authentication plugin.
-  -,, --password2[=name] 
-                      Password for second factor authentication plugin.
-  -,, --password3[=name] 
-                      Password for third factor authentication plugin.
-  -P, --port=#        Port number to use for connection or 0 for default to, in
-                      order of preference, my.cnf, $MYSQL_TCP_PORT,
-                      /etc/services, built-in default (3306).
-  --prompt=name       Set the mysql prompt to this value.
-  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
-                      memory).
-  -q, --quick         Don't cache result, print it row by row. This may slow
-                      down the server if the output is suspended. Doesn't use
-                      history file.
-  -r, --raw           Write fields without conversion. Used with --batch.
-  --reconnect         Reconnect if the connection is lost. Disable with
-                      --disable-reconnect. This option is enabled by default.
-                      (Defaults to on; use --skip-reconnect to disable.)
-  -s, --silent        Be more silent. Print results with a tab as separator,
-                      each row on new line.
-  -S, --socket=name   The socket file to use for connection.
-  --server-public-key-path=name 
-                      File path to the server public RSA key in PEM format.
-  --get-server-public-key 
-                      Get server public key
-  --ssl-mode=name     SSL connection mode.
-  --ssl-ca=name       CA file in PEM format.
-  --ssl-capath=name   CA directory.
-  --ssl-cert=name     X509 cert in PEM format.
-  --ssl-cipher=name   SSL cipher to use.
-  --ssl-key=name      X509 key in PEM format.
-  --ssl-crl=name      Certificate revocation list.
-  --ssl-crlpath=name  Certificate revocation list path.
-  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
-                      TLSv1.3
-  --ssl-fips-mode=name 
-                      SSL FIPS mode (applies only for OpenSSL); permitted
-                      values are: OFF, ON, STRICT
-  --tls-ciphersuites=name 
-                      TLS v1.3 cipher to use.
-  --ssl-session-data=name 
-                      Session data file to use to enable ssl session reuse
-  --ssl-session-data-continue-on-failed-reuse 
-                      If set to ON, this option will allow connection to
-                      succeed even if session data cannot be reused.
-  -t, --table         Output in table format.
-  --tee=name          Append everything into outfile. See interactive help (\h)
-                      also. Does not work in batch mode. Disable with
-                      --disable-tee. This option is disabled by default.
-  -u, --user=name     User for login if not current user.
-  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
-  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
-  -v, --verbose       Write more. (-v -v -v gives the table output format).
-  -V, --version       Output version information and exit.
-  -w, --wait          Wait and retry if connection is down.
-  --connect-timeout=# Number of seconds before connection timeout.
-  --max-allowed-packet=# 
-                      The maximum packet length to send to or receive from
-                      server.
-  --net-buffer-length=# 
-                      The buffer size for TCP/IP and socket communication.
-  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
-  --max-join-size=#   Automatic limit for rows in a join when using
-                      --safe-updates.
-  --show-warnings     Show warnings after every statement.
-  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
-                      commands depends on the patterns supplied via histignore
-                      option besides the default patterns.
-  --plugin-dir=name   Directory for client-side plugins.
-  --default-auth=name Default authentication client-side plugin to use.
-  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
-                      translated to '\n'. This switch turns off both features,
-                      and also turns off parsing of all clientcommands except
-                      \C and DELIMITER, in non-interactive mode (for input
-                      piped to mysql or loaded using the 'source' command).
-                      This is necessary when processing output from mysqlbinlog
-                      that may contain blobs.
-  --connect-expired-password 
-                      Notify the server that this client is prepared to handle
-                      expired password sandbox mode.
-  --network-namespace=name 
-                      Network namespace to use for connection via tcp with a
-                      server.
-  --compression-algorithms=name 
-                      Use compression algorithm in server/client protocol.
-                      Valid values are any combination of
-                      'zstd','zlib','uncompressed'.
-  --zstd-compression-level=# 
-                      Use this compression level in the client/server protocol,
-                      in case --compression-algorithms=zstd. Valid range is
-                      between 1 and 22, inclusive. Default is 3.
-  --load-data-local-dir=name 
-                      Directory path safe for LOAD DATA LOCAL INFILE to read
-                      from.
-  --fido-register-factor=name 
-                      Specifies authentication factor, for which registration
-                      needs to be done.
-  --authentication-oci-client-config-profile=name 
-                      Specifies the configuration profile whose configuration
-                      options are to be read from the OCI configuration file.
-                      Default is DEFAULT.
-  --oci-config-file=name 
-                      Specifies the location of the OCI configuration file.
-                      Default for Linux is ~/.oci/config and %HOME/.oci/config
-                      on Windows.
+--
+-- GTID state at the beginning of the backup 
+--
 
-Default options are read from the following files in the given order:
-/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf 
-The following groups are read: mysql client
-The following options may be given as the first argument:
---print-defaults        Print the program argument list and exit.
---no-defaults           Don't read default options from any option file,
-                        except for login file.
---defaults-file=#       Only read default options from the given file #.
---defaults-extra-file=# Read this file after the global files are read.
---defaults-group-suffix=#
-                        Also read groups with concat(group, suffix)
---login-path=#          Read this path from the login file.
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
-Variables (--variable-name=value)
-and boolean options {FALSE|TRUE}          Value (after reading options)
------------------------------------------ --------------------------------
-auto-rehash                               TRUE
-auto-vertical-output                      FALSE
-bind-address                              (No default value)
-binary-as-hex                             FALSE
-character-sets-dir                        (No default value)
-column-type-info                          FALSE
-comments                                  FALSE
-compress                                  FALSE
-database                                  (No default value)
-default-character-set                     auto
-delimiter                                 ;
-enable-cleartext-plugin                   FALSE
-vertical                                  FALSE
-force                                     FALSE
-histignore                                (No default value)
-named-commands                            FALSE
-ignore-spaces                             FALSE
-init-command                              (No default value)
-local-infile                              FALSE
-no-beep                                   FALSE
-host                                      database-1.cnusogkkql3j.us-east-2.rds.amazonaws.com
-dns-srv-name                              (No default value)
-html                                      FALSE
-xml                                       FALSE
-line-numbers                              TRUE
-unbuffered                                FALSE
-column-names                              TRUE
-sigint-ignore                             FALSE
-port                                      3306
-prompt                                    mysql> 
-quick                                     FALSE
-raw                                       FALSE
-reconnect                                 FALSE
-socket                                    (No default value)
-server-public-key-path                    (No default value)
-get-server-public-key                     FALSE
-ssl-ca                                    (No default value)
-ssl-capath                                (No default value)
-ssl-cert                                  (No default value)
-ssl-cipher                                (No default value)
-ssl-key                                   (No default value)
-ssl-crl                                   (No default value)
-ssl-crlpath                               (No default value)
-tls-version                               (No default value)
-tls-ciphersuites                          (No default value)
-ssl-session-data                          (No default value)
-ssl-session-data-continue-on-failed-reuse FALSE
-table                                     FALSE
-user                                      EDA_project
-safe-updates                              FALSE
-i-am-a-dummy                              FALSE
-connect-timeout                           0
-max-allowed-packet                        16777216
-net-buffer-length                         16384
-select-limit                              1000
-max-join-size                             1000000
-show-warnings                             FALSE
-plugin-dir                                (No default value)
-default-auth                              (No default value)
-binary-mode                               FALSE
-connect-expired-password                  FALSE
-network-namespace                         (No default value)
-compression-algorithms                    (No default value)
-zstd-compression-level                    3
-load-data-local-dir                       (No default value)
-fido-register-factor                      (No default value)
-authentication-oci-client-config-profile  (No default value)
-oci-config-file                           (No default value)
+--
+-- Table structure for table `팀기록_투수`
+--
+
+DROP TABLE IF EXISTS `팀기록_투수`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `팀기록_투수` (
+  `year` int DEFAULT NULL,
+  `순위` int DEFAULT NULL,
+  `팀명` varchar(16) DEFAULT NULL,
+  `평균자책점` float DEFAULT NULL,
+  `경기_수` int DEFAULT NULL,
+  `승리` int DEFAULT NULL,
+  `패배` int DEFAULT NULL,
+  `세이브` int DEFAULT NULL,
+  `홀드` int DEFAULT NULL,
+  `승률` float DEFAULT NULL,
+  `이닝` float DEFAULT NULL,
+  `피안타` int DEFAULT NULL,
+  `홈련` int DEFAULT NULL,
+  `볼넷` int DEFAULT NULL,
+  `사구` int DEFAULT NULL,
+  `삼진` int DEFAULT NULL,
+  `실점` int DEFAULT NULL,
+  `자책점` int DEFAULT NULL,
+  `이닝당출루허용률` float DEFAULT NULL,
+  `완투` int DEFAULT NULL,
+  `완봉` int DEFAULT NULL,
+  `퀄리티스타트` int DEFAULT NULL,
+  `블론세이브` int DEFAULT NULL,
+  `타자수` int DEFAULT NULL,
+  `투구수` int DEFAULT NULL,
+  `피안타율` float DEFAULT NULL,
+  `2루타` int DEFAULT NULL,
+  `3루타` int DEFAULT NULL,
+  `희생번트` int DEFAULT NULL,
+  `희생플라이` int DEFAULT NULL,
+  `고의사구` int DEFAULT NULL,
+  `폭투` int DEFAULT NULL,
+  `보크` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `팀기록_투수`
+--
+
+LOCK TABLES `팀기록_투수` WRITE;
+/*!40000 ALTER TABLE `팀기록_투수` DISABLE KEYS */;
+INSERT INTO `팀기록_투수` VALUES (22,1,'LG',3.33,144,87,55,43,107,0.613,1288,1179,94,451,59,1031,521,476,1.27,0,16,59,15,5432,20918,0.245,166,34,56,46,27,49,0),(22,2,'KT',3.51,144,80,62,37,65,0.563,1287.33,1243,92,364,63,1074,562,502,1.25,1,8,81,13,5405,20356,0.254,188,19,54,38,22,43,3),(22,3,'키움',3.79,144,80,62,48,84,0.563,1296.33,1247,96,490,70,1010,610,546,1.34,2,19,71,18,5579,21568,0.254,259,15,66,42,18,51,1),(22,4,'SSG',3.87,144,88,52,45,68,0.629,1301.33,1223,130,457,65,1023,622,560,1.29,1,10,78,23,5533,21355,0.248,174,17,53,33,18,75,2),(22,5,'NC',3.9,144,67,74,25,54,0.475,1286.67,1230,111,515,98,1168,642,557,1.36,0,11,58,15,5604,22069,0.252,218,18,60,42,10,80,5),(22,6,'KIA',4.2,144,70,73,38,74,0.49,1279.67,1286,120,526,67,1042,679,597,1.42,0,7,64,18,5636,21803,0.261,233,22,75,45,20,56,2),(22,7,'삼성',4.29,144,66,76,34,71,0.465,1287,1370,129,478,66,971,695,613,1.44,1,6,63,21,5678,22174,0.272,251,15,62,34,22,47,3),(22,8,'두산',4.45,144,60,82,32,68,0.423,1279.33,1336,117,555,70,977,721,632,1.48,0,7,54,18,5700,22437,0.269,206,19,57,48,11,69,5),(22,9,'롯데',4.45,144,64,76,34,69,0.457,1280.67,1373,84,492,80,1199,712,633,1.46,0,13,58,13,5686,21932,0.274,257,22,64,37,21,72,1),(22,10,'한화',4.83,144,46,96,25,81,0.324,1268.33,1314,112,602,83,974,759,680,1.51,1,9,37,25,5710,22412,0.268,268,22,63,57,39,65,4),(23,1,'LG',3.67,144,86,56,37,92,0.606,1293.33,1266,74,491,76,977,610,527,1.36,0,9,50,18,5619,21814,0.256,215,17,64,42,15,47,5),(23,2,'NC',3.83,144,75,67,33,88,0.528,1281.33,1160,99,513,62,1090,617,545,1.31,0,14,53,17,5493,21941,0.241,179,24,63,42,6,58,3),(23,3,'두산',3.92,144,74,68,41,70,0.521,1284.67,1245,90,501,82,1013,625,560,1.36,0,9,64,17,5582,22142,0.255,239,17,79,39,12,60,3),(23,4,'KT',3.94,144,79,62,39,61,0.56,1287,1326,83,413,50,968,616,564,1.35,0,12,64,14,5542,20672,0.268,213,22,81,54,22,63,4),(23,5,'KIA',4.13,144,73,69,33,66,0.514,1269,1244,89,564,59,980,650,583,1.42,1,8,46,10,5558,21710,0.258,220,25,67,45,20,55,4),(23,6,'롯데',4.15,144,68,76,35,82,0.472,1272.33,1328,80,532,82,1070,660,586,1.46,1,10,66,21,5653,22286,0.27,223,24,72,55,20,71,2),(23,7,'SSG',4.37,144,76,65,46,71,0.539,1288.33,1354,104,612,67,974,698,626,1.53,1,7,57,21,5722,22881,0.275,216,14,59,52,20,61,3),(23,8,'한화',4.38,144,58,80,20,68,0.42,1291.67,1292,101,518,103,1037,708,628,1.4,0,8,40,24,5682,22355,0.261,241,34,60,48,23,73,7),(23,9,'키움',4.42,144,58,83,33,61,0.411,1288.33,1340,84,532,63,962,710,632,1.45,1,11,68,24,5704,21903,0.269,237,23,62,57,18,56,7),(23,10,'삼성',4.6,144,61,82,38,69,0.427,1278.33,1414,120,464,52,899,728,654,1.47,1,5,63,17,5676,22135,0.28,238,22,66,51,19,51,7),(24,1,'KIA',4.42,81,46,33,28,50,0.582,729,780,83,317,50,622,427,358,1.5,1,0,26,15,3275,12708,0.273,143,10,19,27,11,32,1),(24,2,'삼성',4.43,83,44,37,26,68,0.543,741.67,768,86,301,48,573,395,365,1.44,0,7,27,14,3294,13180,0.266,128,14,23,38,13,34,1),(24,3,'LG',4.51,84,45,37,23,42,0.549,743,792,71,335,50,632,418,372,1.52,2,3,32,11,3350,13090,0.273,127,4,29,34,8,43,2),(24,4,'두산',4.54,85,44,39,25,40,0.53,760,797,80,332,54,610,426,383,1.49,1,4,28,13,3412,13478,0.268,125,19,30,19,8,42,3),(24,5,'NC',4.71,81,38,41,17,42,0.481,724,775,71,283,36,613,422,379,1.46,0,5,31,9,3198,12671,0.275,143,12,28,32,6,26,2),(24,6,'롯데',5.03,78,35,40,18,31,0.467,690,783,72,287,44,584,414,386,1.55,1,3,31,13,3099,12094,0.289,135,13,27,31,10,50,3),(24,7,'키움',5.06,79,34,45,14,35,0.43,697.33,769,71,292,48,498,432,392,1.52,0,2,27,6,3146,11814,0.28,142,14,20,37,7,43,5),(24,8,'한화',5.11,80,35,43,13,25,0.449,708,797,68,308,48,605,437,402,1.56,0,6,24,9,3202,12643,0.286,121,9,27,30,7,35,2),(24,9,'SSG',5.31,82,41,40,18,44,0.506,721,760,91,368,43,692,469,425,1.56,0,4,19,10,3263,13085,0.27,109,12,16,23,13,32,1),(24,10,'KT',5.53,83,37,44,12,30,0.457,735.33,835,89,273,34,637,487,452,1.51,0,2,26,14,3283,12498,0.287,150,24,23,41,12,30,3);
+/*!40000 ALTER TABLE `팀기록_투수` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-07 15:57:38
