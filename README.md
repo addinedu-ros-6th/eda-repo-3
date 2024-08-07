@@ -58,28 +58,29 @@
 --------
 
 ##  KBO 데이터 분석
-### 팀별 타율과 팀순위 비교
+### 팀별 타율과 팀순위 비교 -7p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/c041573c-ecb8-4ef3-b5ad-66385e43e07f" width="500">  
 
 * 공격 요소를 비교하였을 때 홈련율이 높은 팀이 높은 순위임을 확인
-### 팀별 투수 데이터와 팀순위 비교
+* 
+### 팀별 투수 데이터와 팀순위 비교 -8p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/7343c925-098c-4fc1-9322-8bcc4f3a06c8" width="500">
 
 * 투수의 요소를 비교하였을 때 순위와 연관 요소를 찾을 수 없음
 
-### 팀별 수비 풋아웃/수비율 팀순위 비교
+### 팀별 수비 풋아웃/수비율 팀순위 비교 -9p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/a5fc9175-7d51-4ce4-bd21-34dcabb5808f" width="500">  
 
 * 풋아웃과 수비율을 비교하였을 때 순위와 연관 요소를 찾을 수 없음
 
-### 팀별 도루와 팀순위 비교
+### 팀별 도루와 팀순위 비교 -10p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/917dd7ae-a3b7-4896-9e1a-d204c976d177" width="330">  
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/3beb3aa6-60c7-4c9b-9ef7-994634660eec" width="330">
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/0a3ccffc-278c-47d4-a483-344c6690b8fb" width="330">
 
 * 도루율과 팀순위를 비교하였을 때 순위과 관련 요소를 찾을 수 없음
 
-### 24시즌 1등 공격/수비 지표
+### 24시즌 1등 공격/수비 지표 
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/122e68a0-cdb8-45f1-9bb1-6c2f59e0aa0c" width="500">  
 
 * 1등팀의 공격 지표와 수비 지표 모두 좋은 성적을 유지하고 있음
@@ -95,7 +96,7 @@
 
 * 1등팀은 공격 지표와 수비 지표가 저조하지만, 홈런수치가 다른 모든팀에 비해 월등히 높음
 
-### 22시즌 1등 팀과 다른팀의 공격/수비의 BEST 지표 비교
+### 22시즌 1등 팀과 다른팀의 공격/수비의 BEST 지표 비교 -18p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/86091697/44e0e53f-2173-46d8-abf6-21fca3fa971c" width="500">
 
 * 경기당 홈런수를 제외할 경우 모든 지표에서 성적이 저조함
@@ -105,12 +106,12 @@
 ## 특이점 분석
 --------
 
-### 팀별 상위 3명 홈련타자 연봉 비교(%)
+### 팀별 상위 3명 홈련타자 연봉 비교(%) -21p
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/c934035e-7ca0-49e6-982e-303c95a61815" width="500">  
 
 * 구단 전체 연봉의 18.1% 를 홈런타자에게 사용하지만 SSG에서는 23.7% 로 다른팀에 비해 많은 비율로 사용 
 
-### 팀별 상위 3명 홈련타자 연봉 비교(억)
+### 팀별 상위 3명 홈련타자 연봉 비교(억) -22p
 
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/86091697/54bf22dc-ee84-435a-b242-bbe720520edc" width="500">
 
@@ -154,7 +155,7 @@
 * [KBO 홈페이지](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx?sort=HRA_RT)  
 * [스탯티즈](https://statiz.sporki.com/) 
   
-# 사용 라이브러리 -추가 및 제거 필요
+# 사용 라이브러리 
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/4de7a244-a485-4002-8c48-9694397fdf47" width="100">
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/3b056ae2-19aa-49be-bdea-bda7a40e5983" width="100">
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/96e06ebd-8072-4c3f-a58f-677ee405b667" width="100">
