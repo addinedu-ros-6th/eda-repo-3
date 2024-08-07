@@ -1,6 +1,5 @@
-# eda-repo-3
-EDA 프로젝트 3조 저장소. KBO 분석
-# 기후동행카드 이용 현황 분석 및 예측
+# KBO 분석
+
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/2d2778fa-d66b-4f69-a978-83845f629d10" width="600" height="300">
 
 ### 01. 💡프로젝트 소개
