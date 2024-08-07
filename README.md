@@ -152,7 +152,7 @@
 
 # 자료 출처
 * [KBO 홈페이지](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx?sort=HRA_RT)  
-* [스탯티즈](https://statiz.sporki.com/)) 
+* [스탯티즈]((https://statiz.sporki.com/)) 
   
 # 사용 라이브러리 -추가 및 제거 필요
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/4de7a244-a485-4002-8c48-9694397fdf47" width="100">
