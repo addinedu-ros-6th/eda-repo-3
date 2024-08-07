@@ -138,21 +138,23 @@
 
 * 3년간 데이터를 비교 하였을 때, 해당 시즌에서 삼진수와 볼넷수가 증가함.
 
+### KBO 시스템 변화에 따른 관중수 -32p
+
+<img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/86091697/54bf22dc-ee84-435a-b242-bbe720520edc" width="500">
+
+* 3년간 데이터를 비교 하였을 때, 시스템 변화 후 시즌에서 2배 이상 증가함을 확인.
 
 # 4. 결론
 
-#### 서울 외의 지역에서도 대중교통 이용이 많지만 기후동행카드가 충분한 범위를 지원해주지 못하고 있다.
-#### 수도권(서울 제외) 혜택을 많이 볼 수 있는 용인시, 고양시, 부천시가 적절하다.
+#### 팀에서 홈런타자에게 많은 연봉을 투자하여 1등 성공!!
+#### KBO의 변화로 관중을 늘렸음에, 시스템 변화는 성공!! 
 --------------
-# 자료 출처
-* [교통카드 빅데이터 통합정보시스템](https://www.stcis.go.kr/wps/main.do)  
-* [서울특별시 분야별 정보](https://news.seoul.go.kr/traffic/climatecard-service)  
-* [서울시 열린데이터광장](https://data.seoul.go.kr/dataList/OA-12914/S/1/datasetView.do)  
-* [경기도 교통정보센터](https://gits.gg.go.kr/gtdb/web/trafficDb/publicTransport/passengersByRoute.do)  
-* [서울특별시 대중교통 O/D(출발 도착) 현황](https://www.data.go.kr/data/15081036/fileData.do?recommendDataYn=Y)
 
+# 자료 출처
+* [KBO 홈페이지](https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx?sort=HRA_RT)  
+* [스탯티즈](https://statiz.sporki.com/)) 
   
-# 사용 라이브러리
+# 사용 라이브러리 -추가 및 제거 필요
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/4de7a244-a485-4002-8c48-9694397fdf47" width="100">
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/3b056ae2-19aa-49be-bdea-bda7a40e5983" width="100">
 <img src="https://github.com/addinedu-ros-5th/eda-repo-3/assets/55865857/96e06ebd-8072-4c3f-a58f-677ee405b667" width="100">
